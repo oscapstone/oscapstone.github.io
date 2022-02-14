@@ -21,8 +21,8 @@ There is no limitation on which programming language you should use for the labs
 However, there are a lot of things that are language-dependent and even compiler-dependent.
 You need to manage them yourself.
 
-You can check last year's `course website <https://grasslab.github.io/NYCU_Operating_System_Capstone/>`
-and `submission repository <https://github.com/GrassLab/osdi2021>`_ to see what you might need
+You can check last year's `course website <https://grasslab.github.io/NYCU_Operating_System_Capstone/>`_
+and `submission repository <https://github.com/GrassLab/osc2021>`_ to see what you might need
 to do during this semester.
 Yet, the requirements and descriptions may differ this semester.
 

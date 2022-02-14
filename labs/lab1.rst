@@ -22,8 +22,8 @@ Goals of this lab
 Basic Exercises
 ###############
 
-Basic Exercise 1 - Basic Initialization
-=======================================
+Basic Exercise 1 - Basic Initialization - 20%
+=============================================
 
 When a program is loaded, it requires,
 
@@ -44,8 +44,8 @@ Otherwise, it may lead to undefined behaviors.
 
     Initialize rpi3 after booted by bootloader.
 
-Basic Exercise 2 - Mini UART
-============================
+Basic Exercise 2 - Mini UART - 20%
+==================================
 
 You'll use UART as a bridge between rpi3 and host computer for all the labs.
 Rpi3 has 2 different UARTs, mini UART and PL011 UART.
@@ -55,8 +55,8 @@ In this lab, you need to set up the mini UART.
 
     Follow :ref:`uart` to set up mini UART.
 
-Basic Exercise 3 - Simple Shell
-===============================
+Basic Exercise 3 - Simple Shell - 20%
+=====================================
 
 After setting up UART, you should implement a simple shell to let rpi3 interact with the host computer.
 The shell should be able to execute the following commands.
@@ -77,8 +77,8 @@ hello    print Hello World!
 
 .. image:: images/lab1_example1.png
 
-Basic Exercise 4 - Mailbox
-===============================
+Basic Exercise 4 - Mailbox - 20%
+================================
 
 ARM CPU is able to configure peripherals such as clock rate and framebuffer by calling VideoCoreIV(GPU) routines.
 Mailboxes are the communication bridge between them.
@@ -99,8 +99,8 @@ Check if you implement mailbox communication correctly by verifying the hardware
 Advanced Exercises
 ##################
 
-Advanced Exercise 1 - Reboot
-============================
+Advanced Exercise 1 - Reboot - 30%
+==================================
 
 Rpi3 doesn't originally provide an on board reset button.
 

@@ -4,7 +4,7 @@ Schedule
 ======= ========= ============================= =========== ============== ================ 
  Week    Date      Lecture Topics                Readings    Lab/Project    Lecture Video   
 ======= ========= ============================= =========== ============== ================ 
- 1       15-Feb    Course Overview [slide]                                                  
+ 1       15-Feb    Course Overview                                                  
 
          17-Feb    TA Lab Hours: Lab 0                                                      
 

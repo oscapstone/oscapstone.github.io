@@ -17,15 +17,15 @@ Teaching assistants
 
 **Chih-Ning Hsi**
 
-* Email: mllee [at] cs.nctu
+* Email: leonhsi111 [at] gmail
 * Location: EC120
 
 **Kai-Chun Chang**
 
-* Email: mllee [at] cs.nctu
+* Email: aa940249tw [at] gmail
 * Location: EC120
 
-**Chun lin**
+**Chung Chun Lin**
 
-* Email: cclin0816 [at] cs.nctu
-* Location: EC120
+* Email: benjamin.cclin [at] gmail
+* Location: X

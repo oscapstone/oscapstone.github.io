@@ -10,7 +10,7 @@ After copy and paste, you still need to look up the manual to understand how thi
 
 .. important::
   You might still need others to achieve some extra function.
-  Please refer to these manual for more information.
+  Please refer to these manual for more information.  
   https://documentation-service.arm.com/static/613a2c38674a052ae36ca307
   https://developer.arm.com/documentation/100076/0100/a64-instruction-set-reference
   https://developer.arm.com/documentation/ddi0487/latest

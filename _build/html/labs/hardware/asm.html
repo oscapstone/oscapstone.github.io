@@ -110,6 +110,11 @@
    Lab 1: Hello World
   </a>
  </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../lab2.html">
+   Lab 2: Booting
+  </a>
+ </li>
  <li class="toctree-l1 current active has-children">
   <a class="reference internal" href="index.html">
    Hardware
@@ -282,29 +287,29 @@ After copy and paste, you still need to look up the manual to understand how thi
 <div class="admonition important">
 <p class="admonition-title">Important</p>
 <p>You might still need others to achieve some extra function.
-Please refer to these manual for more information.
-<a class="reference external" href="https://documentation-service.arm.com/static/613a2c38674a052ae36ca307">https://documentation-service.arm.com/static/613a2c38674a052ae36ca307</a>
-<a class="reference external" href="https://developer.arm.com/documentation/100076/0100/a64-instruction-set-reference">https://developer.arm.com/documentation/100076/0100/a64-instruction-set-reference</a>
-<a class="reference external" href="https://developer.arm.com/documentation/ddi0487/latest">https://developer.arm.com/documentation/ddi0487/latest</a></p>
+Please refer to this two manual for more information.
+<a class="reference external" href="https://static.docs.arm.com/100898/0100/the_a64_Instruction_set_100898_0100.pdf">https://static.docs.arm.com/100898/0100/the_a64_Instruction_set_100898_0100.pdf</a>
+<a class="reference external" href="https://static.docs.arm.com/ddi0596/a/DDI_0596_ARM_a64_instruction_set_architecture.pdf">https://static.docs.arm.com/ddi0596/a/DDI_0596_ARM_a64_instruction_set_architecture.pdf</a>
+<a class="reference external" href="https://static.docs.arm.com/ddi0487/ea/DDI0487E_a_armv8_arm.pdf">https://static.docs.arm.com/ddi0487/ea/DDI0487E_a_armv8_arm.pdf</a></p>
 </div>
 <div class="section" id="lab-0">
 <h2>Lab 0<a class="headerlink" href="#lab-0" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="c1">// enter busy loop</span>
-<span class="nl">_start</span><span class="p">:</span>
-  <span class="n">wfe</span>
-  <span class="n">b</span> <span class="n">_start</span>
+<span class="nl">_start</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="n">wfe</span><span class="w"></span>
+<span class="w">  </span><span class="n">b</span><span class="w"> </span><span class="n">_start</span><span class="w"></span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="lab-1">
 <h2>Lab 1<a class="headerlink" href="#lab-1" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="c1">// set stack pointer and branch to main function.</span>
-<span class="mi">2</span><span class="o">:</span>
-      <span class="n">ldr</span> <span class="n">x0</span><span class="p">,</span> <span class="o">=</span> <span class="n">_stack_top</span>
-      <span class="n">mov</span> <span class="n">sp</span><span class="p">,</span> <span class="n">x0</span>
-      <span class="n">bl</span> <span class="n">main</span>
-<span class="mi">1</span><span class="o">:</span>
-      <span class="n">b</span> <span class="mi">1</span><span class="n">b</span>
+<span class="mi">2</span><span class="o">:</span><span class="w"></span>
+<span class="w">      </span><span class="n">ldr</span><span class="w"> </span><span class="n">x0</span><span class="p">,</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">_stack_top</span><span class="w"></span>
+<span class="w">      </span><span class="n">mov</span><span class="w"> </span><span class="n">sp</span><span class="p">,</span><span class="w"> </span><span class="n">x0</span><span class="w"></span>
+<span class="w">      </span><span class="n">bl</span><span class="w"> </span><span class="n">main</span><span class="w"></span>
+<span class="mi">1</span><span class="o">:</span><span class="w"></span>
+<span class="w">      </span><span class="n">b</span><span class="w"> </span><span class="mi">1</span><span class="n">b</span><span class="w"></span>
 </pre></div>
 </div>
 </div>

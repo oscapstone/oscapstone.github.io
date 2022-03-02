@@ -30,7 +30,7 @@ Then apply the following steps.
 
 1. Combine the message address (upper 28 bits) with channel number (lower 4 bits) 
 
-2. Check if Mailbox 1 status register's full flag is set.
+2. Check if Mailbox 0 status register's full flag is set.
 
 3. If not, then you can write to Mailbox 1 Read/Write register.
 

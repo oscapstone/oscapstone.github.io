@@ -34,7 +34,7 @@
     <script src="../_static/sphinx-book-theme.9d8b4a8b9bb19db25eeaddc40d639ba2.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Hardware" href="hardware/index.html" />
+    <link rel="next" title="Lab 2: Booting" href="lab2.html" />
     <link rel="prev" title="Lab 0: Environment Setup" href="lab0.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
@@ -108,6 +108,11 @@
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
    Lab 1: Hello World
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="lab2.html">
+   Lab 2: Booting
   </a>
  </li>
  <li class="toctree-l1 has-children">
@@ -477,20 +482,20 @@ Check if you implement mailbox communication correctly by verifying the hardware
 <span class="cp">#define PM_RSTC 0x3F10001c</span>
 <span class="cp">#define PM_WDOG 0x3F100024</span>
 
-<span class="kt">void</span> <span class="nf">set</span><span class="p">(</span><span class="kt">long</span> <span class="n">addr</span><span class="p">,</span> <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">value</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">volatile</span> <span class="kt">unsigned</span> <span class="kt">int</span><span class="o">*</span> <span class="n">point</span> <span class="o">=</span> <span class="p">(</span><span class="kt">unsigned</span> <span class="kt">int</span><span class="o">*</span><span class="p">)</span><span class="n">addr</span><span class="p">;</span>
-    <span class="o">*</span><span class="n">point</span> <span class="o">=</span> <span class="n">value</span><span class="p">;</span>
-<span class="p">}</span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">set</span><span class="p">(</span><span class="kt">long</span><span class="w"> </span><span class="n">addr</span><span class="p">,</span><span class="w"> </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">value</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">volatile</span><span class="w"> </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">int</span><span class="o">*</span><span class="w"> </span><span class="n">point</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">int</span><span class="o">*</span><span class="p">)</span><span class="n">addr</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="o">*</span><span class="n">point</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">value</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 
-<span class="kt">void</span> <span class="nf">reset</span><span class="p">(</span><span class="kt">int</span> <span class="n">tick</span><span class="p">)</span> <span class="p">{</span>                 <span class="c1">// reboot after watchdog timer expire</span>
-    <span class="n">set</span><span class="p">(</span><span class="n">PM_RSTC</span><span class="p">,</span> <span class="n">PM_PASSWORD</span> <span class="o">|</span> <span class="mh">0x20</span><span class="p">);</span>  <span class="c1">// full reset</span>
-    <span class="n">set</span><span class="p">(</span><span class="n">PM_WDOG</span><span class="p">,</span> <span class="n">PM_PASSWORD</span> <span class="o">|</span> <span class="n">tick</span><span class="p">);</span>  <span class="c1">// number of watchdog tick</span>
-<span class="p">}</span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">reset</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">tick</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">                 </span><span class="c1">// reboot after watchdog timer expire</span>
+<span class="w">    </span><span class="n">set</span><span class="p">(</span><span class="n">PM_RSTC</span><span class="p">,</span><span class="w"> </span><span class="n">PM_PASSWORD</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mh">0x20</span><span class="p">);</span><span class="w">  </span><span class="c1">// full reset</span>
+<span class="w">    </span><span class="n">set</span><span class="p">(</span><span class="n">PM_WDOG</span><span class="p">,</span><span class="w"> </span><span class="n">PM_PASSWORD</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">tick</span><span class="p">);</span><span class="w">  </span><span class="c1">// number of watchdog tick</span>
+<span class="p">}</span><span class="w"></span>
 
-<span class="kt">void</span> <span class="nf">cancel_reset</span><span class="p">()</span> <span class="p">{</span>
-    <span class="n">set</span><span class="p">(</span><span class="n">PM_RSTC</span><span class="p">,</span> <span class="n">PM_PASSWORD</span> <span class="o">|</span> <span class="mi">0</span><span class="p">);</span>  <span class="c1">// full reset</span>
-    <span class="n">set</span><span class="p">(</span><span class="n">PM_WDOG</span><span class="p">,</span> <span class="n">PM_PASSWORD</span> <span class="o">|</span> <span class="mi">0</span><span class="p">);</span>  <span class="c1">// number of watchdog tick</span>
-<span class="p">}</span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">cancel_reset</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">set</span><span class="p">(</span><span class="n">PM_RSTC</span><span class="p">,</span><span class="w"> </span><span class="n">PM_PASSWORD</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span><span class="w">  </span><span class="c1">// full reset</span>
+<span class="w">    </span><span class="n">set</span><span class="p">(</span><span class="n">PM_WDOG</span><span class="p">,</span><span class="w"> </span><span class="n">PM_PASSWORD</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span><span class="w">  </span><span class="c1">// number of watchdog tick</span>
+<span class="p">}</span><span class="w"></span>
 </pre></div>
 </div>
 <div class="admonition-todo admonition">
@@ -514,10 +519,10 @@ Check if you implement mailbox communication correctly by verifying the hardware
             <p class="prev-next-title">Lab 0: Environment Setup</p>
         </div>
     </a>
-    <a class='right-next' id="next-link" href="hardware/index.html" title="next page">
+    <a class='right-next' id="next-link" href="lab2.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Hardware</p>
+        <p class="prev-next-title">Lab 2: Booting</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>

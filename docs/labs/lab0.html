@@ -110,6 +110,11 @@
    Lab 1: Hello World
   </a>
  </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="lab2.html">
+   Lab 2: Booting
+  </a>
+ </li>
  <li class="toctree-l1 has-children">
   <a class="reference internal" href="hardware/index.html">
    Hardware
@@ -514,10 +519,10 @@ After saving the following assembly as <code class="docutils literal notranslate
 you can convert it to an object file by <code class="docutils literal notranslate"><span class="pre">aarch64-linux-gnu-gcc</span> <span class="pre">-c</span> <span class="pre">a.S</span></code>.
 Or if you would like to, you can also try llvm’s linker <code class="docutils literal notranslate"><span class="pre">clang</span> <span class="pre">-mcpu=cortex-a53</span> <span class="pre">--target=aarch64-rpi3-elf</span> <span class="pre">-c</span> <span class="pre">a.S</span></code>,
 especially if you are trying to develop on macOS.</p>
-<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="p">.</span><span class="n">section</span> <span class="s">&quot;.text&quot;</span>
-<span class="nl">_start</span><span class="p">:</span>
-  <span class="n">wfe</span>
-  <span class="n">b</span> <span class="n">_start</span>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="p">.</span><span class="n">section</span><span class="w"> </span><span class="s">&quot;.text&quot;</span><span class="w"></span>
+<span class="nl">_start</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="n">wfe</span><span class="w"></span>
+<span class="w">  </span><span class="n">b</span><span class="w"> </span><span class="n">_start</span><span class="w"></span>
 </pre></div>
 </div>
 </div>

@@ -49,8 +49,8 @@ In Lab 2, you'll implement a bootloader that loads the actual kernel through UAR
 Basic Exercises
 ###############
 
-Basic Exercise 1 - UART Bootloader
-==================================
+Basic Exercise 1 - UART Bootloader - 30%
+========================================
 
 In Lab 1, you might experience the process of moving the SD card between your host and rpi3 very often during debugging.
 You can eliminate this by introducing another bootloader to load the kernel under debugging.
@@ -98,8 +98,8 @@ To further make your bootloader less ambiguous with the actual kernel, you can a
   UART is a low-speed interface. It's okay to send your kernel image because it's quite small. Don't use it to send large binary files.
 
 
-Basic Exercise 2 - Initial Ramdisk
-==================================
+Basic Exercise 2 - Initial Ramdisk - 30%
+========================================
 
 After a kernel is initialized, it mounts a root filesystem and runs an init user program.
 The init program can be a script or executable binary to bring up other services or load other drivers later on.
@@ -158,8 +158,8 @@ Then specify the name and loading address in ``config.txt``.
   In Lab 2, you only need to **put some plain text files inside your archive** to test the functionality.
   In the later labs, you will also put script files and executables inside to automate the testing. 
 
-Basic Exercise 3 - Simple Allocator
-===================================
+Basic Exercise 3 - Simple Allocator - 10%
+=========================================
 Kernel needs an allocator in the progress of subsystem initialization. However, the dynamic allocator is also a subsystem that need to be initialized. So we need a simple allocator in the early stage of booting.
 
 .. admonition:: Todo
@@ -186,8 +186,8 @@ The folloing code is a breif example:
 Advanced Exercises
 ##################
 
-Advanced Exercise 1 - Bootloader Self Relocation
-================================================
+Advanced Exercise 1 - Bootloader Self Relocation - 10%
+======================================================
 
 In the basic part, you are allowed to specify the loading address of your bootloader in ``config.txt``.
 However, not all previous stage bootloaders can specify the loading address.
@@ -199,8 +199,8 @@ Hence, a bootloader should be able to relocate itself to another address, so it 
     Add self-relocation to your UART bootloader, so you don't need ``kernel_address=`` option in ``config.txt``
 
 
-Advanced Exercise 2 - Devicetree
-================================
+Advanced Exercise 2 - Devicetree - 30%
+======================================
 
 During the booting process, a kernel should know what devices are currently connected and use the corresponding driver to initialize and access it.
 For powerful buses such as PCIe and USB, the kernel can detect what devices are connected by querying the bus's registers.

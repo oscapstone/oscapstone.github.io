@@ -92,7 +92,7 @@ You can still design it yourself as long as you follow the specification of the 
 
 .. admonition:: Todo
 
-    Implement the buddy system for contiguous page frames allocation and your max order should larger than 5.
+    Implement the buddy system for contiguous page frames allocation and your max order should be larger than 5.
 
 .. note::
 

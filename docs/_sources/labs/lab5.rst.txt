@@ -333,7 +333,7 @@ Test
 
 .. warning::
 
-  Please test your implementation using the code below or equivalent logic code, but you **must output the stack pointer**. This test should work in both exception level 0.
+  Please test your implementation using the code below or equivalent logic code, but you **must output the stack pointer**. This test should work in exception level 0.
 
 .. code:: c
 

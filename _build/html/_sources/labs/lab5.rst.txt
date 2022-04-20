@@ -17,9 +17,7 @@ Goals of this lab
 * Understand how to create threads and user processes.
 * Understand how to implement scheduler and context switch.
 * Understand what's preemption.
-* Understand how to implement the waiting mechanism.
 * Understand how to implement POSIX signals.
-
 
 ##########
 Background
@@ -52,16 +50,17 @@ Moreover, they want each executing program to be isolated and has its identity, 
 To achieve this, the operating system maintains multiple isolated execution instances called processes.
 A process can only access the resource it owns.
 If it needs additional resources, it invokes the corresponding system calls.
-The kernel then checks the capabilities of the process and only provides the resource if the process has the access right.
+The kernel then checks the capabilities of the process and only provides the resource if the process has the access rights.
 
 MMU-less
 --------
 
 In general, programs that directly run machine code on the CPU are isolated by virtual memory.
-However, we don't enable the MMU in this lab, 
+However, we won't enable the MMU in this lab, 
 so we can't prevent illegal memory access and we can't use the same virtual address for different processes.
 If you want to execute multiple programs, please use different linker scripts for different programs 
 and load them to different addresses to prevent overlapping.
+If your program calls fork, the program shouldn't use global variables, dynamic allocation, indirect storage, etc, since the storage will be corrupted.
 
 Run Queue and Wait Queue
 ========================
@@ -206,7 +205,7 @@ Therefore, the finished thread only removes itself from the run queue,
 releases freeable resources, sets its state to be dead,
 and waits for someone to recycle the remaining stuff.
 
-In UNIX-like operating systems, the recycler is another thread that creates the zombie thread(parent).
+In UNIX-like operating systems, the parent thread is accountable for recycling its zombie child.
 The parent can also get the status code from the zombie child's data structure as useful information.
 In this lab, you can let the idle thread do the jobs to simplify the implementation.
 When the idle thread is scheduled, it checks if there is any zombie thread.
@@ -272,7 +271,7 @@ Required System Calls
 You need to implement the following system calls for user programs.
 
 int getpid()
-  Get current process’s id.
+  Get current process's id.
 
 size_t uart_read(char buf[], size_t size)
   Return the number of bytes read by reading size byte into the user-supplied buffer buf.
@@ -285,23 +284,23 @@ int exec(const char\* name, char \*const argv[])
 
 .. admonition:: Note
 
-  In this lab, you won’t have to deal with argument passing, but you can still use it.
+  In this lab, you won't have to deal with argument passing, but you can still use it.
 
 int fork()
-  The standard method of duplicating the current process in UNIX-like operating systems is to use fork(). Following the call to fork(), two processes run the same code. Set the parent process’s return value to the child’s id and the child process’s return value to 0 to distinguish them.
+  The standard method of duplicating the current process in UNIX-like operating systems is to use fork(). Following the call to fork(), two processes run the same code. Set the parent process's return value to the child's id and the child process's return value to 0 to distinguish them.
 
 void exit()
   Terminate the current process.
 
 int mbox_call(unsigned char ch, unsigned int \*mbox)
-  Get the hardware’s information by mailbox
+  Get the hardware's information by mailbox
 
 void kill(int pid)
   Other processes identified by pid should be terminated.
 
 .. admonition:: Note
 
-  You don’t need to implement this system call if you prefer to kill a process using the POSIX Signal stated in Advanced Exercise 1.
+  You don't need to implement this system call if you prefer to kill a process using the POSIX Signal stated in Advanced Exercise 1.
 
 .. warning::
 
@@ -334,7 +333,7 @@ Test
 
 .. warning::
 
-  Please test your implementation using the code below or equivalent logic code, but you **must output the stack pointer**. This test should work in both exception level 0 and level 1.
+  Please test your implementation using the code below or equivalent logic code, but you **must output the stack pointer**. This test should work in both exception level 0.
 
 .. code:: c
 
@@ -387,7 +386,7 @@ User Program
 
 Load the :download:`user program <initramfs.cpio>` to your kernel and execute it. The system call you defined above would be used by the user program.
 
-The test program will access cpu timer register, please add this code or equivilant logic to your timer initialize code
+This test program will access cpu timer register, please add this code or equivilant logic to your timer initialize code
 
 .. code-block:: c
 
@@ -453,6 +452,7 @@ Finally, during execution, the handler requires a user stack. The kernel should 
 
   * Your user-registered handler must be in user mode.
   * Our test program could also apply to your POSIX signal implementation. You should test your implementation in this part with our user program, if your signal handler can only work in your own testcase, you will only receive at most half of the points of this part.
+  * You should copy the user-registered handler when program calls fork
 
 To meet our standards, please follow the guidelines below :
 In order to let a process send transmit signals to any other process, you must implement the `kill(pid, signal)` system call. Meanwhile, you must implement the SIGKILL default signal handler (terminate the process). The signal(signal, handler) system call must then be implemented so that a user program can register its function as the signal's handler.

@@ -217,10 +217,10 @@ In this task, you should design an API to reserve specific locations.
 
 The following code is a brief example:
 
-.. code-block:: c
+.. code:: c
 
   void memory_reserve(start, end) {
-      …
+      //…
   }
 
 .. admonition:: Todo

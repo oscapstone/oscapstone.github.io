@@ -22,19 +22,19 @@
       
 
     
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/sphinx-book-theme.acff12b8f9c144ce68a297486a2fa670.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.e2363ea40746bee74734a24ffefccd78.css" />
     
   <link rel="preload" as="script" href="../_static/js/index.1c5a1a01449ed65a7b51.js">
 
-    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
     <script src="../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Hardware" href="hardware/index.html" />
+    <link rel="next" title="Lab 6: Virtual Memory" href="lab6.html" />
     <link rel="prev" title="Lab 4: Allocator" href="lab4.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
@@ -55,15 +55,16 @@
     <a class="navbar-brand text-wrap" href="../index.html">
       
       
+      
       <h1 class="site-logo" id="site-title">IOC5213: Operating System Capstone</h1>
       
     </a>
 </div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
   <i class="icon fas fa-search"></i>
   <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
-</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item active">
-        <p class="caption">
+        <p class="caption" role="heading">
  <span class="caption-text">
   Class:
  </span>
@@ -80,7 +81,7 @@
   </a>
  </li>
 </ul>
-<p class="caption">
+<p class="caption" role="heading">
  <span class="caption-text">
   Labs:
  </span>
@@ -121,6 +122,11 @@
    Lab 5: Thread and User Process
   </a>
  </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="lab6.html">
+   Lab 6: Virtual Memory
+  </a>
+ </li>
  <li class="toctree-l1 has-children">
   <a class="reference internal" href="hardware/index.html">
    Hardware
@@ -149,7 +155,7 @@
   </ul>
  </li>
 </ul>
-<p class="caption">
+<p class="caption" role="heading">
  <span class="caption-text">
   References:
  </span>
@@ -234,7 +240,7 @@
             <div class="tocsection onthispage pt-5 pb-3">
                 <i class="fas fa-list"></i> Contents
             </div>
-            <nav id="bd-toc-nav">
+            <nav id="bd-toc-nav" aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#introduction">
@@ -530,32 +536,32 @@ Then, put it into the run queue.</p>
 When the current thread calls this API, the scheduler picks the next thread from the run queue.
 In this lab, your scheduler should at least be able to schedule the threads of the same priority in a <strong>round-robin</strong> manner.</p>
 <p>After the next thread is picked, the kernel can save the current thread’s register set and load the next thread’s.</p>
-<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="p">.</span><span class="n">global</span><span class="w"> </span><span class="n">switch_to</span><span class="w"></span>
-<span class="nl">switch_to</span><span class="p">:</span><span class="w"></span>
-<span class="w">    </span><span class="n">stp</span><span class="w"> </span><span class="n">x19</span><span class="p">,</span><span class="w"> </span><span class="n">x20</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="n">x0</span><span class="p">,</span><span class="w"> </span><span class="mi">16</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">0</span><span class="p">]</span><span class="w"></span>
-<span class="w">    </span><span class="n">stp</span><span class="w"> </span><span class="n">x21</span><span class="p">,</span><span class="w"> </span><span class="n">x22</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="n">x0</span><span class="p">,</span><span class="w"> </span><span class="mi">16</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">1</span><span class="p">]</span><span class="w"></span>
-<span class="w">    </span><span class="n">stp</span><span class="w"> </span><span class="n">x23</span><span class="p">,</span><span class="w"> </span><span class="n">x24</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="n">x0</span><span class="p">,</span><span class="w"> </span><span class="mi">16</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">2</span><span class="p">]</span><span class="w"></span>
-<span class="w">    </span><span class="n">stp</span><span class="w"> </span><span class="n">x25</span><span class="p">,</span><span class="w"> </span><span class="n">x26</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="n">x0</span><span class="p">,</span><span class="w"> </span><span class="mi">16</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">3</span><span class="p">]</span><span class="w"></span>
-<span class="w">    </span><span class="n">stp</span><span class="w"> </span><span class="n">x27</span><span class="p">,</span><span class="w"> </span><span class="n">x28</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="n">x0</span><span class="p">,</span><span class="w"> </span><span class="mi">16</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">4</span><span class="p">]</span><span class="w"></span>
-<span class="w">    </span><span class="n">stp</span><span class="w"> </span><span class="n">fp</span><span class="p">,</span><span class="w"> </span><span class="n">lr</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="n">x0</span><span class="p">,</span><span class="w"> </span><span class="mi">16</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">5</span><span class="p">]</span><span class="w"></span>
-<span class="w">    </span><span class="n">mov</span><span class="w"> </span><span class="n">x9</span><span class="p">,</span><span class="w"> </span><span class="n">sp</span><span class="w"></span>
-<span class="w">    </span><span class="n">str</span><span class="w"> </span><span class="n">x9</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="n">x0</span><span class="p">,</span><span class="w"> </span><span class="mi">16</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">6</span><span class="p">]</span><span class="w"></span>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="p">.</span><span class="n">global</span> <span class="n">switch_to</span>
+<span class="nl">switch_to</span><span class="p">:</span>
+    <span class="n">stp</span> <span class="n">x19</span><span class="p">,</span> <span class="n">x20</span><span class="p">,</span> <span class="p">[</span><span class="n">x0</span><span class="p">,</span> <span class="mi">16</span> <span class="o">*</span> <span class="mi">0</span><span class="p">]</span>
+    <span class="n">stp</span> <span class="n">x21</span><span class="p">,</span> <span class="n">x22</span><span class="p">,</span> <span class="p">[</span><span class="n">x0</span><span class="p">,</span> <span class="mi">16</span> <span class="o">*</span> <span class="mi">1</span><span class="p">]</span>
+    <span class="n">stp</span> <span class="n">x23</span><span class="p">,</span> <span class="n">x24</span><span class="p">,</span> <span class="p">[</span><span class="n">x0</span><span class="p">,</span> <span class="mi">16</span> <span class="o">*</span> <span class="mi">2</span><span class="p">]</span>
+    <span class="n">stp</span> <span class="n">x25</span><span class="p">,</span> <span class="n">x26</span><span class="p">,</span> <span class="p">[</span><span class="n">x0</span><span class="p">,</span> <span class="mi">16</span> <span class="o">*</span> <span class="mi">3</span><span class="p">]</span>
+    <span class="n">stp</span> <span class="n">x27</span><span class="p">,</span> <span class="n">x28</span><span class="p">,</span> <span class="p">[</span><span class="n">x0</span><span class="p">,</span> <span class="mi">16</span> <span class="o">*</span> <span class="mi">4</span><span class="p">]</span>
+    <span class="n">stp</span> <span class="n">fp</span><span class="p">,</span> <span class="n">lr</span><span class="p">,</span> <span class="p">[</span><span class="n">x0</span><span class="p">,</span> <span class="mi">16</span> <span class="o">*</span> <span class="mi">5</span><span class="p">]</span>
+    <span class="n">mov</span> <span class="n">x9</span><span class="p">,</span> <span class="n">sp</span>
+    <span class="n">str</span> <span class="n">x9</span><span class="p">,</span> <span class="p">[</span><span class="n">x0</span><span class="p">,</span> <span class="mi">16</span> <span class="o">*</span> <span class="mi">6</span><span class="p">]</span>
 
-<span class="w">    </span><span class="n">ldp</span><span class="w"> </span><span class="n">x19</span><span class="p">,</span><span class="w"> </span><span class="n">x20</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="n">x1</span><span class="p">,</span><span class="w"> </span><span class="mi">16</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">0</span><span class="p">]</span><span class="w"></span>
-<span class="w">    </span><span class="n">ldp</span><span class="w"> </span><span class="n">x21</span><span class="p">,</span><span class="w"> </span><span class="n">x22</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="n">x1</span><span class="p">,</span><span class="w"> </span><span class="mi">16</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">1</span><span class="p">]</span><span class="w"></span>
-<span class="w">    </span><span class="n">ldp</span><span class="w"> </span><span class="n">x23</span><span class="p">,</span><span class="w"> </span><span class="n">x24</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="n">x1</span><span class="p">,</span><span class="w"> </span><span class="mi">16</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">2</span><span class="p">]</span><span class="w"></span>
-<span class="w">    </span><span class="n">ldp</span><span class="w"> </span><span class="n">x25</span><span class="p">,</span><span class="w"> </span><span class="n">x26</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="n">x1</span><span class="p">,</span><span class="w"> </span><span class="mi">16</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">3</span><span class="p">]</span><span class="w"></span>
-<span class="w">    </span><span class="n">ldp</span><span class="w"> </span><span class="n">x27</span><span class="p">,</span><span class="w"> </span><span class="n">x28</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="n">x1</span><span class="p">,</span><span class="w"> </span><span class="mi">16</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">4</span><span class="p">]</span><span class="w"></span>
-<span class="w">    </span><span class="n">ldp</span><span class="w"> </span><span class="n">fp</span><span class="p">,</span><span class="w"> </span><span class="n">lr</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="n">x1</span><span class="p">,</span><span class="w"> </span><span class="mi">16</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">5</span><span class="p">]</span><span class="w"></span>
-<span class="w">    </span><span class="n">ldr</span><span class="w"> </span><span class="n">x9</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="n">x1</span><span class="p">,</span><span class="w"> </span><span class="mi">16</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">6</span><span class="p">]</span><span class="w"></span>
-<span class="w">    </span><span class="n">mov</span><span class="w"> </span><span class="n">sp</span><span class="p">,</span><span class="w">  </span><span class="n">x9</span><span class="w"></span>
-<span class="w">    </span><span class="n">msr</span><span class="w"> </span><span class="n">tpidr_el1</span><span class="p">,</span><span class="w"> </span><span class="n">x1</span><span class="w"></span>
-<span class="w">    </span><span class="n">ret</span><span class="w"></span>
+    <span class="n">ldp</span> <span class="n">x19</span><span class="p">,</span> <span class="n">x20</span><span class="p">,</span> <span class="p">[</span><span class="n">x1</span><span class="p">,</span> <span class="mi">16</span> <span class="o">*</span> <span class="mi">0</span><span class="p">]</span>
+    <span class="n">ldp</span> <span class="n">x21</span><span class="p">,</span> <span class="n">x22</span><span class="p">,</span> <span class="p">[</span><span class="n">x1</span><span class="p">,</span> <span class="mi">16</span> <span class="o">*</span> <span class="mi">1</span><span class="p">]</span>
+    <span class="n">ldp</span> <span class="n">x23</span><span class="p">,</span> <span class="n">x24</span><span class="p">,</span> <span class="p">[</span><span class="n">x1</span><span class="p">,</span> <span class="mi">16</span> <span class="o">*</span> <span class="mi">2</span><span class="p">]</span>
+    <span class="n">ldp</span> <span class="n">x25</span><span class="p">,</span> <span class="n">x26</span><span class="p">,</span> <span class="p">[</span><span class="n">x1</span><span class="p">,</span> <span class="mi">16</span> <span class="o">*</span> <span class="mi">3</span><span class="p">]</span>
+    <span class="n">ldp</span> <span class="n">x27</span><span class="p">,</span> <span class="n">x28</span><span class="p">,</span> <span class="p">[</span><span class="n">x1</span><span class="p">,</span> <span class="mi">16</span> <span class="o">*</span> <span class="mi">4</span><span class="p">]</span>
+    <span class="n">ldp</span> <span class="n">fp</span><span class="p">,</span> <span class="n">lr</span><span class="p">,</span> <span class="p">[</span><span class="n">x1</span><span class="p">,</span> <span class="mi">16</span> <span class="o">*</span> <span class="mi">5</span><span class="p">]</span>
+    <span class="n">ldr</span> <span class="n">x9</span><span class="p">,</span> <span class="p">[</span><span class="n">x1</span><span class="p">,</span> <span class="mi">16</span> <span class="o">*</span> <span class="mi">6</span><span class="p">]</span>
+    <span class="n">mov</span> <span class="n">sp</span><span class="p">,</span>  <span class="n">x9</span>
+    <span class="n">msr</span> <span class="n">tpidr_el1</span><span class="p">,</span> <span class="n">x1</span>
+    <span class="n">ret</span>
 
-<span class="p">.</span><span class="n">global</span><span class="w"> </span><span class="n">get_current</span><span class="w"></span>
-<span class="nl">get_current</span><span class="p">:</span><span class="w"></span>
-<span class="w">    </span><span class="n">mrs</span><span class="w"> </span><span class="n">x0</span><span class="p">,</span><span class="w"> </span><span class="n">tpidr_el1</span><span class="w"></span>
-<span class="w">    </span><span class="n">ret</span><span class="w"></span>
+<span class="p">.</span><span class="n">global</span> <span class="n">get_current</span>
+<span class="nl">get_current</span><span class="p">:</span>
+    <span class="n">mrs</span> <span class="n">x0</span><span class="p">,</span> <span class="n">tpidr_el1</span>
+    <span class="n">ret</span>
 </pre></div>
 </div>
 <p>The above example gets the current thread’s data structure from the system register <code class="docutils literal notranslate"><span class="pre">tpidr_el1</span></code>.
@@ -600,23 +606,23 @@ If yes, it recycles them as follows.</p>
 <h4>Test<a class="headerlink" href="#test" title="Permalink to this headline">¶</a></h4>
 <p>Please test your implementation with the following code or equivalent logic code in the demo.</p>
 <p>Expected result: multiple threads print the content interleaved.</p>
-<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="nf">foo</span><span class="p">(){</span><span class="w"></span>
-<span class="w">    </span><span class="k">for</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span><span class="w"> </span><span class="o">++</span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;Thread id: %d %d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">current_thread</span><span class="p">().</span><span class="n">id</span><span class="p">(),</span><span class="w"> </span><span class="n">i</span><span class="p">);</span><span class="w"></span>
-<span class="w">        </span><span class="n">delay</span><span class="p">(</span><span class="mi">1000000</span><span class="p">);</span><span class="w"></span>
-<span class="w">        </span><span class="n">schedule</span><span class="p">();</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span> <span class="nf">foo</span><span class="p">(){</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">printf</span><span class="p">(</span><span class="s">&quot;Thread id: %d %d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">current_thread</span><span class="p">().</span><span class="n">id</span><span class="p">(),</span> <span class="n">i</span><span class="p">);</span>
+        <span class="n">delay</span><span class="p">(</span><span class="mi">1000000</span><span class="p">);</span>
+        <span class="n">schedule</span><span class="p">();</span>
+    <span class="p">}</span>
+<span class="p">}</span>
 
-<span class="kt">void</span><span class="w"> </span><span class="nf">kernel_main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="c1">// ...</span>
-<span class="w">    </span><span class="c1">// boot setup</span>
-<span class="w">    </span><span class="c1">// ...</span>
-<span class="w">    </span><span class="k">for</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">N</span><span class="p">;</span><span class="w"> </span><span class="o">++</span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="c1">// N should &gt; 2</span>
-<span class="w">        </span><span class="n">thread_create</span><span class="p">(</span><span class="n">foo</span><span class="p">);</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-<span class="w">    </span><span class="n">idle</span><span class="p">();</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
+<span class="kt">void</span> <span class="nf">kernel_main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c1">// ...</span>
+    <span class="c1">// boot setup</span>
+    <span class="c1">// ...</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">N</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// N should &gt; 2</span>
+        <span class="n">thread_create</span><span class="p">(</span><span class="n">foo</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="n">idle</span><span class="p">();</span>
+<span class="p">}</span>
 </pre></div>
 </div>
 <div class="admonition-todo admonition">
@@ -712,34 +718,34 @@ The program uses the general-purpose registers to set the arguments and receive 
 <p class="admonition-title">Warning</p>
 <p>Please test your implementation using the code below or equivalent logic code, but you <strong>must output the stack pointer</strong>. This test should work in exception level 0.</p>
 </div>
-<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="nf">fork_test</span><span class="p">(){</span><span class="w"></span>
-<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\n</span><span class="s">Fork Test, pid %d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">get_pid</span><span class="p">());</span><span class="w"></span>
-<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">cnt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">ret</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">((</span><span class="n">ret</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">fork</span><span class="p">())</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="c1">// child</span>
-<span class="w">        </span><span class="kt">long</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">cur_sp</span><span class="p">;</span><span class="w"></span>
-<span class="w">        </span><span class="k">asm</span><span class="w"> </span><span class="k">volatile</span><span class="p">(</span><span class="s">&quot;mov %0, sp&quot;</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="s">&quot;=r&quot;</span><span class="p">(</span><span class="n">cur_sp</span><span class="p">));</span><span class="w"></span>
-<span class="w">        </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;first child pid: %d, cnt: %d, ptr: %x, sp : %x</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">get_pid</span><span class="p">(),</span><span class="w"> </span><span class="n">cnt</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">cnt</span><span class="p">,</span><span class="w"> </span><span class="n">cur_sp</span><span class="p">);</span><span class="w"></span>
-<span class="w">        </span><span class="o">++</span><span class="n">cnt</span><span class="p">;</span><span class="w"></span>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span> <span class="nf">fork_test</span><span class="p">(){</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\n</span><span class="s">Fork Test, pid %d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">get_pid</span><span class="p">());</span>
+    <span class="kt">int</span> <span class="n">cnt</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">ret</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="k">if</span> <span class="p">((</span><span class="n">ret</span> <span class="o">=</span> <span class="n">fork</span><span class="p">())</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// child</span>
+        <span class="kt">long</span> <span class="kt">long</span> <span class="n">cur_sp</span><span class="p">;</span>
+        <span class="k">asm</span> <span class="k">volatile</span><span class="p">(</span><span class="s">&quot;mov %0, sp&quot;</span> <span class="o">:</span> <span class="s">&quot;=r&quot;</span><span class="p">(</span><span class="n">cur_sp</span><span class="p">));</span>
+        <span class="n">printf</span><span class="p">(</span><span class="s">&quot;first child pid: %d, cnt: %d, ptr: %x, sp : %x</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">get_pid</span><span class="p">(),</span> <span class="n">cnt</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">cnt</span><span class="p">,</span> <span class="n">cur_sp</span><span class="p">);</span>
+        <span class="o">++</span><span class="n">cnt</span><span class="p">;</span>
 
-<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">((</span><span class="n">ret</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">fork</span><span class="p">())</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="mi">0</span><span class="p">){</span><span class="w"></span>
-<span class="w">            </span><span class="k">asm</span><span class="w"> </span><span class="k">volatile</span><span class="p">(</span><span class="s">&quot;mov %0, sp&quot;</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="s">&quot;=r&quot;</span><span class="p">(</span><span class="n">cur_sp</span><span class="p">));</span><span class="w"></span>
-<span class="w">            </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;first child pid: %d, cnt: %d, ptr: %x, sp : %x</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">get_pid</span><span class="p">(),</span><span class="w"> </span><span class="n">cnt</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">cnt</span><span class="p">,</span><span class="w"> </span><span class="n">cur_sp</span><span class="p">);</span><span class="w"></span>
-<span class="w">        </span><span class="p">}</span><span class="w"></span>
-<span class="w">        </span><span class="k">else</span><span class="p">{</span><span class="w"></span>
-<span class="w">            </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">cnt</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">5</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">                </span><span class="k">asm</span><span class="w"> </span><span class="k">volatile</span><span class="p">(</span><span class="s">&quot;mov %0, sp&quot;</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="s">&quot;=r&quot;</span><span class="p">(</span><span class="n">cur_sp</span><span class="p">));</span><span class="w"></span>
-<span class="w">                </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;second child pid: %d, cnt: %d, ptr: %x, sp : %x</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">get_pid</span><span class="p">(),</span><span class="w"> </span><span class="n">cnt</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">cnt</span><span class="p">,</span><span class="w"> </span><span class="n">cur_sp</span><span class="p">);</span><span class="w"></span>
-<span class="w">                </span><span class="n">delay</span><span class="p">(</span><span class="mi">1000000</span><span class="p">);</span><span class="w"></span>
-<span class="w">                </span><span class="o">++</span><span class="n">cnt</span><span class="p">;</span><span class="w"></span>
-<span class="w">            </span><span class="p">}</span><span class="w"></span>
-<span class="w">        </span><span class="p">}</span><span class="w"></span>
-<span class="w">        </span><span class="n">exit</span><span class="p">();</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-<span class="w">    </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;parent here, pid %d, child %d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">get_pid</span><span class="p">(),</span><span class="w"> </span><span class="n">ret</span><span class="p">);</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
+        <span class="k">if</span> <span class="p">((</span><span class="n">ret</span> <span class="o">=</span> <span class="n">fork</span><span class="p">())</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">){</span>
+            <span class="k">asm</span> <span class="k">volatile</span><span class="p">(</span><span class="s">&quot;mov %0, sp&quot;</span> <span class="o">:</span> <span class="s">&quot;=r&quot;</span><span class="p">(</span><span class="n">cur_sp</span><span class="p">));</span>
+            <span class="n">printf</span><span class="p">(</span><span class="s">&quot;first child pid: %d, cnt: %d, ptr: %x, sp : %x</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">get_pid</span><span class="p">(),</span> <span class="n">cnt</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">cnt</span><span class="p">,</span> <span class="n">cur_sp</span><span class="p">);</span>
+        <span class="p">}</span>
+        <span class="k">else</span><span class="p">{</span>
+            <span class="k">while</span> <span class="p">(</span><span class="n">cnt</span> <span class="o">&lt;</span> <span class="mi">5</span><span class="p">)</span> <span class="p">{</span>
+                <span class="k">asm</span> <span class="k">volatile</span><span class="p">(</span><span class="s">&quot;mov %0, sp&quot;</span> <span class="o">:</span> <span class="s">&quot;=r&quot;</span><span class="p">(</span><span class="n">cur_sp</span><span class="p">));</span>
+                <span class="n">printf</span><span class="p">(</span><span class="s">&quot;second child pid: %d, cnt: %d, ptr: %x, sp : %x</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">get_pid</span><span class="p">(),</span> <span class="n">cnt</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">cnt</span><span class="p">,</span> <span class="n">cur_sp</span><span class="p">);</span>
+                <span class="n">delay</span><span class="p">(</span><span class="mi">1000000</span><span class="p">);</span>
+                <span class="o">++</span><span class="n">cnt</span><span class="p">;</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+        <span class="n">exit</span><span class="p">();</span>
+    <span class="p">}</span>
+    <span class="k">else</span> <span class="p">{</span>
+        <span class="n">printf</span><span class="p">(</span><span class="s">&quot;parent here, pid %d, child %d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">get_pid</span><span class="p">(),</span> <span class="n">ret</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
 </pre></div>
 </div>
 </div>
@@ -759,10 +765,10 @@ The program uses the general-purpose registers to set the arguments and receive 
 <h4>User Program<a class="headerlink" href="#user-program" title="Permalink to this headline">¶</a></h4>
 <p>Load the <a class="reference download internal" download="" href="../_downloads/58c515e3041658a045033c8e56ecff4c/initramfs.cpio"><code class="xref download docutils literal notranslate"><span class="pre">user</span> <span class="pre">program</span></code></a> to your kernel and execute it. The system call you defined above would be used by the user program.</p>
 <p>This test program will access cpu timer register, please add this code or equivilant logic to your timer initialize code</p>
-<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">uint64_t</span><span class="w"> </span><span class="n">tmp</span><span class="p">;</span><span class="w"></span>
-<span class="k">asm</span><span class="w"> </span><span class="k">volatile</span><span class="p">(</span><span class="s">&quot;mrs %0, cntkctl_el1&quot;</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="s">&quot;=r&quot;</span><span class="p">(</span><span class="n">tmp</span><span class="p">));</span><span class="w"></span>
-<span class="n">tmp</span><span class="w"> </span><span class="o">|=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"></span>
-<span class="k">asm</span><span class="w"> </span><span class="k">volatile</span><span class="p">(</span><span class="s">&quot;msr cntkctl_el1, %0&quot;</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="s">&quot;r&quot;</span><span class="p">(</span><span class="n">tmp</span><span class="p">));</span><span class="w"></span>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">uint64_t</span> <span class="n">tmp</span><span class="p">;</span>
+<span class="k">asm</span> <span class="nf">volatile</span><span class="p">(</span><span class="s">&quot;mrs %0, cntkctl_el1&quot;</span> <span class="o">:</span> <span class="s">&quot;=r&quot;</span><span class="p">(</span><span class="n">tmp</span><span class="p">));</span>
+<span class="n">tmp</span> <span class="o">|=</span> <span class="mi">1</span><span class="p">;</span>
+<span class="k">asm</span> <span class="nf">volatile</span><span class="p">(</span><span class="s">&quot;msr cntkctl_el1, %0&quot;</span> <span class="o">:</span> <span class="o">:</span> <span class="s">&quot;r&quot;</span><span class="p">(</span><span class="n">tmp</span><span class="p">));</span>
 </pre></div>
 </div>
 <div class="admonition important">
@@ -837,16 +843,36 @@ In order to let a process send transmit signals to any other process, you must i
               </div>
               
         
-        <div class='prev-next-bottom'>
             
-    <a class='left-prev' id="prev-link" href="lab4.html" title="previous page">Lab 4: Allocator</a>
-    <a class='right-next' id="next-link" href="hardware/index.html" title="next page">Hardware</a>
 
-        </div>
+
+
+<div class='prev-next-bottom'>
+    
+    <div id="prev">
+        <a class="left-prev" href="lab4.html" title="previous page">
+            <i class="prevnext-label fas fa-angle-left"></i>
+            <div class="prevnext-info">
+                <p class="prevnext-label">previous</p>
+                <p class="prevnext-title">Lab 4: Allocator</p>
+            </div>
+        </a>
+    </div>
+     <div id="next">
+        <a class="right-next" href="lab6.html" title="next page">
+            <div class="prevnext-info">
+                <p class="prevnext-label">next</p>
+                <p class="prevnext-title">Lab 6: Virtual Memory</p>
+            </div>
+            <i class="prevnext-label fas fa-angle-right"></i>
+        </a>
+     </div>
+
+</div>
         
         </div>
     </div>
-    <footer class="footer mt-5 mt-md-0">
+    <footer class="footer">
     <div class="container">
       <p>
         

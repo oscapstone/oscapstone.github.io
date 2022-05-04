@@ -22,12 +22,12 @@
       
 
     
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/sphinx-book-theme.acff12b8f9c144ce68a297486a2fa670.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.e2363ea40746bee74734a24ffefccd78.css" />
     
   <link rel="preload" as="script" href="../_static/js/index.1c5a1a01449ed65a7b51.js">
 
-    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
@@ -55,15 +55,16 @@
     <a class="navbar-brand text-wrap" href="../index.html">
       
       
+      
       <h1 class="site-logo" id="site-title">IOC5213: Operating System Capstone</h1>
       
     </a>
 </div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
   <i class="icon fas fa-search"></i>
   <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
-</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item active">
-        <p class="caption">
+        <p class="caption" role="heading">
  <span class="caption-text">
   Class:
  </span>
@@ -80,7 +81,7 @@
   </a>
  </li>
 </ul>
-<p class="caption">
+<p class="caption" role="heading">
  <span class="caption-text">
   Labs:
  </span>
@@ -121,6 +122,11 @@
    Lab 5: Thread and User Process
   </a>
  </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="lab6.html">
+   Lab 6: Virtual Memory
+  </a>
+ </li>
  <li class="toctree-l1 has-children">
   <a class="reference internal" href="hardware/index.html">
    Hardware
@@ -149,7 +155,7 @@
   </ul>
  </li>
 </ul>
-<p class="caption">
+<p class="caption" role="heading">
  <span class="caption-text">
   References:
  </span>
@@ -234,7 +240,7 @@
             <div class="tocsection onthispage pt-5 pb-3">
                 <i class="fas fa-list"></i> Contents
             </div>
-            <nav id="bd-toc-nav">
+            <nav id="bd-toc-nav" aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#introduction">
@@ -414,20 +420,20 @@ Check if you implement mailbox communication correctly by verifying the hardware
 <span class="cp">#define PM_RSTC 0x3F10001c</span>
 <span class="cp">#define PM_WDOG 0x3F100024</span>
 
-<span class="kt">void</span><span class="w"> </span><span class="nf">set</span><span class="p">(</span><span class="kt">long</span><span class="w"> </span><span class="n">addr</span><span class="p">,</span><span class="w"> </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">value</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="k">volatile</span><span class="w"> </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">int</span><span class="o">*</span><span class="w"> </span><span class="n">point</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">int</span><span class="o">*</span><span class="p">)</span><span class="n">addr</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="o">*</span><span class="n">point</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">value</span><span class="p">;</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
+<span class="kt">void</span> <span class="nf">set</span><span class="p">(</span><span class="kt">long</span> <span class="n">addr</span><span class="p">,</span> <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">value</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">volatile</span> <span class="kt">unsigned</span> <span class="kt">int</span><span class="o">*</span> <span class="n">point</span> <span class="o">=</span> <span class="p">(</span><span class="kt">unsigned</span> <span class="kt">int</span><span class="o">*</span><span class="p">)</span><span class="n">addr</span><span class="p">;</span>
+    <span class="o">*</span><span class="n">point</span> <span class="o">=</span> <span class="n">value</span><span class="p">;</span>
+<span class="p">}</span>
 
-<span class="kt">void</span><span class="w"> </span><span class="nf">reset</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">tick</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">                 </span><span class="c1">// reboot after watchdog timer expire</span>
-<span class="w">    </span><span class="n">set</span><span class="p">(</span><span class="n">PM_RSTC</span><span class="p">,</span><span class="w"> </span><span class="n">PM_PASSWORD</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mh">0x20</span><span class="p">);</span><span class="w">  </span><span class="c1">// full reset</span>
-<span class="w">    </span><span class="n">set</span><span class="p">(</span><span class="n">PM_WDOG</span><span class="p">,</span><span class="w"> </span><span class="n">PM_PASSWORD</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">tick</span><span class="p">);</span><span class="w">  </span><span class="c1">// number of watchdog tick</span>
-<span class="p">}</span><span class="w"></span>
+<span class="kt">void</span> <span class="nf">reset</span><span class="p">(</span><span class="kt">int</span> <span class="n">tick</span><span class="p">)</span> <span class="p">{</span>                 <span class="c1">// reboot after watchdog timer expire</span>
+    <span class="n">set</span><span class="p">(</span><span class="n">PM_RSTC</span><span class="p">,</span> <span class="n">PM_PASSWORD</span> <span class="o">|</span> <span class="mh">0x20</span><span class="p">);</span>  <span class="c1">// full reset</span>
+    <span class="n">set</span><span class="p">(</span><span class="n">PM_WDOG</span><span class="p">,</span> <span class="n">PM_PASSWORD</span> <span class="o">|</span> <span class="n">tick</span><span class="p">);</span>  <span class="c1">// number of watchdog tick</span>
+<span class="p">}</span>
 
-<span class="kt">void</span><span class="w"> </span><span class="nf">cancel_reset</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="n">set</span><span class="p">(</span><span class="n">PM_RSTC</span><span class="p">,</span><span class="w"> </span><span class="n">PM_PASSWORD</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span><span class="w">  </span><span class="c1">// full reset</span>
-<span class="w">    </span><span class="n">set</span><span class="p">(</span><span class="n">PM_WDOG</span><span class="p">,</span><span class="w"> </span><span class="n">PM_PASSWORD</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span><span class="w">  </span><span class="c1">// number of watchdog tick</span>
-<span class="p">}</span><span class="w"></span>
+<span class="kt">void</span> <span class="nf">cancel_reset</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">set</span><span class="p">(</span><span class="n">PM_RSTC</span><span class="p">,</span> <span class="n">PM_PASSWORD</span> <span class="o">|</span> <span class="mi">0</span><span class="p">);</span>  <span class="c1">// full reset</span>
+    <span class="n">set</span><span class="p">(</span><span class="n">PM_WDOG</span><span class="p">,</span> <span class="n">PM_PASSWORD</span> <span class="o">|</span> <span class="mi">0</span><span class="p">);</span>  <span class="c1">// number of watchdog tick</span>
+<span class="p">}</span>
 </pre></div>
 </div>
 <div class="admonition-todo admonition">
@@ -442,16 +448,36 @@ Check if you implement mailbox communication correctly by verifying the hardware
               </div>
               
         
-        <div class='prev-next-bottom'>
             
-    <a class='left-prev' id="prev-link" href="lab0.html" title="previous page">Lab 0: Environment Setup</a>
-    <a class='right-next' id="next-link" href="lab2.html" title="next page">Lab 2: Booting</a>
 
-        </div>
+
+
+<div class='prev-next-bottom'>
+    
+    <div id="prev">
+        <a class="left-prev" href="lab0.html" title="previous page">
+            <i class="prevnext-label fas fa-angle-left"></i>
+            <div class="prevnext-info">
+                <p class="prevnext-label">previous</p>
+                <p class="prevnext-title">Lab 0: Environment Setup</p>
+            </div>
+        </a>
+    </div>
+     <div id="next">
+        <a class="right-next" href="lab2.html" title="next page">
+            <div class="prevnext-info">
+                <p class="prevnext-label">next</p>
+                <p class="prevnext-title">Lab 2: Booting</p>
+            </div>
+            <i class="prevnext-label fas fa-angle-right"></i>
+        </a>
+     </div>
+
+</div>
         
         </div>
     </div>
-    <footer class="footer mt-5 mt-md-0">
+    <footer class="footer">
     <div class="container">
       <p>
         

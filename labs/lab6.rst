@@ -493,13 +493,13 @@ API Specification
 
   **prot** is the region's access protection
 
-    * PROT_NONE : not accessible
+    * PROT_NONE : 0, not accessible
 
-    * PROT_READ : readable
+    * PROT_READ : 1, readable
 
-    * PROT_WRITE : writable
+    * PROT_WRITE : 2, writable
 
-    * PROT_EXEC : executable
+    * PROT_EXEC : 4, executable
 
   The following **flags** should be implemented
 
@@ -521,7 +521,7 @@ If the user specifies MAP_POPULATE in the mmap() call. The kernel should create 
 
 .. admonition:: Todo
 
-  Implement system call mmap.
+  Implement system call mmap, syscall number: 10.
 
 
 

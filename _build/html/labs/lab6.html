@@ -883,10 +883,10 @@ Memory regions such as <strong>.bss</strong> and <strong>user stack</strong> can
 <p><strong>prot</strong> is the region’s access protection</p>
 <blockquote>
 <div><ul class="simple">
-<li><p>PROT_NONE : not accessible</p></li>
-<li><p>PROT_READ : readable</p></li>
-<li><p>PROT_WRITE : writable</p></li>
-<li><p>PROT_EXEC : executable</p></li>
+<li><p>PROT_NONE : 0, not accessible</p></li>
+<li><p>PROT_READ : 1, readable</p></li>
+<li><p>PROT_WRITE : 2, writable</p></li>
+<li><p>PROT_EXEC : 4, executable</p></li>
 </ul>
 </div></blockquote>
 <p>The following <strong>flags</strong> should be implemented</p>
@@ -914,7 +914,7 @@ Memory regions such as <strong>.bss</strong> and <strong>user stack</strong> can
 </ul>
 <div class="admonition-todo admonition">
 <p class="admonition-title">Todo</p>
-<p>Implement system call mmap.</p>
+<p>Implement system call mmap, syscall number: 10.</p>
 </div>
 </div>
 </div>

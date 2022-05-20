@@ -22,21 +22,20 @@
       
 
     
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.e2363ea40746bee74734a24ffefccd78.css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.acff12b8f9c144ce68a297486a2fa670.css" type="text/css" />
     
   <link rel="preload" as="script" href="../_static/js/index.1c5a1a01449ed65a7b51.js">
 
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
     <script src="../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
-    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Hardware" href="hardware/index.html" />
+    <link rel="next" title="Lab 7: Virtual File System" href="lab7.html" />
     <link rel="prev" title="Lab 5: Thread and User Process" href="lab5.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
@@ -57,16 +56,15 @@
     <a class="navbar-brand text-wrap" href="../index.html">
       
       
-      
       <h1 class="site-logo" id="site-title">IOC5213: Operating System Capstone</h1>
       
     </a>
 </div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
   <i class="icon fas fa-search"></i>
   <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
-</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
     <div class="bd-toc-item active">
-        <p class="caption" role="heading">
+        <p class="caption">
  <span class="caption-text">
   Class:
  </span>
@@ -83,7 +81,7 @@
   </a>
  </li>
 </ul>
-<p class="caption" role="heading">
+<p class="caption">
  <span class="caption-text">
   Labs:
  </span>
@@ -129,6 +127,11 @@
    Lab 6: Virtual Memory
   </a>
  </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="lab7.html">
+   Lab 7: Virtual File System
+  </a>
+ </li>
  <li class="toctree-l1 has-children">
   <a class="reference internal" href="hardware/index.html">
    Hardware
@@ -157,7 +160,7 @@
   </ul>
  </li>
 </ul>
-<p class="caption" role="heading">
+<p class="caption">
  <span class="caption-text">
   References:
  </span>
@@ -242,7 +245,7 @@
             <div class="tocsection onthispage pt-5 pb-3">
                 <i class="fas fa-list"></i> Contents
             </div>
-            <nav id="bd-toc-nav" aria-label="Page">
+            <nav id="bd-toc-nav">
                 <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#introduction">
@@ -604,8 +607,8 @@ The following basic configuration is used in this lab.</p>
 <span class="cp">#define TCR_CONFIG_4KB ((0b00 &lt;&lt; 14) |  (0b10 &lt;&lt; 30))</span>
 <span class="cp">#define TCR_CONFIG_DEFAULT (TCR_CONFIG_REGION_48bit | TCR_CONFIG_4KB)</span>
 
-<span class="n">ldr</span> <span class="n">x0</span><span class="p">,</span> <span class="o">=</span> <span class="n">TCR_CONFIG_DEFAULT</span>
-<span class="n">msr</span> <span class="n">tcr_el1</span><span class="p">,</span> <span class="n">x0</span>
+<span class="n">ldr</span><span class="w"> </span><span class="n">x0</span><span class="p">,</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">TCR_CONFIG_DEFAULT</span><span class="w"></span>
+<span class="n">msr</span><span class="w"> </span><span class="n">tcr_el1</span><span class="p">,</span><span class="w"> </span><span class="n">x0</span><span class="w"></span>
 </pre></div>
 </div>
 <div class="admonition-todo admonition">
@@ -647,11 +650,11 @@ Then, it accesses the memory with different access policies.</p>
 <span class="cp">#define MAIR_IDX_DEVICE_nGnRnE 0</span>
 <span class="cp">#define MAIR_IDX_NORMAL_NOCACHE 1</span>
 
-<span class="n">ldr</span> <span class="n">x0</span><span class="p">,</span> <span class="o">=</span><span class="p">(</span> \
-  <span class="p">(</span><span class="n">MAIR_DEVICE_nGnRnE</span> <span class="o">&lt;&lt;</span> <span class="p">(</span><span class="n">MAIR_IDX_DEVICE_nGnRnE</span> <span class="o">*</span> <span class="mi">8</span><span class="p">))</span> <span class="o">|</span> \
-  <span class="p">(</span><span class="n">MAIR_NORMAL_NOCACHE</span> <span class="o">&lt;&lt;</span> <span class="p">(</span><span class="n">MAIR_IDX_NORMAL_NOCACHE</span> <span class="o">*</span> <span class="mi">8</span><span class="p">))</span> \
-<span class="p">)</span>
-<span class="n">msr</span> <span class="n">mair_el1</span><span class="p">,</span> <span class="n">x0</span>
+<span class="n">ldr</span><span class="w"> </span><span class="n">x0</span><span class="p">,</span><span class="w"> </span><span class="o">=</span><span class="p">(</span><span class="w"> </span>\
+<span class="w">  </span><span class="p">(</span><span class="n">MAIR_DEVICE_nGnRnE</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="p">(</span><span class="n">MAIR_IDX_DEVICE_nGnRnE</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">8</span><span class="p">))</span><span class="w"> </span><span class="o">|</span><span class="w"> </span>\
+<span class="w">  </span><span class="p">(</span><span class="n">MAIR_NORMAL_NOCACHE</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="p">(</span><span class="n">MAIR_IDX_NORMAL_NOCACHE</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">8</span><span class="p">))</span><span class="w"> </span>\
+<span class="p">)</span><span class="w"></span>
+<span class="n">msr</span><span class="w"> </span><span class="n">mair_el1</span><span class="p">,</span><span class="w"> </span><span class="n">x0</span><span class="w"></span>
 </pre></div>
 </div>
 <div class="admonition-todo admonition">
@@ -688,26 +691,26 @@ Hence, you only need</p>
 <span class="cp">#define BOOT_PGD_ATTR PD_TABLE</span>
 <span class="cp">#define BOOT_PUD_ATTR (PD_ACCESS | (MAIR_IDX_DEVICE_nGnRnE &lt;&lt; 2) | PD_BLOCK)</span>
 
-<span class="n">mov</span> <span class="n">x0</span><span class="p">,</span> <span class="mi">0</span> <span class="c1">// PGD&#39;s page frame at 0x0</span>
-<span class="n">mov</span> <span class="n">x1</span><span class="p">,</span> <span class="mh">0x1000</span> <span class="c1">// PUD&#39;s page frame at 0x1000</span>
+<span class="n">mov</span><span class="w"> </span><span class="n">x0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="c1">// PGD&#39;s page frame at 0x0</span>
+<span class="n">mov</span><span class="w"> </span><span class="n">x1</span><span class="p">,</span><span class="w"> </span><span class="mh">0x1000</span><span class="w"> </span><span class="c1">// PUD&#39;s page frame at 0x1000</span>
 
-<span class="n">ldr</span> <span class="n">x2</span><span class="p">,</span> <span class="o">=</span> <span class="n">BOOT_PGD_ATTR</span>
-<span class="n">orr</span> <span class="n">x2</span><span class="p">,</span> <span class="n">x1</span><span class="p">,</span> <span class="n">x2</span> <span class="c1">// combine the physical address of next level page with attribute.</span>
-<span class="n">str</span> <span class="n">x2</span><span class="p">,</span> <span class="p">[</span><span class="n">x0</span><span class="p">]</span>
+<span class="n">ldr</span><span class="w"> </span><span class="n">x2</span><span class="p">,</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">BOOT_PGD_ATTR</span><span class="w"></span>
+<span class="n">orr</span><span class="w"> </span><span class="n">x2</span><span class="p">,</span><span class="w"> </span><span class="n">x1</span><span class="p">,</span><span class="w"> </span><span class="n">x2</span><span class="w"> </span><span class="c1">// combine the physical address of next level page with attribute.</span>
+<span class="n">str</span><span class="w"> </span><span class="n">x2</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="n">x0</span><span class="p">]</span><span class="w"></span>
 
-<span class="n">ldr</span> <span class="n">x2</span><span class="p">,</span> <span class="o">=</span> <span class="n">BOOT_PUD_ATTR</span>
-<span class="n">mov</span> <span class="n">x3</span><span class="p">,</span> <span class="mh">0x00000000</span>
-<span class="n">orr</span> <span class="n">x3</span><span class="p">,</span> <span class="n">x2</span><span class="p">,</span> <span class="n">x3</span>
-<span class="n">str</span> <span class="n">x3</span><span class="p">,</span> <span class="p">[</span><span class="n">x1</span><span class="p">]</span> <span class="c1">// 1st 1GB mapped by the 1st entry of PUD</span>
-<span class="n">mov</span> <span class="n">x3</span><span class="p">,</span> <span class="mh">0x40000000</span>
-<span class="n">orr</span> <span class="n">x3</span><span class="p">,</span> <span class="n">x2</span><span class="p">,</span> <span class="n">x3</span>
-<span class="n">str</span> <span class="n">x3</span><span class="p">,</span> <span class="p">[</span><span class="n">x1</span><span class="p">,</span> <span class="mi">8</span><span class="p">]</span> <span class="c1">// 2nd 1GB mapped by the 2nd entry of PUD</span>
+<span class="n">ldr</span><span class="w"> </span><span class="n">x2</span><span class="p">,</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">BOOT_PUD_ATTR</span><span class="w"></span>
+<span class="n">mov</span><span class="w"> </span><span class="n">x3</span><span class="p">,</span><span class="w"> </span><span class="mh">0x00000000</span><span class="w"></span>
+<span class="n">orr</span><span class="w"> </span><span class="n">x3</span><span class="p">,</span><span class="w"> </span><span class="n">x2</span><span class="p">,</span><span class="w"> </span><span class="n">x3</span><span class="w"></span>
+<span class="n">str</span><span class="w"> </span><span class="n">x3</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="n">x1</span><span class="p">]</span><span class="w"> </span><span class="c1">// 1st 1GB mapped by the 1st entry of PUD</span>
+<span class="n">mov</span><span class="w"> </span><span class="n">x3</span><span class="p">,</span><span class="w"> </span><span class="mh">0x40000000</span><span class="w"></span>
+<span class="n">orr</span><span class="w"> </span><span class="n">x3</span><span class="p">,</span><span class="w"> </span><span class="n">x2</span><span class="p">,</span><span class="w"> </span><span class="n">x3</span><span class="w"></span>
+<span class="n">str</span><span class="w"> </span><span class="n">x3</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="n">x1</span><span class="p">,</span><span class="w"> </span><span class="mi">8</span><span class="p">]</span><span class="w"> </span><span class="c1">// 2nd 1GB mapped by the 2nd entry of PUD</span>
 
-<span class="n">msr</span> <span class="n">ttbr0_el1</span><span class="p">,</span> <span class="n">x0</span> <span class="c1">// load PGD to the bottom translation-based register.</span>
+<span class="n">msr</span><span class="w"> </span><span class="n">ttbr0_el1</span><span class="p">,</span><span class="w"> </span><span class="n">x0</span><span class="w"> </span><span class="c1">// load PGD to the bottom translation-based register.</span>
 
-<span class="n">mrs</span> <span class="n">x2</span><span class="p">,</span> <span class="n">sctlr_el1</span>
-<span class="n">orr</span> <span class="n">x2</span> <span class="p">,</span> <span class="n">x2</span><span class="p">,</span> <span class="mi">1</span>
-<span class="n">msr</span> <span class="n">sctlr_el1</span><span class="p">,</span> <span class="n">x2</span> <span class="c1">// enable MMU, cache remains disabled</span>
+<span class="n">mrs</span><span class="w"> </span><span class="n">x2</span><span class="p">,</span><span class="w"> </span><span class="n">sctlr_el1</span><span class="w"></span>
+<span class="n">orr</span><span class="w"> </span><span class="n">x2</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="n">x2</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="w"></span>
+<span class="n">msr</span><span class="w"> </span><span class="n">sctlr_el1</span><span class="p">,</span><span class="w"> </span><span class="n">x2</span><span class="w"> </span><span class="c1">// enable MMU, cache remains disabled</span>
 </pre></div>
 </div>
 <p>If you setup correctly, your kernel should work as before.</p>
@@ -734,16 +737,16 @@ Next, enable the MMU and use an indirect branch to the virtual address.
 Then, the CPU is running your kernel in the upper address space.</p>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="c1">// ...</span>
 
-<span class="n">msr</span> <span class="n">ttbr0_el1</span><span class="p">,</span> <span class="n">x0</span>
-<span class="n">msr</span> <span class="n">ttbr1_el1</span><span class="p">,</span> <span class="n">x0</span> <span class="c1">// also load PGD to the upper translation based register.</span>
-<span class="n">mrs</span> <span class="n">x2</span><span class="p">,</span> <span class="n">sctlr_el1</span>
-<span class="n">orr</span> <span class="n">x2</span> <span class="p">,</span> <span class="n">x2</span><span class="p">,</span> <span class="mi">1</span>
-<span class="n">msr</span> <span class="n">sctlr_el1</span><span class="p">,</span> <span class="n">x2</span>
+<span class="n">msr</span><span class="w"> </span><span class="n">ttbr0_el1</span><span class="p">,</span><span class="w"> </span><span class="n">x0</span><span class="w"></span>
+<span class="n">msr</span><span class="w"> </span><span class="n">ttbr1_el1</span><span class="p">,</span><span class="w"> </span><span class="n">x0</span><span class="w"> </span><span class="c1">// also load PGD to the upper translation based register.</span>
+<span class="n">mrs</span><span class="w"> </span><span class="n">x2</span><span class="p">,</span><span class="w"> </span><span class="n">sctlr_el1</span><span class="w"></span>
+<span class="n">orr</span><span class="w"> </span><span class="n">x2</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="n">x2</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="w"></span>
+<span class="n">msr</span><span class="w"> </span><span class="n">sctlr_el1</span><span class="p">,</span><span class="w"> </span><span class="n">x2</span><span class="w"></span>
 
-<span class="n">ldr</span> <span class="n">x2</span><span class="p">,</span> <span class="o">=</span> <span class="n">boot_rest</span> <span class="c1">// indirect branch to the virtual address</span>
-<span class="n">br</span> <span class="n">x2</span>
+<span class="n">ldr</span><span class="w"> </span><span class="n">x2</span><span class="p">,</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">boot_rest</span><span class="w"> </span><span class="c1">// indirect branch to the virtual address</span>
+<span class="n">br</span><span class="w"> </span><span class="n">x2</span><span class="w"></span>
 
-<span class="nl">boot_rest</span><span class="p">:</span>
+<span class="nl">boot_rest</span><span class="p">:</span><span class="w"></span>
 <span class="c1">// ...</span>
 </pre></div>
 </div>
@@ -784,19 +787,19 @@ During this process, the next level page tables such as PUD, PMD, and PTE may no
 You should allocate one page frame to be used as the next level page table.
 Then, fill the page frame’s entries to map the virtual address.</p>
 <p>Here is the brief example:</p>
-<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">pte</span> <span class="o">*</span><span class="nf">walk</span><span class="p">(</span><span class="n">pagetable</span> <span class="n">pagetable</span><span class="p">,</span> <span class="kt">uint64_t</span> <span class="n">va</span><span class="p">,</span> <span class="kt">int</span> <span class="n">alloc</span><span class="p">)</span> <span class="p">{</span>
-  <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">level</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span> <span class="n">level</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">;</span> <span class="n">level</span><span class="o">--</span><span class="p">)</span> <span class="p">{</span>
-    <span class="n">pte</span> <span class="o">*</span><span class="n">pte</span> <span class="o">=</span> <span class="p">...;</span>
-    <span class="k">if</span> <span class="p">(</span><span class="o">*</span><span class="n">pte</span> <span class="n">is</span> <span class="n">a</span> <span class="n">entry</span><span class="p">)</span> <span class="p">{</span>
-      <span class="n">pagetable</span> <span class="o">=</span> <span class="o">*</span><span class="n">pte</span><span class="p">;</span>
-    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-      <span class="n">pagetable</span> <span class="o">=</span> <span class="n">alloc_page</span><span class="p">();</span>
-      <span class="n">memset</span><span class="p">(</span><span class="n">pagetable</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mh">0x1000</span><span class="p">);</span>
-      <span class="o">*</span><span class="n">pte</span> <span class="o">=</span> <span class="p">...;</span>
-    <span class="p">}</span>
-  <span class="p">}</span>
-  <span class="k">return</span> <span class="p">...;</span>
-<span class="p">}</span>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">pte</span><span class="w"> </span><span class="o">*</span><span class="nf">walk</span><span class="p">(</span><span class="n">pagetable</span><span class="w"> </span><span class="n">pagetable</span><span class="p">,</span><span class="w"> </span><span class="kt">uint64_t</span><span class="w"> </span><span class="n">va</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">alloc</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">level</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span><span class="p">;</span><span class="w"> </span><span class="n">level</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">level</span><span class="o">--</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">pte</span><span class="w"> </span><span class="o">*</span><span class="n">pte</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">...;</span><span class="w"></span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">*</span><span class="n">pte</span><span class="w"> </span><span class="n">is</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">entry</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="n">pagetable</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">*</span><span class="n">pte</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="n">pagetable</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">alloc_page</span><span class="p">();</span><span class="w"></span>
+<span class="w">      </span><span class="n">memset</span><span class="p">(</span><span class="n">pagetable</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mh">0x1000</span><span class="p">);</span><span class="w"></span>
+<span class="w">      </span><span class="o">*</span><span class="n">pte</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">...;</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="p">...;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 </pre></div>
 </div>
 <div class="admonition-todo admonition">
@@ -825,12 +828,12 @@ Therefore, you can revisit <code class="docutils literal notranslate"><span clas
 you can set the translation based register(<code class="docutils literal notranslate"><span class="pre">ttbr0_el1</span></code>) with different PGDs.</p>
 <p>In addition, you might need memory barriers to guarantee previous instructions are finished.
 Also, a TLB invalidation is needed because the old values are staled.</p>
-<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">ldr</span> <span class="n">x0</span><span class="p">,</span> <span class="o">=</span> <span class="n">next_pgd</span>
-<span class="n">dsb</span> <span class="n">ish</span> <span class="c1">// ensure write has completed</span>
-<span class="n">msr</span> <span class="n">ttbr0_el1</span><span class="p">,</span> <span class="n">x0</span> <span class="c1">// switch translation based address.</span>
-<span class="n">tlbi</span> <span class="n">vmalle1is</span> <span class="c1">// invalidate all TLB entries</span>
-<span class="n">dsb</span> <span class="n">ish</span> <span class="c1">// ensure completion of TLB invalidatation</span>
-<span class="n">isb</span> <span class="c1">// clear pipeline</span>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">ldr</span><span class="w"> </span><span class="n">x0</span><span class="p">,</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">next_pgd</span><span class="w"></span>
+<span class="n">dsb</span><span class="w"> </span><span class="n">ish</span><span class="w"> </span><span class="c1">// ensure write has completed</span>
+<span class="n">msr</span><span class="w"> </span><span class="n">ttbr0_el1</span><span class="p">,</span><span class="w"> </span><span class="n">x0</span><span class="w"> </span><span class="c1">// switch translation based address.</span>
+<span class="n">tlbi</span><span class="w"> </span><span class="n">vmalle1is</span><span class="w"> </span><span class="c1">// invalidate all TLB entries</span>
+<span class="n">dsb</span><span class="w"> </span><span class="n">ish</span><span class="w"> </span><span class="c1">// ensure completion of TLB invalidatation</span>
+<span class="n">isb</span><span class="w"> </span><span class="c1">// clear pipeline</span>
 </pre></div>
 </div>
 <div class="admonition-todo admonition">
@@ -941,9 +944,9 @@ The kernel only allocates the PGD for newly created process in the beggining.</p
 <p>To justify the correctness, you should print the log of each fault; here’s an brief example.</p>
 </div>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="c1">// For Translation fault</span>
-<span class="n">printf</span><span class="p">(</span><span class="s">&quot;[Translation fault]: %x</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">addr</span><span class="p">);</span>
+<span class="n">printf</span><span class="p">(</span><span class="s">&quot;[Translation fault]: %x</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">addr</span><span class="p">);</span><span class="w"></span>
 <span class="c1">// For Segmentation fault</span>
-<span class="n">printf</span><span class="p">(</span><span class="s">&quot;[Segmentation fault]: Kill Process</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+<span class="n">printf</span><span class="p">(</span><span class="s">&quot;[Segmentation fault]: Kill Process</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span><span class="w"></span>
 </pre></div>
 </div>
 <div class="admonition-todo admonition">
@@ -1002,36 +1005,16 @@ And you should not reclaim the page frame if there is still someone referring to
               </div>
               
         
+        <div class='prev-next-bottom'>
             
+    <a class='left-prev' id="prev-link" href="lab5.html" title="previous page">Lab 5: Thread and User Process</a>
+    <a class='right-next' id="next-link" href="lab7.html" title="next page">Lab 7: Virtual File System</a>
 
-
-
-<div class='prev-next-bottom'>
-    
-    <div id="prev">
-        <a class="left-prev" href="lab5.html" title="previous page">
-            <i class="prevnext-label fas fa-angle-left"></i>
-            <div class="prevnext-info">
-                <p class="prevnext-label">previous</p>
-                <p class="prevnext-title">Lab 5: Thread and User Process</p>
-            </div>
-        </a>
-    </div>
-     <div id="next">
-        <a class="right-next" href="hardware/index.html" title="next page">
-            <div class="prevnext-info">
-                <p class="prevnext-label">next</p>
-                <p class="prevnext-title">Hardware</p>
-            </div>
-            <i class="prevnext-label fas fa-angle-right"></i>
-        </a>
-     </div>
-
-</div>
+        </div>
         
         </div>
     </div>
-    <footer class="footer">
+    <footer class="footer mt-5 mt-md-0">
     <div class="container">
       <p>
         

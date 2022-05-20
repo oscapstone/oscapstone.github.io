@@ -22,12 +22,12 @@
       
 
     
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.e2363ea40746bee74734a24ffefccd78.css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.acff12b8f9c144ce68a297486a2fa670.css" type="text/css" />
     
   <link rel="preload" as="script" href="../_static/js/index.1c5a1a01449ed65a7b51.js">
 
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
@@ -55,16 +55,15 @@
     <a class="navbar-brand text-wrap" href="../index.html">
       
       
-      
       <h1 class="site-logo" id="site-title">IOC5213: Operating System Capstone</h1>
       
     </a>
 </div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
   <i class="icon fas fa-search"></i>
   <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
-</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
     <div class="bd-toc-item active">
-        <p class="caption" role="heading">
+        <p class="caption">
  <span class="caption-text">
   Class:
  </span>
@@ -81,7 +80,7 @@
   </a>
  </li>
 </ul>
-<p class="caption" role="heading">
+<p class="caption">
  <span class="caption-text">
   Labs:
  </span>
@@ -127,6 +126,11 @@
    Lab 6: Virtual Memory
   </a>
  </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="lab7.html">
+   Lab 7: Virtual File System
+  </a>
+ </li>
  <li class="toctree-l1 has-children">
   <a class="reference internal" href="hardware/index.html">
    Hardware
@@ -155,7 +159,7 @@
   </ul>
  </li>
 </ul>
-<p class="caption" role="heading">
+<p class="caption">
  <span class="caption-text">
   References:
  </span>
@@ -240,7 +244,7 @@
             <div class="tocsection onthispage pt-5 pb-3">
                 <i class="fas fa-list"></i> Contents
             </div>
-            <nav id="bd-toc-nav" aria-label="Page">
+            <nav id="bd-toc-nav">
                 <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#introduction">
@@ -386,13 +390,17 @@ It’s because the compiler uses the default linker script for you. (<code class
 In bare-metal programming, you should set the memory layout yourself.</p>
 <p>This is an incomplete linker script for you.
 You should extend it in the following lab.</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span>SECTIONS
-<span class="linenos">2</span>{
-<span class="linenos">3</span>  . = 0x80000;
-<span class="linenos">4</span>  .text : { *(.text) }
-<span class="linenos">5</span>}
+<div class="highlight-none notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span>SECTIONS
+{
+  . = 0x80000;
+  .text : { *(.text) }
+}
 </pre></div>
-</div>
+</td></tr></table></div>
 </div>
 <div class="section" id="qemu">
 <h3>QEMU<a class="headerlink" href="#qemu" title="Permalink to this headline">¶</a></h3>
@@ -420,10 +428,10 @@ After saving the following assembly as <code class="docutils literal notranslate
 you can convert it to an object file by <code class="docutils literal notranslate"><span class="pre">aarch64-linux-gnu-gcc</span> <span class="pre">-c</span> <span class="pre">a.S</span></code>.
 Or if you would like to, you can also try llvm’s linker <code class="docutils literal notranslate"><span class="pre">clang</span> <span class="pre">-mcpu=cortex-a53</span> <span class="pre">--target=aarch64-rpi3-elf</span> <span class="pre">-c</span> <span class="pre">a.S</span></code>,
 especially if you are trying to develop on macOS.</p>
-<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="p">.</span><span class="n">section</span> <span class="s">&quot;.text&quot;</span>
-<span class="nl">_start</span><span class="p">:</span>
-  <span class="n">wfe</span>
-  <span class="n">b</span> <span class="n">_start</span>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="p">.</span><span class="n">section</span><span class="w"> </span><span class="s">&quot;.text&quot;</span><span class="w"></span>
+<span class="nl">_start</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="n">wfe</span><span class="w"></span>
+<span class="w">  </span><span class="n">b</span><span class="w"> </span><span class="n">_start</span><span class="w"></span>
 </pre></div>
 </div>
 </div>
@@ -560,36 +568,16 @@ We don’t provide JTAG in this course, you can try it if you have one.
               </div>
               
         
+        <div class='prev-next-bottom'>
             
+    <a class='left-prev' id="prev-link" href="overview.html" title="previous page">Overview</a>
+    <a class='right-next' id="next-link" href="lab1.html" title="next page">Lab 1: Hello World</a>
 
-
-
-<div class='prev-next-bottom'>
-    
-    <div id="prev">
-        <a class="left-prev" href="overview.html" title="previous page">
-            <i class="prevnext-label fas fa-angle-left"></i>
-            <div class="prevnext-info">
-                <p class="prevnext-label">previous</p>
-                <p class="prevnext-title">Overview</p>
-            </div>
-        </a>
-    </div>
-     <div id="next">
-        <a class="right-next" href="lab1.html" title="next page">
-            <div class="prevnext-info">
-                <p class="prevnext-label">next</p>
-                <p class="prevnext-title">Lab 1: Hello World</p>
-            </div>
-            <i class="prevnext-label fas fa-angle-right"></i>
-        </a>
-     </div>
-
-</div>
+        </div>
         
         </div>
     </div>
-    <footer class="footer">
+    <footer class="footer mt-5 mt-md-0">
     <div class="container">
       <p>
         

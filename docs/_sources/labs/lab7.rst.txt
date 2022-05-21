@@ -90,8 +90,9 @@ to re-design or modify the code.
   1. There's no constraint on the design of VFS api, as long as there are no hard coded method for any file system (VFS is an generalize interface).
   2. The following steps are just recommendations, you don't have to follow them.
   3. For tmpfs, you can assume that component name won't excced 15 characters, and at most 16 entries for a directory. and at most 4096 bytes for a file.
-  4. No need to prepare for edge case, ex. open directory as file ..., except open nonexist file, or create file on nonexist directory, if you're not sure if the edge case will be tested, please ask TA in discord.
+  4. For VFS the max pathanme length is 256.
   5. No need to support remove, rmdir, unlink ...
+  6. For file descriptor, max open fd is 16, so fd < 16 if your fd number is reusable. 
 
 .. code:: c
 
@@ -176,7 +177,7 @@ to re-design or modify the code.
 
 
 
-Basic Exercise 1 - Root File System - 25%
+Basic Exercise 1 - Root File System - 35%
 ==========================================
 
 In this part, you'll need to implement tmpfs which follows the VFS 
@@ -254,7 +255,7 @@ create an regular file on underlying file system, should fail
 if file exist. Then passes the file's vnode back to VFS.
 
 
-Basic Exercise 2 - Multi-level VFS - 20%
+Basic Exercise 2 - Multi-level VFS - 15%
 =========================================
 
 In this part, your VFS should be able to
@@ -286,7 +287,7 @@ Also, the lookup should be able to cross mounting point.
 For mounted vnode, VFS should go to the mounted file system's 
 root vnode.
 
-pseudo code:
+pseudo code, this code doesn't show crossing of mount point or relative pathname.
 
 .. code:: c
 
@@ -304,7 +305,7 @@ pseudo code:
     return 0;
   }
 
-Basic Exercise 3 - Multitask VFS - 25%
+Basic Exercise 3 - Multitask VFS - 15%
 =======================================
 
 In this part, you need to implement
@@ -324,6 +325,8 @@ information.
 You'll need to support relative path lookup, ``""``, ``"."``, ``".."``, 
 and if the root vnode is mounted on a vnode, VFS should go 
 to the mounted vnode, other wise, ``".."`` behaves like ``"."`` 
+
+You also need to support change directory, to modify current working directory.
 
 File Descriptor Table
 ----------------------
@@ -358,15 +361,19 @@ You'll need to provide the following system calls
 
   // syscall number : 15
   // you can ignore mode, since there is no access control
-  int mkdir(const char *pathname, mode_t mode);
+  int mkdir(const char *pathname, unsigned mode);
 
   // syscall number : 16
-  // you can ignore arguments other than target and filesystem
+  // you can ignore arguments other than target (where to mount) and filesystem (fs name)
   int mount(const char *src, const char *target, const char *filesystem, unsigned long flags, const void *data);
 
+  // syscall number : 17
+  int chdir(const char *path);
 
-Basic Exercise 4 - Initramfs - 10%
-==================================
+
+
+Basic Exercise 4 - /initramfs - 15%
+===================================
 
 In this part, you need to make initramfs as an read only 
 file system which follows the VFS interface, and mount 
@@ -455,12 +462,12 @@ info), which are also VFS api using underlying method.
 
 .. code:: c
 
-  // syscall number : 17
+  // syscall number : 18
   // you only need to implement seek set
   # define SEEK_SET 0
   long lseek64(int fd, long offset, int whence);
 
-  // syscall number : 18
+  // syscall number : 19
   int ioctl(int fd, unsigned long request, ...);
 
   // ioctl 0 will be use to get info

@@ -301,8 +301,8 @@
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#basic-exercise-1-root-file-system-25">
-     Basic Exercise 1 - Root File System - 25%
+    <a class="reference internal nav-link" href="#basic-exercise-1-root-file-system-35">
+     Basic Exercise 1 - Root File System - 35%
     </a>
     <ul class="nav section-nav flex-column">
      <li class="toc-h4 nav-item toc-entry">
@@ -353,8 +353,8 @@
     </ul>
    </li>
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#basic-exercise-2-multi-level-vfs-20">
-     Basic Exercise 2 - Multi-level VFS - 20%
+    <a class="reference internal nav-link" href="#basic-exercise-2-multi-level-vfs-15">
+     Basic Exercise 2 - Multi-level VFS - 15%
     </a>
     <ul class="nav section-nav flex-column">
      <li class="toc-h4 nav-item toc-entry">
@@ -375,8 +375,8 @@
     </ul>
    </li>
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#basic-exercise-3-multitask-vfs-25">
-     Basic Exercise 3 - Multitask VFS - 25%
+    <a class="reference internal nav-link" href="#basic-exercise-3-multitask-vfs-15">
+     Basic Exercise 3 - Multitask VFS - 15%
     </a>
     <ul class="nav section-nav flex-column">
      <li class="toc-h4 nav-item toc-entry">
@@ -397,8 +397,8 @@
     </ul>
    </li>
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#basic-exercise-4-initramfs-10">
-     Basic Exercise 4 - Initramfs - 10%
+    <a class="reference internal nav-link" href="#basic-exercise-4-initramfs-15">
+     Basic Exercise 4 - /initramfs - 15%
     </a>
    </li>
   </ul>
@@ -530,8 +530,9 @@ to re-design or modify the code.</p>
 <li><p>There’s no constraint on the design of VFS api, as long as there are no hard coded method for any file system (VFS is an generalize interface).</p></li>
 <li><p>The following steps are just recommendations, you don’t have to follow them.</p></li>
 <li><p>For tmpfs, you can assume that component name won’t excced 15 characters, and at most 16 entries for a directory. and at most 4096 bytes for a file.</p></li>
-<li><p>No need to prepare for edge case, ex. open directory as file …, except open nonexist file, or create file on nonexist directory, if you’re not sure if the edge case will be tested, please ask TA in discord.</p></li>
+<li><p>For VFS the max pathanme length is 256.</p></li>
 <li><p>No need to support remove, rmdir, unlink …</p></li>
+<li><p>For file descriptor, max open fd is 16, so fd &lt; 16 if your fd number is reusable.</p></li>
 </ol>
 </div>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">struct</span><span class="w"> </span><span class="nc">vnode</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
@@ -613,8 +614,8 @@ to re-design or modify the code.</p>
 <span class="p">...</span><span class="w"></span>
 </pre></div>
 </div>
-<div class="section" id="basic-exercise-1-root-file-system-25">
-<h3>Basic Exercise 1 - Root File System - 25%<a class="headerlink" href="#basic-exercise-1-root-file-system-25" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="basic-exercise-1-root-file-system-35">
+<h3>Basic Exercise 1 - Root File System - 35%<a class="headerlink" href="#basic-exercise-1-root-file-system-35" title="Permalink to this headline">¶</a></h3>
 <p>In this part, you’ll need to implement tmpfs which follows the VFS
 interface, setup tmpfs as the root file system.</p>
 <div class="section" id="file-system-registration">
@@ -677,8 +678,8 @@ vnode to the VFS if it finds the file.</p>
 if file exist. Then passes the file’s vnode back to VFS.</p>
 </div>
 </div>
-<div class="section" id="basic-exercise-2-multi-level-vfs-20">
-<h3>Basic Exercise 2 - Multi-level VFS - 20%<a class="headerlink" href="#basic-exercise-2-multi-level-vfs-20" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="basic-exercise-2-multi-level-vfs-15">
+<h3>Basic Exercise 2 - Multi-level VFS - 15%<a class="headerlink" href="#basic-exercise-2-multi-level-vfs-15" title="Permalink to this headline">¶</a></h3>
 <p>In this part, your VFS should be able to</p>
 <ul class="simple">
 <li><p>create subdirectories</p></li>
@@ -703,7 +704,7 @@ from root file system’s root vnode</p>
 <p>Also, the lookup should be able to cross mounting point.
 For mounted vnode, VFS should go to the mounted file system’s
 root vnode.</p>
-<p>pseudo code:</p>
+<p>pseudo code, this code doesn’t show crossing of mount point or relative pathname.</p>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"> </span><span class="nf">vfs_lookup</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="o">*</span><span class="w"> </span><span class="n">pathname</span><span class="p">,</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">vnode</span><span class="o">**</span><span class="w"> </span><span class="n">target</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
 <span class="w">  </span><span class="k">auto</span><span class="w"> </span><span class="n">vnode_itr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rootfs</span><span class="o">-&gt;</span><span class="n">root</span><span class="p">;</span><span class="w"></span>
 <span class="w">  </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">component_name</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">pathname</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
@@ -721,8 +722,8 @@ root vnode.</p>
 </div>
 </div>
 </div>
-<div class="section" id="basic-exercise-3-multitask-vfs-25">
-<h3>Basic Exercise 3 - Multitask VFS - 25%<a class="headerlink" href="#basic-exercise-3-multitask-vfs-25" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="basic-exercise-3-multitask-vfs-15">
+<h3>Basic Exercise 3 - Multitask VFS - 15%<a class="headerlink" href="#basic-exercise-3-multitask-vfs-15" title="Permalink to this headline">¶</a></h3>
 <p>In this part, you need to implement</p>
 <ul class="simple">
 <li><p>current working directory</p></li>
@@ -738,6 +739,7 @@ information.</p>
 <p>You’ll need to support relative path lookup, <code class="docutils literal notranslate"><span class="pre">&quot;&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;.&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;..&quot;</span></code>,
 and if the root vnode is mounted on a vnode, VFS should go
 to the mounted vnode, other wise, <code class="docutils literal notranslate"><span class="pre">&quot;..&quot;</span></code> behaves like <code class="docutils literal notranslate"><span class="pre">&quot;.&quot;</span></code></p>
+<p>You also need to support change directory, to modify current working directory.</p>
 </div>
 <div class="section" id="file-descriptor-table">
 <h4>File Descriptor Table<a class="headerlink" href="#file-descriptor-table" title="Permalink to this headline">¶</a></h4>
@@ -767,17 +769,20 @@ and return the result to the user.</p>
 
 <span class="c1">// syscall number : 15</span>
 <span class="c1">// you can ignore mode, since there is no access control</span>
-<span class="kt">int</span><span class="w"> </span><span class="nf">mkdir</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">pathname</span><span class="p">,</span><span class="w"> </span><span class="kt">mode_t</span><span class="w"> </span><span class="n">mode</span><span class="p">);</span><span class="w"></span>
+<span class="kt">int</span><span class="w"> </span><span class="nf">mkdir</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">pathname</span><span class="p">,</span><span class="w"> </span><span class="kt">unsigned</span><span class="w"> </span><span class="n">mode</span><span class="p">);</span><span class="w"></span>
 
 <span class="c1">// syscall number : 16</span>
-<span class="c1">// you can ignore arguments other than target and filesystem</span>
+<span class="c1">// you can ignore arguments other than target (where to mount) and filesystem (fs name)</span>
 <span class="kt">int</span><span class="w"> </span><span class="nf">mount</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">src</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">target</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">filesystem</span><span class="p">,</span><span class="w"> </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">flags</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">data</span><span class="p">);</span><span class="w"></span>
+
+<span class="c1">// syscall number : 17</span>
+<span class="kt">int</span><span class="w"> </span><span class="nf">chdir</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">path</span><span class="p">);</span><span class="w"></span>
 </pre></div>
 </div>
 </div>
 </div>
-<div class="section" id="basic-exercise-4-initramfs-10">
-<h3>Basic Exercise 4 - Initramfs - 10%<a class="headerlink" href="#basic-exercise-4-initramfs-10" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="basic-exercise-4-initramfs-15">
+<h3>Basic Exercise 4 - /initramfs - 15%<a class="headerlink" href="#basic-exercise-4-initramfs-15" title="Permalink to this headline">¶</a></h3>
 <p>In this part, you need to make initramfs as an read only
 file system which follows the VFS interface, and mount
 on <code class="docutils literal notranslate"><span class="pre">&quot;/initramfs&quot;</span></code>.</p>
@@ -849,12 +854,12 @@ write directly to framebuffer.</p>
 <p>Also you need to support lseek64 system call (to write framebuffer
 again without reopen) and ioctl system call (to query framebuffer
 info), which are also VFS api using underlying method.</p>
-<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="c1">// syscall number : 17</span>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="c1">// syscall number : 18</span>
 <span class="c1">// you only need to implement seek set</span>
 <span class="cp"># define SEEK_SET 0</span>
 <span class="kt">long</span><span class="w"> </span><span class="nf">lseek64</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">fd</span><span class="p">,</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">offset</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">whence</span><span class="p">);</span><span class="w"></span>
 
-<span class="c1">// syscall number : 18</span>
+<span class="c1">// syscall number : 19</span>
 <span class="kt">int</span><span class="w"> </span><span class="nf">ioctl</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">fd</span><span class="p">,</span><span class="w"> </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">request</span><span class="p">,</span><span class="w"> </span><span class="p">...);</span><span class="w"></span>
 
 <span class="c1">// ioctl 0 will be use to get info</span>

@@ -814,18 +814,33 @@ recognized by the VFS.</p>
 find the device driver. Next, the driver initializes the file
 with its method. Then, the user can read/write the file to access
 the device.</p>
+<ol class="arabic simple">
+<li><p>mkdir <code class="docutils literal notranslate"><span class="pre">&quot;/dev&quot;</span></code></p></li>
+<li><p>mknod <code class="docutils literal notranslate"><span class="pre">&quot;/dev/uart&quot;</span></code></p></li>
+<li><p>mknod <code class="docutils literal notranslate"><span class="pre">&quot;/dev/framebuffer&quot;</span></code></p></li>
+</ol>
 </div>
 <div class="section" id="alternative">
 <h4>Alternative<a class="headerlink" href="#alternative" title="Permalink to this headline">¶</a></h4>
 <p>There’s also other way to hack this (which is weird, but it works).
 As long as it’s not hard coded on VFS, and it works fine with VFS api.</p>
-<dl class="simple">
-<dt>For example:</dt><dd><ol class="arabic simple">
-<li><p>Creat devfs, which have hard coded device file, and mount on <code class="docutils literal notranslate"><span class="pre">&quot;/dev&quot;</span></code> (tmpfs directory)</p></li>
-<li><p>Creat uartfs and mount on <code class="docutils literal notranslate"><span class="pre">&quot;/dev/uart&quot;</span></code> (tmpfs directory)</p></li>
+<ul class="simple">
+<li><p>Creat devfs, which have hard coded device file, and mount on <code class="docutils literal notranslate"><span class="pre">&quot;/dev&quot;</span></code></p>
+<ol class="arabic simple">
+<li><p>mkdir <code class="docutils literal notranslate"><span class="pre">&quot;/dev&quot;</span></code></p></li>
+<li><p>mount <code class="docutils literal notranslate"><span class="pre">&quot;devfs&quot;</span></code> on <code class="docutils literal notranslate"><span class="pre">&quot;/dev&quot;</span></code></p></li>
 </ol>
-</dd>
-</dl>
+</li>
+<li><p>Creat uartfs and mount on <code class="docutils literal notranslate"><span class="pre">&quot;/dev/uart&quot;</span></code></p>
+<ol class="arabic simple">
+<li><p>mkdir <code class="docutils literal notranslate"><span class="pre">&quot;/dev&quot;</span></code></p></li>
+<li><p>mkdir <code class="docutils literal notranslate"><span class="pre">&quot;/dev/uart&quot;</span></code></p></li>
+<li><p>mount <code class="docutils literal notranslate"><span class="pre">&quot;uartfs&quot;</span></code> on <code class="docutils literal notranslate"><span class="pre">&quot;/dev/uart&quot;</span></code></p></li>
+<li><p>mkdir <code class="docutils literal notranslate"><span class="pre">&quot;/dev/framebuffer&quot;</span></code></p></li>
+<li><p>mount <code class="docutils literal notranslate"><span class="pre">&quot;framebufferfs&quot;</span></code> on <code class="docutils literal notranslate"><span class="pre">&quot;/dev/framebuffer&quot;</span></code></p></li>
+</ol>
+</li>
+</ul>
 </div>
 </div>
 <div class="section" id="advanced-exercises-1-dev-uart-15">

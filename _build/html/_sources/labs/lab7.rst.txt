@@ -416,15 +416,29 @@ find the device driver. Next, the driver initializes the file
 with its method. Then, the user can read/write the file to access 
 the device.
 
+1. mkdir ``"/dev"``
+2. mknod ``"/dev/uart"``
+3. mknod ``"/dev/framebuffer"``
+
 Alternative
 -----------
 
 There's also other way to hack this (which is weird, but it works). 
 As long as it's not hard coded on VFS, and it works fine with VFS api.
 
-For example:
-  1. Creat devfs, which have hard coded device file, and mount on ``"/dev"`` (tmpfs directory)
-  2. Creat uartfs and mount on ``"/dev/uart"`` (tmpfs directory)
+* Creat devfs, which have hard coded device file, and mount on ``"/dev"``
+
+  1. mkdir ``"/dev"``
+  2. mount ``"devfs"`` on ``"/dev"``
+
+* Creat uartfs and mount on ``"/dev/uart"``
+
+  1. mkdir ``"/dev"``
+  2. mkdir ``"/dev/uart"``
+  3. mount ``"uartfs"`` on ``"/dev/uart"``
+  4. mkdir ``"/dev/framebuffer"``
+  5. mount ``"framebufferfs"`` on ``"/dev/framebuffer"``
+
 
 Advanced Exercises 1 - /dev/uart - 15%
 ======================================

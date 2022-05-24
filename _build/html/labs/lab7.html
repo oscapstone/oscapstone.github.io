@@ -4,11 +4,13 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
     <title>Lab 7: Virtual File System &#8212; IOC5213: Operating System Capstone</title>
     
-  <link href="../_static/css/theme.css" rel="stylesheet" />
-  <link href="../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
 
     
   <link rel="stylesheet"
@@ -18,29 +20,43 @@
   <link rel="preload" as="font" type="font/woff2" crossorigin
     href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
 
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=62ba249389abaaa9ffc34bf36a076bdc1d65ee18" type="text/css" />
     
-      
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
 
-    
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/sphinx-book-theme.acff12b8f9c144ce68a297486a2fa670.css" type="text/css" />
-    
-  <link rel="preload" as="script" href="../_static/js/index.1c5a1a01449ed65a7b51.js">
-
-    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
-    <script src="../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=f31d14ad54b65d19161ba51d4ffff3a77ae00456"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Hardware" href="hardware/index.html" />
     <link rel="prev" title="Lab 6: Virtual Memory" href="lab6.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="docsearch:language" content="en" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
     
   </head>
-  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
     
     <div class="container-fluid" id="banner"></div>
 
@@ -49,10 +65,12 @@
     <div class="container-xl">
       <div class="row">
           
-<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
-    
-        <div class="navbar-brand-box">
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
     <a class="navbar-brand text-wrap" href="../index.html">
+      
       
       
       <h1 class="site-logo" id="site-title">IOC5213: Operating System Capstone</h1>
@@ -61,9 +79,9 @@
 </div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
   <i class="icon fas fa-search"></i>
   <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
-</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item active">
-        <p class="caption">
+        <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Class:
  </span>
@@ -80,7 +98,7 @@
   </a>
  </li>
 </ul>
-<p class="caption">
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Labs:
  </span>
@@ -159,7 +177,7 @@
   </ul>
  </li>
 </ul>
-<p class="caption">
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   References:
  </span>
@@ -178,12 +196,17 @@
 </ul>
 
     </div>
-</nav> <!-- To handle the deprecated key -->
-
-<div class="navbar_extra_footer">
-  Theme by the <a href="https://ebp.jupyterbook.org">Executable Book Project</a>
-</div>
-
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Theme by the <a href="https://ebp.jupyterbook.org">Executable Book Project</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
 </div>
 
 
@@ -191,61 +214,117 @@
 
 
           
-<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
     
-    <div class="topbar container-xl fixed-top">
-    <div class="topbar-contents row">
-        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
-        <div class="col pl-md-4 topbar-main">
-            
-            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
-                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
-                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
-                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
-                <i class="fas fa-bars"></i>
-                <i class="fas fa-arrow-left"></i>
-                <i class="fas fa-arrow-up"></i>
-            </button>
-            
-            
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
-            class="fas fa-download"></i></button>
-
-    <div class="dropdown-buttons">
-        <!-- ipynb file if we had a myst markdown file -->
+    <div class="header-article row sticky-top noprint">
         
-        <!-- Download raw file -->
-        <a class="dropdown-buttons" href="../_sources/labs/lab7.rst.txt"><button type="button"
-                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
-                data-placement="left">.rst</button></a>
-        <!-- Download PDF via print -->
-        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
-            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../_sources/labs/lab7.rst.txt"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.rst</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
     </div>
 </div>
 
-            <!-- Source interaction buttons -->
-
-            <!-- Full screen (wrap in <a> to have style consistency -->
-
-<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
-        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
-        title="Fullscreen mode"><i
-            class="fas fa-expand"></i></button></a>
-
-            <!-- Launch buttons -->
-
-        </div>
-
-        <!-- Table of contents -->
-        <div class="d-none d-md-block col-md-2 bd-toc show">
-            
-            <div class="tocsection onthispage pt-5 pb-3">
-                <i class="fas fa-list"></i> Contents
-            </div>
-            <nav id="bd-toc-nav">
-                <ul class="visible nav section-nav flex-column">
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#introduction">
    Introduction
@@ -449,27 +528,246 @@
  </li>
 </ul>
 
-            </nav>
-        </div>
-    </div>
+    </nav>
 </div>
-    <div id="main-content" class="row">
-        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
-        
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Lab 7: Virtual File System</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#introduction">
+   Introduction
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#goals-of-this-lab">
+   Goals of this lab
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#background">
+   Background
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#tree-structure">
+     Tree Structure
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#terminology">
+     Terminology
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#file-system">
+       File System
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#vnode">
+       Vnode
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#component-name">
+       Component Name
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#file-handle">
+       File Handle
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#basic-exercises">
+   Basic Exercises
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#basic-exercise-1-root-file-system-35">
+     Basic Exercise 1 - Root File System - 35%
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#file-system-registration">
+       File System Registration
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#mounting-file-system">
+       Mounting File System
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#root-directory-s-vnode">
+       Root directory’s vnode
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#open-method">
+       Open Method
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#close-method">
+       Close Method
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#read-method">
+       Read Method
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#write-method">
+       Write Method
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#lookup-method">
+       Lookup Method
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#create-method">
+       Create Method
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#basic-exercise-2-multi-level-vfs-15">
+     Basic Exercise 2 - Multi-level VFS - 15%
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#mkdir-method">
+       Mkdir Method
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#mounting-another-file-system">
+       Mounting Another File System
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#pathname-lookup">
+       Pathname Lookup
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#basic-exercise-3-multitask-vfs-15">
+     Basic Exercise 3 - Multitask VFS - 15%
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#current-working-directory">
+       Current Working Directory
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#file-descriptor-table">
+       File Descriptor Table
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#system-calls-for-vfs">
+       System Calls for VFS
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#basic-exercise-4-initramfs-15">
+     Basic Exercise 4 - /initramfs - 15%
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#advanced-exercises">
+   Advanced Exercises
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#special-file">
+     Special File
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#device-file-registration">
+       Device File Registration
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#mknod">
+       Mknod
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#alternative">
+       Alternative
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#advanced-exercises-1-dev-uart-15">
+     Advanced Exercises 1 - /dev/uart - 15%
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#advanced-exercises-2-dev-framebuffer-15">
+     Advanced Exercises 2 - /dev/framebuffer - 15%
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#test">
+     Test
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
               <div>
                 
-  <div class="section" id="lab-7-virtual-file-system">
-<h1>Lab 7: Virtual File System<a class="headerlink" href="#lab-7-virtual-file-system" title="Permalink to this headline">¶</a></h1>
+  <section id="lab-7-virtual-file-system">
+<h1>Lab 7: Virtual File System<a class="headerlink" href="#lab-7-virtual-file-system" title="Permalink to this headline">#</a></h1>
 <a class="reference internal image-reference" href="../_images/vfs_meme.JPG"><img alt="../_images/vfs_meme.JPG" src="../_images/vfs_meme.JPG" style="width: 400px;" /></a>
-<div class="section" id="introduction">
-<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<section id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">#</a></h2>
 <p>A file system manages data in storage mediums.
 Each file system has a specific way to store and retrieve the data.
 Hence, a virtual file system (VFS) is common in general-purpose OS, providing a unified interface for all file systems.</p>
 <p>In this lab, you’ll implement a VFS interface for your kernel, and a memory-based file system (tmpfs) that mounts as the root file system, you’ll also implement special file for uart and framebuffer.</p>
-</div>
-<div class="section" id="goals-of-this-lab">
-<h2>Goals of this lab<a class="headerlink" href="#goals-of-this-lab" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="goals-of-this-lab">
+<h2>Goals of this lab<a class="headerlink" href="#goals-of-this-lab" title="Permalink to this headline">#</a></h2>
 <ul class="simple">
 <li><p>Understand how VFS interface works.</p></li>
 <li><p>Understand how to set up a root file system.</p></li>
@@ -477,11 +775,11 @@ Hence, a virtual file system (VFS) is common in general-purpose OS, providing a 
 <li><p>Understand how to mount a file system and look up a file across file systems.</p></li>
 <li><p>Understand how special file works.</p></li>
 </ul>
-</div>
-<div class="section" id="background">
-<h2>Background<a class="headerlink" href="#background" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="tree-structure">
-<h3>Tree Structure<a class="headerlink" href="#tree-structure" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="background">
+<h2>Background<a class="headerlink" href="#background" title="Permalink to this headline">#</a></h2>
+<section id="tree-structure">
+<h3>Tree Structure<a class="headerlink" href="#tree-structure" title="Permalink to this headline">#</a></h3>
 <p>A file system is usually hierarchical, and a tree is a suitable
 data structure to represent it.</p>
 <p>Each node represents an entity such as a file or directory in
@@ -491,36 +789,36 @@ pathname, which VFS can parse and traverse from one node to
 another.</p>
 <p>Example graph:</p>
 <img alt="../_images/vfs_1.png" src="../_images/vfs_1.png" />
-</div>
-<div class="section" id="terminology">
-<h3>Terminology<a class="headerlink" href="#terminology" title="Permalink to this headline">¶</a></h3>
-<div class="section" id="file-system">
-<h4>File System<a class="headerlink" href="#file-system" title="Permalink to this headline">¶</a></h4>
+</section>
+<section id="terminology">
+<h3>Terminology<a class="headerlink" href="#terminology" title="Permalink to this headline">#</a></h3>
+<section id="file-system">
+<h4>File System<a class="headerlink" href="#file-system" title="Permalink to this headline">#</a></h4>
 <p>In this documentation, a file system refers to a concrete
 file system type such as tmpfs, FAT32, etc.
 And the virtual file system will be shortened as VFS.</p>
-</div>
-<div class="section" id="vnode">
-<h4>Vnode<a class="headerlink" href="#vnode" title="Permalink to this headline">¶</a></h4>
+</section>
+<section id="vnode">
+<h4>Vnode<a class="headerlink" href="#vnode" title="Permalink to this headline">#</a></h4>
 <p>We call a node in a VFS tree a vnode, which is an abstract
 class that provides an unified interface, the underlying file
 systems should implement the methods and create the instance.</p>
-</div>
-<div class="section" id="component-name">
-<h4>Component Name<a class="headerlink" href="#component-name" title="Permalink to this headline">¶</a></h4>
+</section>
+<section id="component-name">
+<h4>Component Name<a class="headerlink" href="#component-name" title="Permalink to this headline">#</a></h4>
 <p>A pathname delimits each component name by ‘/’.</p>
-</div>
-<div class="section" id="file-handle">
-<h4>File Handle<a class="headerlink" href="#file-handle" title="Permalink to this headline">¶</a></h4>
+</section>
+<section id="file-handle">
+<h4>File Handle<a class="headerlink" href="#file-handle" title="Permalink to this headline">#</a></h4>
 <p>Files can be opened simultaneously. You should maintain a data
 structure that keeps information such as position of next R/W
 operation for each opened file. We call this data structure file
 handle.</p>
-</div>
-</div>
-</div>
-<div class="section" id="basic-exercises">
-<h2>Basic Exercises<a class="headerlink" href="#basic-exercises" title="Permalink to this headline">¶</a></h2>
+</section>
+</section>
+</section>
+<section id="basic-exercises">
+<h2>Basic Exercises<a class="headerlink" href="#basic-exercises" title="Permalink to this headline">#</a></h2>
 <p>For basic exercises, you’ll need to create an VFS interface first.</p>
 <p>We’ve provide an example code for you, and it’s up to you
 to re-design or modify the code.</p>
@@ -614,90 +912,90 @@ to re-design or modify the code.</p>
 <span class="p">...</span><span class="w"></span>
 </pre></div>
 </div>
-<div class="section" id="basic-exercise-1-root-file-system-35">
-<h3>Basic Exercise 1 - Root File System - 35%<a class="headerlink" href="#basic-exercise-1-root-file-system-35" title="Permalink to this headline">¶</a></h3>
+<section id="basic-exercise-1-root-file-system-35">
+<h3>Basic Exercise 1 - Root File System - 35%<a class="headerlink" href="#basic-exercise-1-root-file-system-35" title="Permalink to this headline">#</a></h3>
 <p>In this part, you’ll need to implement tmpfs which follows the VFS
 interface, setup tmpfs as the root file system.</p>
-<div class="section" id="file-system-registration">
-<h4>File System Registration<a class="headerlink" href="#file-system-registration" title="Permalink to this headline">¶</a></h4>
+<section id="file-system-registration">
+<h4>File System Registration<a class="headerlink" href="#file-system-registration" title="Permalink to this headline">#</a></h4>
 <p>Since each file system has its own initialization method,
 the VFS should provide interface for each file system to
 register. Then, users can mount the file system by specifying
 the name.</p>
-</div>
-<div class="section" id="mounting-file-system">
-<h4>Mounting File System<a class="headerlink" href="#mounting-file-system" title="Permalink to this headline">¶</a></h4>
+</section>
+<section id="mounting-file-system">
+<h4>Mounting File System<a class="headerlink" href="#mounting-file-system" title="Permalink to this headline">#</a></h4>
 <p>The provided code uses <strong>struct mount</strong> to represent a mounted
 file system, VFS should provide an api for mounting a file
 system to a mount point.</p>
 <p>The root file system is at the top of the VFS tree, you should
 mount tmpfs at rootfs, at this point, lookup might not be
 available, you can call setup_mount directly to mount it.</p>
-</div>
-<div class="section" id="root-directory-s-vnode">
-<h4>Root directory’s vnode<a class="headerlink" href="#root-directory-s-vnode" title="Permalink to this headline">¶</a></h4>
+</section>
+<section id="root-directory-s-vnode">
+<h4>Root directory’s vnode<a class="headerlink" href="#root-directory-s-vnode" title="Permalink to this headline">#</a></h4>
 <p>Each mounted file system has its own root vnode. You should create
 the root vnode during the mount setup.</p>
 <p>The internal representation of each filesystem’s vnode may differ,
 you can use vnode.internal to point to it.</p>
-</div>
-<div class="section" id="open-method">
-<h4>Open Method<a class="headerlink" href="#open-method" title="Permalink to this headline">¶</a></h4>
+</section>
+<section id="open-method">
+<h4>Open Method<a class="headerlink" href="#open-method" title="Permalink to this headline">#</a></h4>
 <p>It opens the vnode regardless of the underlying file system and
 file type, and creates a file handle for the file.</p>
-</div>
-<div class="section" id="close-method">
-<h4>Close Method<a class="headerlink" href="#close-method" title="Permalink to this headline">¶</a></h4>
+</section>
+<section id="close-method">
+<h4>Close Method<a class="headerlink" href="#close-method" title="Permalink to this headline">#</a></h4>
 <p>close and release the file handle.</p>
-</div>
-<div class="section" id="read-method">
-<h4>Read Method<a class="headerlink" href="#read-method" title="Permalink to this headline">¶</a></h4>
+</section>
+<section id="read-method">
+<h4>Read Method<a class="headerlink" href="#read-method" title="Permalink to this headline">#</a></h4>
 <p>Given the file handle, VFS calls the corresponding read method
 to read the file starting from f_pos, then updates f_pos after
 read. (or not if it’s a special file)</p>
 <p>Note that f_pos should not exceed the file size. Once a file
 read reaches the end of file(EOF), it should stop.
 Returns size read or error code on error.</p>
-</div>
-<div class="section" id="write-method">
-<h4>Write Method<a class="headerlink" href="#write-method" title="Permalink to this headline">¶</a></h4>
+</section>
+<section id="write-method">
+<h4>Write Method<a class="headerlink" href="#write-method" title="Permalink to this headline">#</a></h4>
 <p>Given the file handle, VFS calls the corresponding write
 method to write the file starting from f_pos, then updates
 f_pos and size after write. (or not if it’s a special file)
 Returns size written or error code on error.</p>
-</div>
-<div class="section" id="lookup-method">
-<h4>Lookup Method<a class="headerlink" href="#lookup-method" title="Permalink to this headline">¶</a></h4>
+</section>
+<section id="lookup-method">
+<h4>Lookup Method<a class="headerlink" href="#lookup-method" title="Permalink to this headline">#</a></h4>
 <p>File system iterates through directory entries and compares the
 component name to find the target file. Then, it passes the file’s
 vnode to the VFS if it finds the file.</p>
-</div>
-<div class="section" id="create-method">
-<h4>Create Method<a class="headerlink" href="#create-method" title="Permalink to this headline">¶</a></h4>
+</section>
+<section id="create-method">
+<h4>Create Method<a class="headerlink" href="#create-method" title="Permalink to this headline">#</a></h4>
 <p>create an regular file on underlying file system, should fail
 if file exist. Then passes the file’s vnode back to VFS.</p>
-</div>
-</div>
-<div class="section" id="basic-exercise-2-multi-level-vfs-15">
-<h3>Basic Exercise 2 - Multi-level VFS - 15%<a class="headerlink" href="#basic-exercise-2-multi-level-vfs-15" title="Permalink to this headline">¶</a></h3>
+</section>
+</section>
+<section id="basic-exercise-2-multi-level-vfs-15">
+<h3>Basic Exercise 2 - Multi-level VFS - 15%<a class="headerlink" href="#basic-exercise-2-multi-level-vfs-15" title="Permalink to this headline">#</a></h3>
 <p>In this part, your VFS should be able to</p>
 <ul class="simple">
 <li><p>create subdirectories</p></li>
 <li><p>mount file systems on directories</p></li>
 <li><p>look up an pathname</p></li>
 </ul>
-<div class="section" id="mkdir-method">
-<h4>Mkdir Method<a class="headerlink" href="#mkdir-method" title="Permalink to this headline">¶</a></h4>
+<section id="mkdir-method">
+<h4>Mkdir Method<a class="headerlink" href="#mkdir-method" title="Permalink to this headline">#</a></h4>
 <p>create a directory on underlying file system, same as creating
 a regular file.</p>
-</div>
-<div class="section" id="mounting-another-file-system">
-<h4>Mounting Another File System<a class="headerlink" href="#mounting-another-file-system" title="Permalink to this headline">¶</a></h4>
+</section>
+<section id="mounting-another-file-system">
+<h4>Mounting Another File System<a class="headerlink" href="#mounting-another-file-system" title="Permalink to this headline">#</a></h4>
 <p>same as mounting the root file system, except, you should
 be able to mount on any vnode.</p>
-</div>
-<div class="section" id="pathname-lookup">
-<h4>Pathname Lookup<a class="headerlink" href="#pathname-lookup" title="Permalink to this headline">¶</a></h4>
+</section>
+<section id="pathname-lookup">
+<h4>Pathname Lookup<a class="headerlink" href="#pathname-lookup" title="Permalink to this headline">#</a></h4>
 <p>VFS api takes pathname as argument (absolute path <code class="docutils literal notranslate"><span class="pre">&quot;/&quot;</span></code> for now),
 you need to lookup the pathname by traversing vnodes, starting
 from root file system’s root vnode</p>
@@ -720,18 +1018,18 @@ root vnode.</p>
 <span class="p">}</span><span class="w"></span>
 </pre></div>
 </div>
-</div>
-</div>
-<div class="section" id="basic-exercise-3-multitask-vfs-15">
-<h3>Basic Exercise 3 - Multitask VFS - 15%<a class="headerlink" href="#basic-exercise-3-multitask-vfs-15" title="Permalink to this headline">¶</a></h3>
+</section>
+</section>
+<section id="basic-exercise-3-multitask-vfs-15">
+<h3>Basic Exercise 3 - Multitask VFS - 15%<a class="headerlink" href="#basic-exercise-3-multitask-vfs-15" title="Permalink to this headline">#</a></h3>
 <p>In this part, you need to implement</p>
 <ul class="simple">
 <li><p>current working directory</p></li>
 <li><p>file descriptor table</p></li>
 <li><p>system calls for VFS</p></li>
 </ul>
-<div class="section" id="current-working-directory">
-<h4>Current Working Directory<a class="headerlink" href="#current-working-directory" title="Permalink to this headline">¶</a></h4>
+<section id="current-working-directory">
+<h4>Current Working Directory<a class="headerlink" href="#current-working-directory" title="Permalink to this headline">#</a></h4>
 <p>Each task may have different current working directory and
 root directory, you need to keep that information in your
 task struct, and VFS should traverse vnode base on those
@@ -740,9 +1038,9 @@ information.</p>
 and if the root vnode is mounted on a vnode, VFS should go
 to the mounted vnode, other wise, <code class="docutils literal notranslate"><span class="pre">&quot;..&quot;</span></code> behaves like <code class="docutils literal notranslate"><span class="pre">&quot;.&quot;</span></code></p>
 <p>You also need to support change directory, to modify current working directory.</p>
-</div>
-<div class="section" id="file-descriptor-table">
-<h4>File Descriptor Table<a class="headerlink" href="#file-descriptor-table" title="Permalink to this headline">¶</a></h4>
+</section>
+<section id="file-descriptor-table">
+<h4>File Descriptor Table<a class="headerlink" href="#file-descriptor-table" title="Permalink to this headline">#</a></h4>
 <p>Each process should have a file descriptor table to bookkeep
 the opened files. When the user opens a file, the kernel
 creates a file handle in the table and returns the index
@@ -750,9 +1048,9 @@ creates a file handle in the table and returns the index
 the file descriptor to the kernel to get the file handle. Then,
 the kernel calls the corresponding VFS API using the file handle
 and return the result to the user.</p>
-</div>
-<div class="section" id="system-calls-for-vfs">
-<h4>System Calls for VFS<a class="headerlink" href="#system-calls-for-vfs" title="Permalink to this headline">¶</a></h4>
+</section>
+<section id="system-calls-for-vfs">
+<h4>System Calls for VFS<a class="headerlink" href="#system-calls-for-vfs" title="Permalink to this headline">#</a></h4>
 <p>You’ll need to provide the following system calls</p>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#define O_CREAT 00000100</span>
 <span class="c1">// syscall number : 11</span>
@@ -762,10 +1060,12 @@ and return the result to the user.</p>
 <span class="kt">int</span><span class="w"> </span><span class="nf">close</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">fd</span><span class="p">);</span><span class="w"></span>
 
 <span class="c1">// syscall number : 13</span>
-<span class="kt">int</span><span class="w"> </span><span class="nf">write</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">fd</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">buf</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">count</span><span class="p">);</span><span class="w"></span>
+<span class="c1">// remember to return read size or error code</span>
+<span class="kt">long</span><span class="w"> </span><span class="nf">write</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">fd</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">buf</span><span class="p">,</span><span class="w"> </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">count</span><span class="p">);</span><span class="w"></span>
 
 <span class="c1">// syscall number : 14</span>
-<span class="kt">int</span><span class="w"> </span><span class="nf">read</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">fd</span><span class="p">,</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">buf</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">count</span><span class="p">);</span><span class="w"></span>
+<span class="c1">// remember to return read size or error code</span>
+<span class="kt">long</span><span class="w"> </span><span class="nf">read</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">fd</span><span class="p">,</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">buf</span><span class="p">,</span><span class="w"> </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">count</span><span class="p">);</span><span class="w"></span>
 
 <span class="c1">// syscall number : 15</span>
 <span class="c1">// you can ignore mode, since there is no access control</span>
@@ -779,10 +1079,10 @@ and return the result to the user.</p>
 <span class="kt">int</span><span class="w"> </span><span class="nf">chdir</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">path</span><span class="p">);</span><span class="w"></span>
 </pre></div>
 </div>
-</div>
-</div>
-<div class="section" id="basic-exercise-4-initramfs-15">
-<h3>Basic Exercise 4 - /initramfs - 15%<a class="headerlink" href="#basic-exercise-4-initramfs-15" title="Permalink to this headline">¶</a></h3>
+</section>
+</section>
+<section id="basic-exercise-4-initramfs-15">
+<h3>Basic Exercise 4 - /initramfs - 15%<a class="headerlink" href="#basic-exercise-4-initramfs-15" title="Permalink to this headline">#</a></h3>
 <p>In this part, you need to make initramfs as an read only
 file system which follows the VFS interface, and mount
 on <code class="docutils literal notranslate"><span class="pre">&quot;/initramfs&quot;</span></code>.</p>
@@ -791,24 +1091,24 @@ initramfs at registration (or mount), then create directory
 <code class="docutils literal notranslate"><span class="pre">&quot;/initramfs&quot;</span></code> on root file system, then mount on it.</p>
 <p>All method like write, create, mkdir, should fail on this
 file system.</p>
-</div>
-</div>
-<div class="section" id="advanced-exercises">
-<h2>Advanced Exercises<a class="headerlink" href="#advanced-exercises" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="special-file">
-<h3>Special File<a class="headerlink" href="#special-file" title="Permalink to this headline">¶</a></h3>
+</section>
+</section>
+<section id="advanced-exercises">
+<h2>Advanced Exercises<a class="headerlink" href="#advanced-exercises" title="Permalink to this headline">#</a></h2>
+<section id="special-file">
+<h3>Special File<a class="headerlink" href="#special-file" title="Permalink to this headline">#</a></h3>
 <p>A file in VFS can also represent a device.
 In order to create a special file, the normal way is to use mknod,
 which creates a special file with specified device driver,
 and file_operation points to driver’s method.</p>
-<div class="section" id="device-file-registration">
-<h4>Device File Registration<a class="headerlink" href="#device-file-registration" title="Permalink to this headline">¶</a></h4>
+<section id="device-file-registration">
+<h4>Device File Registration<a class="headerlink" href="#device-file-registration" title="Permalink to this headline">#</a></h4>
 <p>A device can register itself to the VFS in its setup. The VFS
 assigns the device a unique device id. Then the device can be
 recognized by the VFS.</p>
-</div>
-<div class="section" id="mknod">
-<h4>Mknod<a class="headerlink" href="#mknod" title="Permalink to this headline">¶</a></h4>
+</section>
+<section id="mknod">
+<h4>Mknod<a class="headerlink" href="#mknod" title="Permalink to this headline">#</a></h4>
 <p>A user can use the device id to create a device file in a file system.</p>
 <p>After the device file created, the VFS uses the device id to
 find the device driver. Next, the driver initializes the file
@@ -819,9 +1119,9 @@ the device.</p>
 <li><p>mknod <code class="docutils literal notranslate"><span class="pre">&quot;/dev/uart&quot;</span></code></p></li>
 <li><p>mknod <code class="docutils literal notranslate"><span class="pre">&quot;/dev/framebuffer&quot;</span></code></p></li>
 </ol>
-</div>
-<div class="section" id="alternative">
-<h4>Alternative<a class="headerlink" href="#alternative" title="Permalink to this headline">¶</a></h4>
+</section>
+<section id="alternative">
+<h4>Alternative<a class="headerlink" href="#alternative" title="Permalink to this headline">#</a></h4>
 <p>There’s also other way to hack this (which is weird, but it works).
 As long as it’s not hard coded on VFS, and it works fine with VFS api.</p>
 <ul class="simple">
@@ -841,10 +1141,10 @@ As long as it’s not hard coded on VFS, and it works fine with VFS api.</p>
 </ol>
 </li>
 </ul>
-</div>
-</div>
-<div class="section" id="advanced-exercises-1-dev-uart-15">
-<h3>Advanced Exercises 1 - /dev/uart - 15%<a class="headerlink" href="#advanced-exercises-1-dev-uart-15" title="Permalink to this headline">¶</a></h3>
+</section>
+</section>
+<section id="advanced-exercises-1-dev-uart-15">
+<h3>Advanced Exercises 1 - /dev/uart - 15%<a class="headerlink" href="#advanced-exercises-1-dev-uart-15" title="Permalink to this headline">#</a></h3>
 <p>You need to create a device file at <code class="docutils literal notranslate"><span class="pre">&quot;/dev/uart&quot;</span></code> for your UART
 device as the console. R/W to this file is same as
 uartread / uartwrite.</p>
@@ -854,9 +1154,9 @@ and stderr (fd 2), for user process</p>
 <span class="n">write</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;hello world</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">12</span><span class="p">);</span><span class="w"></span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="advanced-exercises-2-dev-framebuffer-15">
-<h3>Advanced Exercises 2 - /dev/framebuffer - 15%<a class="headerlink" href="#advanced-exercises-2-dev-framebuffer-15" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="advanced-exercises-2-dev-framebuffer-15">
+<h3>Advanced Exercises 2 - /dev/framebuffer - 15%<a class="headerlink" href="#advanced-exercises-2-dev-framebuffer-15" title="Permalink to this headline">#</a></h3>
 <p>In previous lab, we use mbox_call to establish framebuffer, and
 mapped VC memory for user in order to use framebuffer.
 Which means a system call and memory map is needed for
@@ -865,7 +1165,7 @@ every device.</p>
 at <code class="docutils literal notranslate"><span class="pre">&quot;/dev/framebuffer&quot;</span></code></p>
 <p>You need to initialize the framebuffer using mailbox
 at mknod (or mount or ioctl, we don’t care), and when written,
-write directly to framebuffer.</p>
+write directly to framebuffer (lfb + f_pos).</p>
 <p>Also you need to support lseek64 system call (to write framebuffer
 again without reopen) and ioctl system call (to query framebuffer
 info), which are also VFS api using underlying method.</p>
@@ -898,10 +1198,13 @@ info), which are also VFS api using underlying method.</p>
 
 <span class="n">ioctl</span><span class="p">(</span><span class="n">fb</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">fb_info</span><span class="p">);</span><span class="w"></span>
 
-<span class="p">...</span><span class="w"></span>
-<span class="n">lseek64</span><span class="p">(</span><span class="n">fb</span><span class="p">,</span><span class="w"> </span><span class="n">offset</span><span class="p">,</span><span class="w"> </span><span class="n">SEEK_SET</span><span class="p">)</span><span class="w"></span>
-<span class="n">write</span><span class="p">(</span><span class="n">fb</span><span class="p">,</span><span class="w"> </span><span class="p">...);</span><span class="w"></span>
-<span class="p">...</span><span class="w"></span>
+<span class="k">while</span><span class="p">(</span><span class="nb">true</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="p">...</span><span class="w"></span>
+<span class="w">  </span><span class="n">lseek64</span><span class="p">(</span><span class="n">fb</span><span class="p">,</span><span class="w"> </span><span class="n">offset</span><span class="p">,</span><span class="w"> </span><span class="n">SEEK_SET</span><span class="p">)</span><span class="w"></span>
+<span class="w">  </span><span class="p">...</span><span class="w"></span>
+<span class="w">  </span><span class="n">write</span><span class="p">(</span><span class="n">fb</span><span class="p">,</span><span class="w"> </span><span class="n">color</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="p">...</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 </pre></div>
 </div>
 <p>The following code is for mailbox initialize used in previous lab.</p>
@@ -971,45 +1274,59 @@ info), which are also VFS api using underlying method.</p>
 <span class="p">}</span><span class="w"></span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="test">
-<h3>Test<a class="headerlink" href="#test" title="Permalink to this headline">¶</a></h3>
-<p>we will upload test program later &lt;3</p>
-</div>
-</div>
-</div>
+</section>
+<section id="test">
+<h3>Test<a class="headerlink" href="#test" title="Permalink to this headline">#</a></h3>
+<p><a class="reference download internal" download="" href="../_downloads/3cb3bdb8f851d1cf29ac6f4f5d585981/vfs1.img"><code class="xref download docutils literal notranslate"><span class="pre">user</span> <span class="pre">program</span></code></a></p>
+</section>
+</section>
+</section>
 
 
               </div>
               
-        
-        <div class='prev-next-bottom'>
-            
-    <a class='left-prev' id="prev-link" href="lab6.html" title="previous page">Lab 6: Virtual Memory</a>
-    <a class='right-next' id="next-link" href="hardware/index.html" title="next page">Hardware</a>
-
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="lab6.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Lab 6: Virtual Memory</p>
         </div>
-        
+    </a>
+    <a class='right-next' id="next-link" href="hardware/index.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Hardware</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            </footer>
         </div>
     </div>
-    <footer class="footer mt-5 mt-md-0">
-    <div class="container">
-      <p>
-        
-          By Jim, Muller<br/>
-        
-            &copy; Copyright 2021, Jim, Muller.<br/>
-      </p>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Jim, Muller<br/>
+  
+      &copy; Copyright 2021, Jim, Muller.<br/>
+</p>
+        </footer>
     </div>
-  </footer>
-</main>
+    
+</div>
 
 
       </div>
     </div>
   
-  <script src="../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
 
-  
+
   </body>
 </html>

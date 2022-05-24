@@ -4,11 +4,13 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
     <title>Lab 5: Thread and User Process &#8212; IOC5213: Operating System Capstone</title>
     
-  <link href="../_static/css/theme.css" rel="stylesheet" />
-  <link href="../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
 
     
   <link rel="stylesheet"
@@ -18,29 +20,43 @@
   <link rel="preload" as="font" type="font/woff2" crossorigin
     href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
 
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=62ba249389abaaa9ffc34bf36a076bdc1d65ee18" type="text/css" />
     
-      
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
 
-    
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/sphinx-book-theme.acff12b8f9c144ce68a297486a2fa670.css" type="text/css" />
-    
-  <link rel="preload" as="script" href="../_static/js/index.1c5a1a01449ed65a7b51.js">
-
-    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
-    <script src="../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=f31d14ad54b65d19161ba51d4ffff3a77ae00456"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Lab 6: Virtual Memory" href="lab6.html" />
     <link rel="prev" title="Lab 4: Allocator" href="lab4.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="docsearch:language" content="en" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
     
   </head>
-  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
     
     <div class="container-fluid" id="banner"></div>
 
@@ -49,10 +65,12 @@
     <div class="container-xl">
       <div class="row">
           
-<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
-    
-        <div class="navbar-brand-box">
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
     <a class="navbar-brand text-wrap" href="../index.html">
+      
       
       
       <h1 class="site-logo" id="site-title">IOC5213: Operating System Capstone</h1>
@@ -61,9 +79,9 @@
 </div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
   <i class="icon fas fa-search"></i>
   <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
-</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item active">
-        <p class="caption">
+        <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Class:
  </span>
@@ -80,7 +98,7 @@
   </a>
  </li>
 </ul>
-<p class="caption">
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Labs:
  </span>
@@ -159,7 +177,7 @@
   </ul>
  </li>
 </ul>
-<p class="caption">
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   References:
  </span>
@@ -178,12 +196,17 @@
 </ul>
 
     </div>
-</nav> <!-- To handle the deprecated key -->
-
-<div class="navbar_extra_footer">
-  Theme by the <a href="https://ebp.jupyterbook.org">Executable Book Project</a>
-</div>
-
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Theme by the <a href="https://ebp.jupyterbook.org">Executable Book Project</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
 </div>
 
 
@@ -191,61 +214,117 @@
 
 
           
-<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
     
-    <div class="topbar container-xl fixed-top">
-    <div class="topbar-contents row">
-        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
-        <div class="col pl-md-4 topbar-main">
-            
-            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
-                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
-                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
-                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
-                <i class="fas fa-bars"></i>
-                <i class="fas fa-arrow-left"></i>
-                <i class="fas fa-arrow-up"></i>
-            </button>
-            
-            
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
-            class="fas fa-download"></i></button>
-
-    <div class="dropdown-buttons">
-        <!-- ipynb file if we had a myst markdown file -->
+    <div class="header-article row sticky-top noprint">
         
-        <!-- Download raw file -->
-        <a class="dropdown-buttons" href="../_sources/labs/lab5.rst.txt"><button type="button"
-                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
-                data-placement="left">.rst</button></a>
-        <!-- Download PDF via print -->
-        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
-            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../_sources/labs/lab5.rst.txt"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.rst</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
     </div>
 </div>
 
-            <!-- Source interaction buttons -->
-
-            <!-- Full screen (wrap in <a> to have style consistency -->
-
-<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
-        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
-        title="Fullscreen mode"><i
-            class="fas fa-expand"></i></button></a>
-
-            <!-- Launch buttons -->
-
-        </div>
-
-        <!-- Table of contents -->
-        <div class="d-none d-md-block col-md-2 bd-toc show">
-            
-            <div class="tocsection onthispage pt-5 pb-3">
-                <i class="fas fa-list"></i> Contents
-            </div>
-            <nav id="bd-toc-nav">
-                <ul class="visible nav section-nav flex-column">
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#introduction">
    Introduction
@@ -406,36 +485,212 @@
  </li>
 </ul>
 
-            </nav>
-        </div>
-    </div>
+    </nav>
 </div>
-    <div id="main-content" class="row">
-        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
-        
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Lab 5: Thread and User Process</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#introduction">
+   Introduction
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#goals-of-this-lab">
+   Goals of this lab
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#background">
+   Background
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#threads">
+     Threads
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#user-process">
+     User Process
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#mmu-less">
+       MMU-less
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#run-queue-and-wait-queue">
+     Run Queue and Wait Queue
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#yield-and-preemption">
+     Yield and Preemption
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#basic-exercises">
+   Basic Exercises
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#basic-exercise-1-thread-10">
+     Basic Exercise 1 - Thread - 10%
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#creating-a-thread">
+       Creating a Thread
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#scheduler-and-context-switch">
+       Scheduler and Context Switch
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#the-idle-thread">
+       The Idle Thread
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#end-of-a-thread">
+       End of a Thread
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#test">
+       Test
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#basic-exercise-2-user-process-and-system-call-30">
+     Basic Exercise 2 - User Process and System Call - 30%
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#trap-frame">
+       Trap Frame
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#system-calls">
+       System Calls
+      </a>
+      <ul class="nav section-nav flex-column">
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#required-system-calls">
+         Required System Calls
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#system-call-format-in-video-player-s-test-program">
+         System Call Format in Video Player’s Test Program
+        </a>
+       </li>
+      </ul>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#kernel-preemption">
+       Kernel Preemption
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id1">
+       Test
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#video-player-40">
+     Video Player - 40%
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#timer">
+       Timer
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#user-program">
+       User Program
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#advanced-exercises">
+   Advanced Exercises
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#advanced-exercise-1-posix-signal-30">
+     Advanced Exercise 1 - POSIX Signal - 30%
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#implementation">
+       Implementation
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
               <div>
                 
-  <div class="section" id="lab-5-thread-and-user-process">
-<h1>Lab 5: Thread and User Process<a class="headerlink" href="#lab-5-thread-and-user-process" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="introduction">
-<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+  <section id="lab-5-thread-and-user-process">
+<h1>Lab 5: Thread and User Process<a class="headerlink" href="#lab-5-thread-and-user-process" title="Permalink to this headline">#</a></h1>
+<section id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">#</a></h2>
 <p>Multitasking is the most important feature of an operating system.
 In this lab, you’ll learn how to create threads and how to switch between different threads to achieve multitasking.
 Moreover, you’ll learn how a user program becomes a user process and accesses services provided by the kernel through system calls.</p>
-</div>
-<div class="section" id="goals-of-this-lab">
-<h2>Goals of this lab<a class="headerlink" href="#goals-of-this-lab" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="goals-of-this-lab">
+<h2>Goals of this lab<a class="headerlink" href="#goals-of-this-lab" title="Permalink to this headline">#</a></h2>
 <ul class="simple">
 <li><p>Understand how to create threads and user processes.</p></li>
 <li><p>Understand how to implement scheduler and context switch.</p></li>
 <li><p>Understand what’s preemption.</p></li>
 <li><p>Understand how to implement POSIX signals.</p></li>
 </ul>
-</div>
-<div class="section" id="background">
-<h2>Background<a class="headerlink" href="#background" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="threads">
-<h3>Threads<a class="headerlink" href="#threads" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="background">
+<h2>Background<a class="headerlink" href="#background" title="Permalink to this headline">#</a></h2>
+<section id="threads">
+<h3>Threads<a class="headerlink" href="#threads" title="Permalink to this headline">#</a></h3>
 <p>In the previous lab, you already learned how to implement multitasking with a single stack.
 However, in the case of single stack multitasking, the CPU thread can’t switch between two tasks at any time.
 Otherwise, a task may corrupt another task’s context stored on the stack.</p>
@@ -449,9 +704,9 @@ Moreover, these register sets can be loaded by any other CPU thread to achieve t
 <p>In this documentation, a thread means a software thread.
 For processing elements containing their hardware register sets are called CPU threads.</p>
 </div>
-</div>
-<div class="section" id="user-process">
-<h3>User Process<a class="headerlink" href="#user-process" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="user-process">
+<h3>User Process<a class="headerlink" href="#user-process" title="Permalink to this headline">#</a></h3>
 <p>When a user wants to run an application,
 the operating system loads the user program into memory and runs it with one or multiple threads.
 However, users want to run multiple programs or multiple copies of the same program.
@@ -460,18 +715,18 @@ To achieve this, the operating system maintains multiple isolated execution inst
 A process can only access the resource it owns.
 If it needs additional resources, it invokes the corresponding system calls.
 The kernel then checks the capabilities of the process and only provides the resource if the process has the access rights.</p>
-<div class="section" id="mmu-less">
-<h4>MMU-less<a class="headerlink" href="#mmu-less" title="Permalink to this headline">¶</a></h4>
+<section id="mmu-less">
+<h4>MMU-less<a class="headerlink" href="#mmu-less" title="Permalink to this headline">#</a></h4>
 <p>In general, programs that directly run machine code on the CPU are isolated by virtual memory.
 However, we won’t enable the MMU in this lab,
 so we can’t prevent illegal memory access and we can’t use the same virtual address for different processes.
 If you want to execute multiple programs, please use different linker scripts for different programs
 and load them to different addresses to prevent overlapping.
 If your program calls fork, the program shouldn’t use global variables, dynamic allocation, indirect storage, etc, since the storage will be corrupted.</p>
-</div>
-</div>
-<div class="section" id="run-queue-and-wait-queue">
-<h3>Run Queue and Wait Queue<a class="headerlink" href="#run-queue-and-wait-queue" title="Permalink to this headline">¶</a></h3>
+</section>
+</section>
+<section id="run-queue-and-wait-queue">
+<h3>Run Queue and Wait Queue<a class="headerlink" href="#run-queue-and-wait-queue" title="Permalink to this headline">#</a></h3>
 <p>One CPU thread can run one thread at a time, but there may be multiple runnable threads at the same time.
 Those runnable threads are put in the run queue.
 When the current thread relinquishes control of the CPU thread, it calls the scheduler to pick the next thread.
@@ -485,9 +740,9 @@ and waits for others to wake it up.</p>
 When the resource is ready, one or many waiting threads in the wait queue will be put back to the run queue.
 The awakened thread is eventually scheduled and runs.
 Then, it can get the resource if the resource is still available.</p>
-</div>
-<div class="section" id="yield-and-preemption">
-<h3>Yield and Preemption<a class="headerlink" href="#yield-and-preemption" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="yield-and-preemption">
+<h3>Yield and Preemption<a class="headerlink" href="#yield-and-preemption" title="Permalink to this headline">#</a></h3>
 <p>As mentioned above, a thread can voluntarily yield the CPU thread to others.
 Yet, we can’t rely on a voluntary yield, because once a thread never yields,
 a high-priority thread can’t run even when it’s runnable.
@@ -509,19 +764,19 @@ Meanwhile, a data race in the kernel can break the entire system.
 If the kernel’s developers need to enable fine-grained preemption in kernel mode,
 They need to be aware of all possible shared resource accesses and adopt the right methods to protect them,
 hence it’s more complex to enable kernel preemption.</p>
-</div>
-</div>
-<div class="section" id="basic-exercises">
-<h2>Basic Exercises<a class="headerlink" href="#basic-exercises" title="Permalink to this headline">¶</a></h2>
+</section>
+</section>
+<section id="basic-exercises">
+<h2>Basic Exercises<a class="headerlink" href="#basic-exercises" title="Permalink to this headline">#</a></h2>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p>You won’t need to demonstrate the test component in Basic 1 and 2 if you can execute the test program successfully in Video Player.</p>
 </div>
-<div class="section" id="basic-exercise-1-thread-10">
-<h3>Basic Exercise 1 - Thread - 10%<a class="headerlink" href="#basic-exercise-1-thread-10" title="Permalink to this headline">¶</a></h3>
+<section id="basic-exercise-1-thread-10">
+<h3>Basic Exercise 1 - Thread - 10%<a class="headerlink" href="#basic-exercise-1-thread-10" title="Permalink to this headline">#</a></h3>
 <p>In this part, you need to implement the creation, switch, and recycling of threads.</p>
-<div class="section" id="creating-a-thread">
-<h4>Creating a Thread<a class="headerlink" href="#creating-a-thread" title="Permalink to this headline">¶</a></h4>
+<section id="creating-a-thread">
+<h4>Creating a Thread<a class="headerlink" href="#creating-a-thread" title="Permalink to this headline">#</a></h4>
 <p>Implement a thread-creating API.
 Users can pass a function(task) to the API, and the function is run in a newly created thread.
 To make the thread schedulable and runnable, you should create a data structure and a stack for it.
@@ -533,9 +788,9 @@ Then, put it into the run queue.</p>
 <span class="n">t</span> <span class="o">=</span> <span class="n">Thread</span><span class="p">(</span><span class="n">foo</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="scheduler-and-context-switch">
-<h4>Scheduler and Context Switch<a class="headerlink" href="#scheduler-and-context-switch" title="Permalink to this headline">¶</a></h4>
+</section>
+<section id="scheduler-and-context-switch">
+<h4>Scheduler and Context Switch<a class="headerlink" href="#scheduler-and-context-switch" title="Permalink to this headline">#</a></h4>
 <p>Implement the <code class="docutils literal notranslate"><span class="pre">schedule()</span></code> API.
 When the current thread calls this API, the scheduler picks the next thread from the run queue.
 In this lab, your scheduler should at least be able to schedule the threads of the same priority in a <strong>round-robin</strong> manner.</p>
@@ -578,15 +833,15 @@ After switching the stack pointer and the <code class="docutils literal notransl
 <p>You only need to save <a class="reference external" href="https://developer.arm.com/documentation/102374/0101/Procedure-Call-Standard">callee-saved registers</a>,
 because other registers are already on the stack.</p>
 </div>
-</div>
-<div class="section" id="the-idle-thread">
-<h4>The Idle Thread<a class="headerlink" href="#the-idle-thread" title="Permalink to this headline">¶</a></h4>
+</section>
+<section id="the-idle-thread">
+<h4>The Idle Thread<a class="headerlink" href="#the-idle-thread" title="Permalink to this headline">#</a></h4>
 <p>The idle thread is a thread that is always runnable.
 When there are no other runnable threads,
 the scheduler should pick it to guarantee that the CPU thread always can fetch and execute the next instruction.</p>
-</div>
-<div class="section" id="end-of-a-thread">
-<h4>End of a Thread<a class="headerlink" href="#end-of-a-thread" title="Permalink to this headline">¶</a></h4>
+</section>
+<section id="end-of-a-thread">
+<h4>End of a Thread<a class="headerlink" href="#end-of-a-thread" title="Permalink to this headline">#</a></h4>
 <p>When a thread finishes its jobs, it needs to explicitly or implicitly call(return and let the caller call) <code class="docutils literal notranslate"><span class="pre">exit()</span></code>
 to indicate it’s terminated.</p>
 <p>In general, the thread can’t recycle all its resources.
@@ -605,9 +860,9 @@ If yes, it recycles them as follows.</p>
         <span class="n">schedule</span><span class="p">()</span> <span class="c1"># switch to any other runnable thread</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="test">
-<h4>Test<a class="headerlink" href="#test" title="Permalink to this headline">¶</a></h4>
+</section>
+<section id="test">
+<h4>Test<a class="headerlink" href="#test" title="Permalink to this headline">#</a></h4>
 <p>Please test your implementation with the following code or equivalent logic code in the demo.</p>
 <p>Expected result: multiple threads print the content interleaved.</p>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="nf">foo</span><span class="p">(){</span><span class="w"></span>
@@ -633,22 +888,22 @@ If yes, it recycles them as follows.</p>
 <p class="admonition-title">Todo</p>
 <p>Implement the thread mechanism.</p>
 </div>
-</div>
-</div>
-<div class="section" id="basic-exercise-2-user-process-and-system-call-30">
-<h3>Basic Exercise 2 - User Process and System Call - 30%<a class="headerlink" href="#basic-exercise-2-user-process-and-system-call-30" title="Permalink to this headline">¶</a></h3>
+</section>
+</section>
+<section id="basic-exercise-2-user-process-and-system-call-30">
+<h3>Basic Exercise 2 - User Process and System Call - 30%<a class="headerlink" href="#basic-exercise-2-user-process-and-system-call-30" title="Permalink to this headline">#</a></h3>
 <p>In this part, you need to implement the basic user process mechanism such as system calls and user preemption.</p>
-<div class="section" id="trap-frame">
-<h4>Trap Frame<a class="headerlink" href="#trap-frame" title="Permalink to this headline">¶</a></h4>
+<section id="trap-frame">
+<h4>Trap Frame<a class="headerlink" href="#trap-frame" title="Permalink to this headline">#</a></h4>
 <p>The registers are saved at the top of the kernel stack when a user process throws an exception and enters kernel mode. The registers are loaded before returning to user mode. The trap frame is the name given to the saved material.
 The kernel will not affect the trap frame in normal exception handling (e.g., page fault, interrupt), so the user process will not be aware that it has entered kernel mode. When it comes to system calls, however, the user software expects the kernel to take care of it.
 The program uses the general-purpose registers to set the arguments and receive the return value, just like conventional function calls. The kernel can then read the trap frame to acquire the user’s parameters and write it to set the return value and error code.</p>
-</div>
-<div class="section" id="system-calls">
-<h4>System Calls<a class="headerlink" href="#system-calls" title="Permalink to this headline">¶</a></h4>
+</section>
+<section id="system-calls">
+<h4>System Calls<a class="headerlink" href="#system-calls" title="Permalink to this headline">#</a></h4>
 <p>In the previous lab, the <cite>svc</cite> instruction allowed your user program to trap to the kernel. In this lab, you’ll learn how arguments and return values are transmitted between user and kernel modes. In order to develop simple user programs, you’ll also need to implement some fundamental system calls.</p>
-<div class="section" id="required-system-calls">
-<h5>Required System Calls<a class="headerlink" href="#required-system-calls" title="Permalink to this headline">¶</a></h5>
+<section id="required-system-calls">
+<h5>Required System Calls<a class="headerlink" href="#required-system-calls" title="Permalink to this headline">#</a></h5>
 <p>You need to implement the following system calls for user programs.</p>
 <dl class="simple">
 <dt>int getpid()</dt><dd><p>Get current process’s id.</p>
@@ -682,9 +937,9 @@ The program uses the general-purpose registers to set the arguments and receive 
 <p class="admonition-title">Warning</p>
 <p>To execute the test program in Video Player, make sure your system calls match the guidelines below.</p>
 </div>
-</div>
-<div class="section" id="system-call-format-in-video-player-s-test-program">
-<h5>System Call Format in Video Player’s Test Program<a class="headerlink" href="#system-call-format-in-video-player-s-test-program" title="Permalink to this headline">¶</a></h5>
+</section>
+<section id="system-call-format-in-video-player-s-test-program">
+<h5>System Call Format in Video Player’s Test Program<a class="headerlink" href="#system-call-format-in-video-player-s-test-program" title="Permalink to this headline">#</a></h5>
 <ul class="simple">
 <li><p>The svc function will be called via a system call: <cite>svc 0</cite></p></li>
 <li><dl class="simple">
@@ -710,14 +965,14 @@ The program uses the general-purpose registers to set the arguments and receive 
 </dl>
 </li>
 </ul>
-</div>
-</div>
-<div class="section" id="kernel-preemption">
-<h4>Kernel Preemption<a class="headerlink" href="#kernel-preemption" title="Permalink to this headline">¶</a></h4>
+</section>
+</section>
+<section id="kernel-preemption">
+<h4>Kernel Preemption<a class="headerlink" href="#kernel-preemption" title="Permalink to this headline">#</a></h4>
 <p>It’s worth noting that you can only disable preemption or interrupts when absolutely essential. Your kernel should always be preemptible at other times.</p>
-</div>
-<div class="section" id="id1">
-<h4>Test<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h4>
+</section>
+<section id="id1">
+<h4>Test<a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h4>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p>Please test your implementation using the code below or equivalent logic code, but you <strong>must output the stack pointer</strong>. This test should work in exception level 0.</p>
@@ -752,21 +1007,21 @@ The program uses the general-purpose registers to set the arguments and receive 
 <span class="p">}</span><span class="w"></span>
 </pre></div>
 </div>
-</div>
-</div>
-<div class="section" id="video-player-40">
-<h3>Video Player - 40%<a class="headerlink" href="#video-player-40" title="Permalink to this headline">¶</a></h3>
+</section>
+</section>
+<section id="video-player-40">
+<h3>Video Player - 40%<a class="headerlink" href="#video-player-40" title="Permalink to this headline">#</a></h3>
 <p>In order to test the correctness of your previous implementation, we create a user program that runs only if your kernel behaves as expected.</p>
-<div class="section" id="timer">
-<h4>Timer<a class="headerlink" href="#timer" title="Permalink to this headline">¶</a></h4>
+<section id="timer">
+<h4>Timer<a class="headerlink" href="#timer" title="Permalink to this headline">#</a></h4>
 <p>Enable the core timer interrupt. Schedule the pending threads when the core timer interrupts.</p>
 <div class="admonition-note admonition">
 <p class="admonition-title">Note</p>
 <p>Set the expired time as core timer frequency shift right 5 bits.</p>
 </div>
-</div>
-<div class="section" id="user-program">
-<h4>User Program<a class="headerlink" href="#user-program" title="Permalink to this headline">¶</a></h4>
+</section>
+<section id="user-program">
+<h4>User Program<a class="headerlink" href="#user-program" title="Permalink to this headline">#</a></h4>
 <p>Load the <a class="reference download internal" download="" href="../_downloads/58c515e3041658a045033c8e56ecff4c/initramfs.cpio"><code class="xref download docutils literal notranslate"><span class="pre">user</span> <span class="pre">program</span></code></a> to your kernel and execute it. The system call you defined above would be used by the user program.</p>
 <p>This test program will access cpu timer register, please add this code or equivilant logic to your timer initialize code</p>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">uint64_t</span><span class="w"> </span><span class="n">tmp</span><span class="p">;</span><span class="w"></span>
@@ -794,16 +1049,16 @@ If everything goes well, you’ll enter a shell generated by the user program an
 <p class="admonition-title">Warning</p>
 <p>Only if you can run our test program fluently will you receive all the points; otherwise, even though you implemented the system call correctly, you will receive no points in this section.</p>
 </div>
-</div>
-</div>
-</div>
-<div class="section" id="advanced-exercises">
-<h2>Advanced Exercises<a class="headerlink" href="#advanced-exercises" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="advanced-exercise-1-posix-signal-30">
-<h3>Advanced Exercise 1 - POSIX Signal - 30%<a class="headerlink" href="#advanced-exercise-1-posix-signal-30" title="Permalink to this headline">¶</a></h3>
+</section>
+</section>
+</section>
+<section id="advanced-exercises">
+<h2>Advanced Exercises<a class="headerlink" href="#advanced-exercises" title="Permalink to this headline">#</a></h2>
+<section id="advanced-exercise-1-posix-signal-30">
+<h3>Advanced Exercise 1 - POSIX Signal - 30%<a class="headerlink" href="#advanced-exercise-1-posix-signal-30" title="Permalink to this headline">#</a></h3>
 <p>The POSIX signal is an asynchronous method of inter-process communication. When a user process gets a signal, it calls a default or registered signal handler.</p>
-<div class="section" id="implementation">
-<h4>Implementation<a class="headerlink" href="#implementation" title="Permalink to this headline">¶</a></h4>
+<section id="implementation">
+<h4>Implementation<a class="headerlink" href="#implementation" title="Permalink to this headline">#</a></h4>
 <p>One alternative method is for the kernel to check for outstanding signals before returning the process to user mode. If the answer is yes, the kernel executes the appropriate handler.</p>
 <p>The default signal handlers can be finished in kernel mode. The registered signal handlers, on the other hand, should be run in user mode. Furthermore, while performing the handler, the user process may enter kernel mode again owing to another system call or interrupt. As a result, before running the handler, you should save the original context. When the handler completes, the kernel restores the context so that the original execution can proceed.</p>
 <p>The process is still in user mode after the handler finishes and returns. The kernel can set the handler’s return address(lr) to a chunk of code containing the sigreturn() system call to force it into kernel mode and indicate that it has already completed. Following that, the kernel recognizes that the handler is complete and restores the prior context.</p>
@@ -838,42 +1093,56 @@ In order to let a process send transmit signals to any other process, you must i
 </dl>
 <p>SIGKILL = 9</p>
 <p>You can simply type <cite>register</cite> in shell to register a handler provided by us while running our test program. Similarly, you can use the command <cite>signal_kill {tid}</cite> to indicate which thread you want to terminate.</p>
-</div>
-</div>
-</div>
-</div>
+</section>
+</section>
+</section>
+</section>
 
 
               </div>
               
-        
-        <div class='prev-next-bottom'>
-            
-    <a class='left-prev' id="prev-link" href="lab4.html" title="previous page">Lab 4: Allocator</a>
-    <a class='right-next' id="next-link" href="lab6.html" title="next page">Lab 6: Virtual Memory</a>
-
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="lab4.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Lab 4: Allocator</p>
         </div>
-        
+    </a>
+    <a class='right-next' id="next-link" href="lab6.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Lab 6: Virtual Memory</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            </footer>
         </div>
     </div>
-    <footer class="footer mt-5 mt-md-0">
-    <div class="container">
-      <p>
-        
-          By Jim, Muller<br/>
-        
-            &copy; Copyright 2021, Jim, Muller.<br/>
-      </p>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Jim, Muller<br/>
+  
+      &copy; Copyright 2021, Jim, Muller.<br/>
+</p>
+        </footer>
     </div>
-  </footer>
-</main>
+    
+</div>
 
 
       </div>
     </div>
   
-  <script src="../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
 
-  
+
   </body>
 </html>

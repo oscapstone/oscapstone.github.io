@@ -354,10 +354,12 @@ You'll need to provide the following system calls
   int close(int fd);
 
   // syscall number : 13
-  int write(int fd, const void *buf, int count);
+  // remember to return read size or error code
+  long write(int fd, const void *buf, unsigned long count);
 
   // syscall number : 14
-  int read(int fd, void *buf, int count);
+  // remember to return read size or error code
+  long read(int fd, void *buf, unsigned long count);
 
   // syscall number : 15
   // you can ignore mode, since there is no access control
@@ -468,7 +470,7 @@ at ``"/dev/framebuffer"``
 
 You need to initialize the framebuffer using mailbox 
 at mknod (or mount or ioctl, we don't care), and when written, 
-write directly to framebuffer.
+write directly to framebuffer (lfb + f_pos).
 
 Also you need to support lseek64 system call (to write framebuffer 
 again without reopen) and ioctl system call (to query framebuffer 
@@ -508,10 +510,13 @@ The following code will be in test program
 
   ioctl(fb, 0, &fb_info); 
 
-  ...
-  lseek64(fb, offset, SEEK_SET)
-  write(fb, ...);
-  ...
+  while(true) {
+    ...
+    lseek64(fb, offset, SEEK_SET)
+    ...
+    write(fb, color, 4);
+    ...
+  }
 
 The following code is for mailbox initialize used in previous lab.
 
@@ -585,5 +590,5 @@ The following code is for mailbox initialize used in previous lab.
 Test
 ====
 
-we will upload test program later <3
+:download:`user program <vfs1.img>`
 

@@ -4,13 +4,11 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Lab 3: Exception and Interrupt &#8212; IOC5213: Operating System Capstone</title>
     
-  <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
-<link href="../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+  <link href="../_static/css/theme.css" rel="stylesheet" />
+  <link href="../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
 
     
   <link rel="stylesheet"
@@ -20,43 +18,29 @@
   <link rel="preload" as="font" type="font/woff2" crossorigin
     href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
 
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=62ba249389abaaa9ffc34bf36a076bdc1d65ee18" type="text/css" />
     
-  <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+      
 
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.acff12b8f9c144ce68a297486a2fa670.css" type="text/css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.1c5a1a01449ed65a7b51.js">
+
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
-    <script src="../_static/scripts/sphinx-book-theme.js?digest=f31d14ad54b65d19161ba51d4ffff3a77ae00456"></script>
+    <script src="../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Lab 4: Allocator" href="lab4.html" />
     <link rel="prev" title="Lab 2: Booting" href="lab2.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="docsearch:language" content="None">
-    
-
-    <!-- Google Analytics -->
+    <meta name="docsearch:language" content="en" />
     
   </head>
-  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
-<!-- Checkboxes to toggle the left sidebar -->
-<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
-<label class="overlay overlay-navbar" for="__navigation">
-    <div class="visually-hidden">Toggle navigation sidebar</div>
-</label>
-<!-- Checkboxes to toggle the in-page toc -->
-<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
-<label class="overlay overlay-pagetoc" for="__page-toc">
-    <div class="visually-hidden">Toggle in-page Table of Contents</div>
-</label>
-<!-- Headers at the top -->
-<div class="announcement header-item noprint"></div>
-<div class="header header-item noprint"></div>
-
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
     
     <div class="container-fluid" id="banner"></div>
 
@@ -65,12 +49,10 @@
     <div class="container-xl">
       <div class="row">
           
-<!-- Sidebar -->
-<div class="bd-sidebar noprint" id="site-navigation">
-    <div class="bd-sidebar__content">
-        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
     <a class="navbar-brand text-wrap" href="../index.html">
-      
       
       
       <h1 class="site-logo" id="site-title">IOC5213: Operating System Capstone</h1>
@@ -79,9 +61,9 @@
 </div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
   <i class="icon fas fa-search"></i>
   <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
-</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
     <div class="bd-toc-item active">
-        <p aria-level="2" class="caption" role="heading">
+        <p class="caption">
  <span class="caption-text">
   Class:
  </span>
@@ -98,7 +80,7 @@
   </a>
  </li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
+<p class="caption">
  <span class="caption-text">
   Labs:
  </span>
@@ -177,7 +159,7 @@
   </ul>
  </li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
+<p class="caption">
  <span class="caption-text">
   References:
  </span>
@@ -196,512 +178,261 @@
 </ul>
 
     </div>
-</nav></div>
-        <div class="bd-sidebar__bottom">
-             <!-- To handle the deprecated key -->
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Theme by the <a href="https://ebp.jupyterbook.org">Executable Book Project</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
             
-            <div class="navbar_extra_footer">
-            Theme by the <a href="https://ebp.jupyterbook.org">Executable Book Project</a>
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/labs/lab3.rst.txt"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.rst</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
             </div>
-            
+            <nav id="bd-toc-nav">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#introduction">
+   Introduction
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#goals-of-this-lab">
+   Goals of this lab
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#background">
+   Background
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#official-reference">
+     Official Reference
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#exception-levels">
+     Exception Levels
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#exception-handling">
+     Exception Handling
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#vector-table">
+       Vector Table
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#interrupts">
+     Interrupts
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#interrupt-controllers">
+       Interrupt Controllers
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#critical-sections">
+       Critical Sections
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#basic-exercises">
+   Basic Exercises
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#basic-exercise-1-exception-30">
+     Basic Exercise 1 - Exception  - 30%
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#exception-level-switch">
+       Exception Level Switch
+      </a>
+      <ul class="nav section-nav flex-column">
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#el2-to-el1">
+         EL2 to EL1
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#el1-to-el0">
+         EL1 to EL0
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#el0-to-el1">
+         EL0 to EL1
+        </a>
+       </li>
+      </ul>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id2">
+       Exception Handling
+      </a>
+      <ul class="nav section-nav flex-column">
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#context-saving">
+         Context saving
+        </a>
+       </li>
+      </ul>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#basic-exercise-2-interrupt-10">
+     Basic Exercise 2 - Interrupt - 10%
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#core-timer-interrupt">
+       Core Timer Interrupt
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#basic-exercise-3-rpi3-s-peripheral-interrupt-30">
+     Basic Exercise 3 - Rpi3’s Peripheral Interrupt - 30%
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#enable-mini-uart-s-interrupt">
+       Enable mini UART’s Interrupt.
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#determine-the-interrupt-source">
+       Determine the Interrupt Source
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#asynchronous-read-and-write">
+       Asynchronous Read and Write
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#advanced-exercises">
+   Advanced Exercises
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#advanced-exercise-1-timer-multiplexing-20">
+     Advanced Exercise 1 - Timer Multiplexing - 20%
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#advanced-exercise-2-concurrent-i-o-devices-handling-20">
+     Advanced Exercise 2 - Concurrent I/O Devices Handling 20%
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#decouple-the-interrupt-handlers">
+       Decouple the Interrupt Handlers
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#nested-interrupt">
+       Nested Interrupt
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#preemption">
+       Preemption
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+            </nav>
         </div>
     </div>
-    <div id="rtd-footer-container"></div>
 </div>
-
-
-          
-
-
-          
-<!-- A tiny helper pixel to detect if we've scrolled -->
-<div class="sbt-scroll-pixel-helper"></div>
-<!-- Main content -->
-<div class="col py-0 content-container">
-    
-    <div class="header-article row sticky-top noprint">
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
         
-
-
-
-<div class="col py-1 d-flex header-article-main">
-    <div class="header-article__left">
-        
-        <label for="__navigation"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="right"
-title="Toggle navigation"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-bars"></i>
-  </span>
-
-</label>
-
-        
-    </div>
-    <div class="header-article__right">
-<button onclick="toggleFullScreen()"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="bottom"
-title="Fullscreen mode"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-expand"></i>
-  </span>
-
-</button>
-
-<div class="menu-dropdown menu-dropdown-download-buttons">
-  <button class="headerbtn menu-dropdown__trigger"
-      aria-label="Download this page">
-      <i class="fas fa-download"></i>
-  </button>
-  <div class="menu-dropdown__content">
-    <ul>
-      <li>
-        <a href="../_sources/labs/lab3.rst.txt"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Download source file"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-file"></i>
-  </span>
-<span class="headerbtn__text-container">.rst</span>
-</a>
-
-      </li>
-      
-      <li>
-        
-<button onclick="printPdf(this)"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="left"
-title="Print to PDF"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-file-pdf"></i>
-  </span>
-<span class="headerbtn__text-container">.pdf</span>
-</button>
-
-      </li>
-      
-    </ul>
-  </div>
-</div>
-<label for="__page-toc"
-  class="headerbtn headerbtn-page-toc"
-  
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-list"></i>
-  </span>
-
-</label>
-
-    </div>
-</div>
-
-<!-- Table of contents -->
-<div class="col-md-3 bd-toc show noprint">
-    <div class="tocsection onthispage pt-5 pb-3">
-        <i class="fas fa-list"></i> Contents
-    </div>
-    <nav id="bd-toc-nav" aria-label="Page">
-        <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#introduction">
-   Introduction
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#goals-of-this-lab">
-   Goals of this lab
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#background">
-   Background
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#official-reference">
-     Official Reference
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#exception-levels">
-     Exception Levels
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#exception-handling">
-     Exception Handling
-    </a>
-    <ul class="nav section-nav flex-column">
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#vector-table">
-       Vector Table
-      </a>
-     </li>
-    </ul>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#interrupts">
-     Interrupts
-    </a>
-    <ul class="nav section-nav flex-column">
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#interrupt-controllers">
-       Interrupt Controllers
-      </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#critical-sections">
-       Critical Sections
-      </a>
-     </li>
-    </ul>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#basic-exercises">
-   Basic Exercises
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#basic-exercise-1-exception-30">
-     Basic Exercise 1 - Exception  - 30%
-    </a>
-    <ul class="nav section-nav flex-column">
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#exception-level-switch">
-       Exception Level Switch
-      </a>
-      <ul class="nav section-nav flex-column">
-       <li class="toc-h5 nav-item toc-entry">
-        <a class="reference internal nav-link" href="#el2-to-el1">
-         EL2 to EL1
-        </a>
-       </li>
-       <li class="toc-h5 nav-item toc-entry">
-        <a class="reference internal nav-link" href="#el1-to-el0">
-         EL1 to EL0
-        </a>
-       </li>
-       <li class="toc-h5 nav-item toc-entry">
-        <a class="reference internal nav-link" href="#el0-to-el1">
-         EL0 to EL1
-        </a>
-       </li>
-      </ul>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#id2">
-       Exception Handling
-      </a>
-      <ul class="nav section-nav flex-column">
-       <li class="toc-h5 nav-item toc-entry">
-        <a class="reference internal nav-link" href="#context-saving">
-         Context saving
-        </a>
-       </li>
-      </ul>
-     </li>
-    </ul>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#basic-exercise-2-interrupt-10">
-     Basic Exercise 2 - Interrupt - 10%
-    </a>
-    <ul class="nav section-nav flex-column">
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#core-timer-interrupt">
-       Core Timer Interrupt
-      </a>
-     </li>
-    </ul>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#basic-exercise-3-rpi3-s-peripheral-interrupt-30">
-     Basic Exercise 3 - Rpi3’s Peripheral Interrupt - 30%
-    </a>
-    <ul class="nav section-nav flex-column">
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#enable-mini-uart-s-interrupt">
-       Enable mini UART’s Interrupt.
-      </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#determine-the-interrupt-source">
-       Determine the Interrupt Source
-      </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#asynchronous-read-and-write">
-       Asynchronous Read and Write
-      </a>
-     </li>
-    </ul>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#advanced-exercises">
-   Advanced Exercises
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#advanced-exercise-1-timer-multiplexing-20">
-     Advanced Exercise 1 - Timer Multiplexing - 20%
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#advanced-exercise-2-concurrent-i-o-devices-handling-20">
-     Advanced Exercise 2 - Concurrent I/O Devices Handling 20%
-    </a>
-    <ul class="nav section-nav flex-column">
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#decouple-the-interrupt-handlers">
-       Decouple the Interrupt Handlers
-      </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#nested-interrupt">
-       Nested Interrupt
-      </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#preemption">
-       Preemption
-      </a>
-     </li>
-    </ul>
-   </li>
-  </ul>
- </li>
-</ul>
-
-    </nav>
-</div>
-    </div>
-    <div class="article row">
-        <div class="col pl-md-3 pl-lg-5 content-container">
-            <!-- Table of contents that is only displayed when printing the page -->
-            <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Lab 3: Exception and Interrupt</h1>
-                <!-- Table of contents -->
-                <div id="print-main-content">
-                    <div id="jb-print-toc">
-                        
-                        <div>
-                            <h2> Contents </h2>
-                        </div>
-                        <nav aria-label="Page">
-                            <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#introduction">
-   Introduction
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#goals-of-this-lab">
-   Goals of this lab
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#background">
-   Background
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#official-reference">
-     Official Reference
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#exception-levels">
-     Exception Levels
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#exception-handling">
-     Exception Handling
-    </a>
-    <ul class="nav section-nav flex-column">
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#vector-table">
-       Vector Table
-      </a>
-     </li>
-    </ul>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#interrupts">
-     Interrupts
-    </a>
-    <ul class="nav section-nav flex-column">
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#interrupt-controllers">
-       Interrupt Controllers
-      </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#critical-sections">
-       Critical Sections
-      </a>
-     </li>
-    </ul>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#basic-exercises">
-   Basic Exercises
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#basic-exercise-1-exception-30">
-     Basic Exercise 1 - Exception  - 30%
-    </a>
-    <ul class="nav section-nav flex-column">
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#exception-level-switch">
-       Exception Level Switch
-      </a>
-      <ul class="nav section-nav flex-column">
-       <li class="toc-h5 nav-item toc-entry">
-        <a class="reference internal nav-link" href="#el2-to-el1">
-         EL2 to EL1
-        </a>
-       </li>
-       <li class="toc-h5 nav-item toc-entry">
-        <a class="reference internal nav-link" href="#el1-to-el0">
-         EL1 to EL0
-        </a>
-       </li>
-       <li class="toc-h5 nav-item toc-entry">
-        <a class="reference internal nav-link" href="#el0-to-el1">
-         EL0 to EL1
-        </a>
-       </li>
-      </ul>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#id2">
-       Exception Handling
-      </a>
-      <ul class="nav section-nav flex-column">
-       <li class="toc-h5 nav-item toc-entry">
-        <a class="reference internal nav-link" href="#context-saving">
-         Context saving
-        </a>
-       </li>
-      </ul>
-     </li>
-    </ul>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#basic-exercise-2-interrupt-10">
-     Basic Exercise 2 - Interrupt - 10%
-    </a>
-    <ul class="nav section-nav flex-column">
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#core-timer-interrupt">
-       Core Timer Interrupt
-      </a>
-     </li>
-    </ul>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#basic-exercise-3-rpi3-s-peripheral-interrupt-30">
-     Basic Exercise 3 - Rpi3’s Peripheral Interrupt - 30%
-    </a>
-    <ul class="nav section-nav flex-column">
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#enable-mini-uart-s-interrupt">
-       Enable mini UART’s Interrupt.
-      </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#determine-the-interrupt-source">
-       Determine the Interrupt Source
-      </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#asynchronous-read-and-write">
-       Asynchronous Read and Write
-      </a>
-     </li>
-    </ul>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#advanced-exercises">
-   Advanced Exercises
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#advanced-exercise-1-timer-multiplexing-20">
-     Advanced Exercise 1 - Timer Multiplexing - 20%
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#advanced-exercise-2-concurrent-i-o-devices-handling-20">
-     Advanced Exercise 2 - Concurrent I/O Devices Handling 20%
-    </a>
-    <ul class="nav section-nav flex-column">
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#decouple-the-interrupt-handlers">
-       Decouple the Interrupt Handlers
-      </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#nested-interrupt">
-       Nested Interrupt
-      </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#preemption">
-       Preemption
-      </a>
-     </li>
-    </ul>
-   </li>
-  </ul>
- </li>
-</ul>
-
-                        </nav>
-                    </div>
-                </div>
-            </div>
-            <main id="main-content" role="main">
-                
               <div>
                 
-  <section id="lab-3-exception-and-interrupt">
-<h1>Lab 3: Exception and Interrupt<a class="headerlink" href="#lab-3-exception-and-interrupt" title="Permalink to this headline">#</a></h1>
-<section id="introduction">
-<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">#</a></h2>
+  <div class="section" id="lab-3-exception-and-interrupt">
+<h1>Lab 3: Exception and Interrupt<a class="headerlink" href="#lab-3-exception-and-interrupt" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
 <p>An exception is an event that causes the currently executing program to relinquish the CPU to the corresponding handler.
 With the exception mechanism, an operating system can</p>
 <ol class="arabic simple">
@@ -709,9 +440,9 @@ With the exception mechanism, an operating system can</p>
 <li><p>A user program can generate an exception to get the corresponding operating system’s service.</p></li>
 <li><p>A peripheral device can force the currently executing program to relinquish the CPU and execute its handler.</p></li>
 </ol>
-</section>
-<section id="goals-of-this-lab">
-<h2>Goals of this lab<a class="headerlink" href="#goals-of-this-lab" title="Permalink to this headline">#</a></h2>
+</div>
+<div class="section" id="goals-of-this-lab">
+<h2>Goals of this lab<a class="headerlink" href="#goals-of-this-lab" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li><p>Understand what’s exception levels in Armv8-A.</p></li>
 <li><p>Understand what’s exception handling.</p></li>
@@ -720,20 +451,20 @@ With the exception mechanism, an operating system can</p>
 <li><p>Understand how to multiplex a timer.</p></li>
 <li><p>Understand how to concurrently handle I/O devices.</p></li>
 </ul>
-</section>
-<section id="background">
-<h2>Background<a class="headerlink" href="#background" title="Permalink to this headline">#</a></h2>
-<section id="official-reference">
-<h3>Official Reference<a class="headerlink" href="#official-reference" title="Permalink to this headline">#</a></h3>
+</div>
+<div class="section" id="background">
+<h2>Background<a class="headerlink" href="#background" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="official-reference">
+<h3>Official Reference<a class="headerlink" href="#official-reference" title="Permalink to this headline">¶</a></h3>
 <p>Exceptions are tightly coupled with the CPU’s design.
 We only briefly introduce the components needed in this lab.
 If you want to know the details, please refer to ARM’s official
 <a class="reference external" href="https://developer.arm.com/documentation/102412/0100">introduction</a>
 and
 <a class="reference external" href="https://developer.arm.com/documentation/ddi0487/aa/?lang=en">manual</a>’s Chapter D1(page 1496)</p>
-</section>
-<section id="exception-levels">
-<h3>Exception Levels<a class="headerlink" href="#exception-levels" title="Permalink to this headline">#</a></h3>
+</div>
+<div class="section" id="exception-levels">
+<h3>Exception Levels<a class="headerlink" href="#exception-levels" title="Permalink to this headline">¶</a></h3>
 <p><a class="reference external" href="https://en.wikipedia.org/wiki/Principle_of_least_privilege">Principle of least privilege</a>
 limits the resource that a program can access.
 The limitation reduces possible errors during execution and the attack surface,
@@ -745,9 +476,9 @@ so an operating system can run diverse user applications without crashing the en
 In general, all user programs are run in EL0, and operating systems are run in EL1.
 The operating system can decrease the exception level and jump to the user program by setting the system registers and executing an exception return instruction.
 When an exception is taken during a user program’s execution, the exception level is increased, and the CPU will jump to the exception handler.</p>
-</section>
-<section id="exception-handling">
-<h3>Exception Handling<a class="headerlink" href="#exception-handling" title="Permalink to this headline">#</a></h3>
+</div>
+<div class="section" id="exception-handling">
+<h3>Exception Handling<a class="headerlink" href="#exception-handling" title="Permalink to this headline">¶</a></h3>
 <p>When a CPU takes an exception, it does the following things.</p>
 <ul class="simple">
 <li><p>Save the current processor’s state(PSTATE) in SPSR_ELx. (x is the target Exception level)</p></li>
@@ -763,8 +494,8 @@ Then the CPU,</p>
 <li><p>Restore PSTATE from SPSR_ELx.</p></li>
 <li><p>Switch to the corresponding Exception level according to SPSR_ELx.</p></li>
 </ul>
-<section id="vector-table">
-<h4>Vector Table<a class="headerlink" href="#vector-table" title="Permalink to this headline">#</a></h4>
+<div class="section" id="vector-table">
+<h4>Vector Table<a class="headerlink" href="#vector-table" title="Permalink to this headline">¶</a></h4>
 <p>As mentioned above, the CPU starts its execution at the corresponding vector address.
 The address is defined as the following vector table, and the base address of the table is saved in VBAR_ELx.</p>
 <img alt="../_images/vector_table.jpg" src="../_images/vector_table.jpg" />
@@ -781,10 +512,10 @@ Therefore, it corresponds to the table’s</p>
 <blockquote>
 <div><p>Exception from a lower EL and at least one lower EL is AARCH64.</p>
 </div></blockquote>
-</section>
-</section>
-<section id="interrupts">
-<h3>Interrupts<a class="headerlink" href="#interrupts" title="Permalink to this headline">#</a></h3>
+</div>
+</div>
+<div class="section" id="interrupts">
+<h3>Interrupts<a class="headerlink" href="#interrupts" title="Permalink to this headline">¶</a></h3>
 <p>Besides computing, the CPU also needs to control I/O devices.
 I/O devices are not always ready.
 Hence, the CPU needs to check the device’s status and readiness before processing an I/O device’s data.</p>
@@ -796,8 +527,8 @@ It may lead to the I/O device’s underutilization or data loss.</p>
 Then, the CPU can do the device’s handler to process the data immediately.
 Besides, interrupt forces the current running process relinquishes the CPU’s control.
 Therefore, any process can’t run with indefinite time.</p>
-<section id="interrupt-controllers">
-<h4>Interrupt Controllers<a class="headerlink" href="#interrupt-controllers" title="Permalink to this headline">#</a></h4>
+<div class="section" id="interrupt-controllers">
+<h4>Interrupt Controllers<a class="headerlink" href="#interrupt-controllers" title="Permalink to this headline">¶</a></h4>
 <p>Rpi3 has two levels of interrupt controllers.
 The first level controller routes interrupt to each CPU core, so each CPU core can have its timer interrupt and send interrupt processor Interrupts between each other.
 The details could be found in</p>
@@ -805,9 +536,9 @@ The details could be found in</p>
 <p>The second level controller routes interrupt from peripherals such as UART and system timer, they are aggregated and sent to the first level interrupt controller as GPU IRQ.
 The details could be found in</p>
 <p><a class="reference external" href="https://cs140e.sergio.bz/docs/BCM2837-ARM-Peripherals.pdf">https://cs140e.sergio.bz/docs/BCM2837-ARM-Peripherals.pdf</a> (page 109)</p>
-</section>
-<section id="critical-sections">
-<h4>Critical Sections<a class="headerlink" href="#critical-sections" title="Permalink to this headline">#</a></h4>
+</div>
+<div class="section" id="critical-sections">
+<h4>Critical Sections<a class="headerlink" href="#critical-sections" title="Permalink to this headline">¶</a></h4>
 <p>A critical section is a code segment that can’t be executed concurrently.
 When interrupts are enabled, the CPU can be interrupted when it’s accessing some shared data.
 If the interrupt handler also accesses the data, the data may be corrupted.
@@ -820,17 +551,17 @@ Hence, you should either</p>
 <li><p>disable the CPU’s interrupt temporarily in critical sections to prevent concurrent access in the interrupt handlers.</p></li>
 <li><p>limit interrupt handlers from calling part of the APIs that access the shared data.</p></li>
 </ul>
-</section>
-</section>
-</section>
-<section id="basic-exercises">
-<h2>Basic Exercises<a class="headerlink" href="#basic-exercises" title="Permalink to this headline">#</a></h2>
-<section id="basic-exercise-1-exception-30">
-<h3>Basic Exercise 1 - Exception  - 30%<a class="headerlink" href="#basic-exercise-1-exception-30" title="Permalink to this headline">#</a></h3>
-<section id="exception-level-switch">
-<h4>Exception Level Switch<a class="headerlink" href="#exception-level-switch" title="Permalink to this headline">#</a></h4>
-<section id="el2-to-el1">
-<h5>EL2 to EL1<a class="headerlink" href="#el2-to-el1" title="Permalink to this headline">#</a></h5>
+</div>
+</div>
+</div>
+<div class="section" id="basic-exercises">
+<h2>Basic Exercises<a class="headerlink" href="#basic-exercises" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="basic-exercise-1-exception-30">
+<h3>Basic Exercise 1 - Exception  - 30%<a class="headerlink" href="#basic-exercise-1-exception-30" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="exception-level-switch">
+<h4>Exception Level Switch<a class="headerlink" href="#exception-level-switch" title="Permalink to this headline">¶</a></h4>
+<div class="section" id="el2-to-el1">
+<h5>EL2 to EL1<a class="headerlink" href="#el2-to-el1" title="Permalink to this headline">¶</a></h5>
 <p>Rpi3’s CPU runs in EL2 after being booted by default, but we want the kernel to run in EL1.
 Hence, your kernel needs to switch to EL1 at the beginning.</p>
 <p>You can use the following code to switch from EL2 to EL1.
@@ -853,9 +584,9 @@ Then it sets <code class="docutils literal notranslate"><span class="pre">spsr_e
 <p class="admonition-title">Todo</p>
 <p>Switch from EL2 to EL1 .</p>
 </div>
-</section>
-<section id="el1-to-el0">
-<h5>EL1 to EL0<a class="headerlink" href="#el1-to-el0" title="Permalink to this headline">#</a></h5>
+</div>
+<div class="section" id="el1-to-el0">
+<h5>EL1 to EL0<a class="headerlink" href="#el1-to-el0" title="Permalink to this headline">¶</a></h5>
 <p>After the kernel is initialized, it can load user programs and execute them in EL0 by <code class="docutils literal notranslate"><span class="pre">eret</span></code>.
 You need to prepare a function as a user program and add a command to your shell that can</p>
 <ol class="arabic simple">
@@ -871,9 +602,9 @@ You need to prepare a function as a user program and add a command to your shell
 <p class="admonition-title">Hint</p>
 <p>You can use QEMU and GDB to check if you do it correctly.</p>
 </div>
-</section>
-<section id="el0-to-el1">
-<h5>EL0 to EL1<a class="headerlink" href="#el0-to-el1" title="Permalink to this headline">#</a></h5>
+</div>
+<div class="section" id="el0-to-el1">
+<h5>EL0 to EL1<a class="headerlink" href="#el0-to-el1" title="Permalink to this headline">¶</a></h5>
 <p>The user program can go back to EL1 by taking an exception.
 But you need to set up the exception vector table first.
 You can use the following vector table and set <code class="docutils literal notranslate"><span class="pre">vbar_el1</span></code> to its address.</p>
@@ -927,10 +658,10 @@ You can use the following vector table and set <code class="docutils literal not
 <p class="admonition-title">Important</p>
 <p>The vector table’s base address should be aligned to 0x800</p>
 </div>
-</section>
-</section>
-<section id="id2">
-<h4>Exception Handling<a class="headerlink" href="#id2" title="Permalink to this headline">#</a></h4>
+</div>
+</div>
+<div class="section" id="id2">
+<h4>Exception Handling<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h4>
 <p>After setting the vector table, load the following user program.
 The user program takes an exception by the <code class="docutils literal notranslate"><span class="pre">svc</span></code> instruction which is used for system calls.</p>
 <p>The design of system calls is left to the next lab.
@@ -952,8 +683,8 @@ Now, your kernel only needs to print the content of <code class="docutils litera
 <p class="admonition-title">Todo</p>
 <p>Set the vector table and implement the exception handler.</p>
 </div>
-<section id="context-saving">
-<h5>Context saving<a class="headerlink" href="#context-saving" title="Permalink to this headline">#</a></h5>
+<div class="section" id="context-saving">
+<h5>Context saving<a class="headerlink" href="#context-saving" title="Permalink to this headline">¶</a></h5>
 <p>You may find that the above user program behaves unexpectedly.
 That’s because the user program and the exception handler share the same general purpose registers bank.
 You need to save them before entering the kernel’s function.
@@ -1012,13 +743,13 @@ Otherwise, it may be corrupted.</p>
 <p class="admonition-title">Todo</p>
 <p>Save the user program’s context before executing the exception handler.</p>
 </div>
-</section>
-</section>
-</section>
-<section id="basic-exercise-2-interrupt-10">
-<h3>Basic Exercise 2 - Interrupt - 10%<a class="headerlink" href="#basic-exercise-2-interrupt-10" title="Permalink to this headline">#</a></h3>
-<section id="core-timer-interrupt">
-<h4>Core Timer Interrupt<a class="headerlink" href="#core-timer-interrupt" title="Permalink to this headline">#</a></h4>
+</div>
+</div>
+</div>
+<div class="section" id="basic-exercise-2-interrupt-10">
+<h3>Basic Exercise 2 - Interrupt - 10%<a class="headerlink" href="#basic-exercise-2-interrupt-10" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="core-timer-interrupt">
+<h4>Core Timer Interrupt<a class="headerlink" href="#core-timer-interrupt" title="Permalink to this headline">¶</a></h4>
 <p>Rpi3’s each CPU core has its core timer.
 It can be configured by the following system registers.</p>
 <blockquote>
@@ -1061,25 +792,25 @@ You can do it by setting <code class="docutils literal notranslate"><span class=
 <p class="admonition-title">Hint</p>
 <p>You can get the seconds after booting from the count of the timer(<code class="docutils literal notranslate"><span class="pre">cntpct_el0</span></code>) and the frequency of the timer(<code class="docutils literal notranslate"><span class="pre">cntfrq_el0</span></code>).</p>
 </div>
-</section>
-</section>
-<section id="basic-exercise-3-rpi3-s-peripheral-interrupt-30">
-<h3>Basic Exercise 3 - Rpi3’s Peripheral Interrupt - 30%<a class="headerlink" href="#basic-exercise-3-rpi3-s-peripheral-interrupt-30" title="Permalink to this headline">#</a></h3>
+</div>
+</div>
+<div class="section" id="basic-exercise-3-rpi3-s-peripheral-interrupt-30">
+<h3>Basic Exercise 3 - Rpi3’s Peripheral Interrupt - 30%<a class="headerlink" href="#basic-exercise-3-rpi3-s-peripheral-interrupt-30" title="Permalink to this headline">¶</a></h3>
 <p>In this advanced part, you need to implement rpi3’s mini UART’s interrupt handling.
 Then, you don’t have to busy-polling the UART device.</p>
-<section id="enable-mini-uart-s-interrupt">
-<h4>Enable mini UART’s Interrupt.<a class="headerlink" href="#enable-mini-uart-s-interrupt" title="Permalink to this headline">#</a></h4>
+<div class="section" id="enable-mini-uart-s-interrupt">
+<h4>Enable mini UART’s Interrupt.<a class="headerlink" href="#enable-mini-uart-s-interrupt" title="Permalink to this headline">¶</a></h4>
 <p>To enable mini UART’s interrupt,
 you need to set <code class="docutils literal notranslate"><span class="pre">AUX_MU_IER_REG(0x3f215044)</span></code> and the second level interrupt controller’s <code class="docutils literal notranslate"><span class="pre">Enable</span> <span class="pre">IRQs1(0x3f00b210)</span></code>’s  bit29.</p>
-</section>
-<section id="determine-the-interrupt-source">
-<h4>Determine the Interrupt Source<a class="headerlink" href="#determine-the-interrupt-source" title="Permalink to this headline">#</a></h4>
+</div>
+<div class="section" id="determine-the-interrupt-source">
+<h4>Determine the Interrupt Source<a class="headerlink" href="#determine-the-interrupt-source" title="Permalink to this headline">¶</a></h4>
 <p>When the UART’s interrupt is enabled, there is more than one interrupt source to the CPU.
 Hence, your kernel needs to check the source of the interrupt before executing the corresponding interrupt handler.
 Please refer to both interrupt controllers’ manuals to determine the interrupt source.</p>
-</section>
-<section id="asynchronous-read-and-write">
-<h4>Asynchronous Read and Write<a class="headerlink" href="#asynchronous-read-and-write" title="Permalink to this headline">#</a></h4>
+</div>
+<div class="section" id="asynchronous-read-and-write">
+<h4>Asynchronous Read and Write<a class="headerlink" href="#asynchronous-read-and-write" title="Permalink to this headline">¶</a></h4>
 <p>In previous labs, your shell blocks the execution by busy polling the UART when it needs to read or write.
 Now, you can create a read buffer and a write buffer.
 Your shell writes bytes to the write buffer when it prints a message.
@@ -1094,11 +825,11 @@ The shell reads the bytes array from the buffer and gets the number of bytes it 
 <p class="admonition-title">Note</p>
 <p>You don’t have to replace all print functions with the asynchronous version.</p>
 </div>
-</section>
-</section>
-</section>
-<section id="advanced-exercises">
-<h2>Advanced Exercises<a class="headerlink" href="#advanced-exercises" title="Permalink to this headline">#</a></h2>
+</div>
+</div>
+</div>
+<div class="section" id="advanced-exercises">
+<h2>Advanced Exercises<a class="headerlink" href="#advanced-exercises" title="Permalink to this headline">¶</a></h2>
 <p>In the advanced part, it’s required to enable interrupts in EL1.
 You can only disable interrupts to protect the critical sections.
 You can use the following code to enable/disable interrupts.</p>
@@ -1112,8 +843,8 @@ You can use the following code to enable/disable interrupts.</p>
 <p class="admonition-title">Important</p>
 <p>This part is the <strong>dependency</strong> of the following advanced parts, but it doesn’t count in your score.</p>
 </div>
-<section id="advanced-exercise-1-timer-multiplexing-20">
-<h3>Advanced Exercise 1 - Timer Multiplexing - 20%<a class="headerlink" href="#advanced-exercise-1-timer-multiplexing-20" title="Permalink to this headline">#</a></h3>
+<div class="section" id="advanced-exercise-1-timer-multiplexing-20">
+<h3>Advanced Exercise 1 - Timer Multiplexing - 20%<a class="headerlink" href="#advanced-exercise-1-timer-multiplexing-20" title="Permalink to this headline">¶</a></h3>
 <p>Timers can be used to do periodic jobs such as scheduling and journaling and one-shot executing such as sleeping and timeout.
 However, the number of hardware timers is limited.
 Therefore, the kernel needs a software mechanism to multiplex the timer.</p>
@@ -1155,9 +886,9 @@ The printing order is determined by the command executed time and the user-speci
 <p class="admonition-title">Hint</p>
 <p>You can implement this exercise with exception to modify privileged registers or just run your program in EL1.</p>
 </div>
-</section>
-<section id="advanced-exercise-2-concurrent-i-o-devices-handling-20">
-<h3>Advanced Exercise 2 - Concurrent I/O Devices Handling 20%<a class="headerlink" href="#advanced-exercise-2-concurrent-i-o-devices-handling-20" title="Permalink to this headline">#</a></h3>
+</div>
+<div class="section" id="advanced-exercise-2-concurrent-i-o-devices-handling-20">
+<h3>Advanced Exercise 2 - Concurrent I/O Devices Handling 20%<a class="headerlink" href="#advanced-exercise-2-concurrent-i-o-devices-handling-20" title="Permalink to this headline">¶</a></h3>
 <p>The kernel needs to handle a lot of I/O devices at the same time.
 For devices(e.g. UART) that have a short period of process time,
 the kernel can finish their handlers immediately right after they’re ready.
@@ -1166,8 +897,8 @@ the kernel needs to schedule the execution order.</p>
 <p>Usually, we want to use the first come first serve principle to prevent starvation.
 However, we may also want prioritized execution for some critical handlers.
 In this part, you need to know how to implement it using a single thread(i.e. a single stack).</p>
-<section id="decouple-the-interrupt-handlers">
-<h4>Decouple the Interrupt Handlers<a class="headerlink" href="#decouple-the-interrupt-handlers" title="Permalink to this headline">#</a></h4>
+<div class="section" id="decouple-the-interrupt-handlers">
+<h4>Decouple the Interrupt Handlers<a class="headerlink" href="#decouple-the-interrupt-handlers" title="Permalink to this headline">¶</a></h4>
 <p>A simpler way to implement an interrupt handler is processing all the device’s data one at a time with interrupts disabled.
 However, a less critical interrupt handler can block a more critical one for a long time.
 Hence, we want to decouple the interrupt handler and the actual processing.</p>
@@ -1186,9 +917,9 @@ Also, the kernel can execute the task in any order such as FIFO or LIFO.</p>
 <p class="admonition-title">Todo</p>
 <p>Implement a task queue mechanism, so interrupt handlers can add their processing tasks to it.</p>
 </div>
-</section>
-<section id="nested-interrupt">
-<h4>Nested Interrupt<a class="headerlink" href="#nested-interrupt" title="Permalink to this headline">#</a></h4>
+</div>
+<div class="section" id="nested-interrupt">
+<h4>Nested Interrupt<a class="headerlink" href="#nested-interrupt" title="Permalink to this headline">¶</a></h4>
 <p>The tasks in the queue can be executed at any time, but we want them to be executed as soon as possible.
 It’s because that a high-priority process may be waiting for the data.</p>
 <p>Therefore, before the interrupt handler return to the user program,
@@ -1199,9 +930,9 @@ Hence, besides general-purpose registers, you should also save <code class="docu
 <p class="admonition-title">Todo</p>
 <p>Execute the tasks in the queue before returning to the user program with interrupts enabled.</p>
 </div>
-</section>
-<section id="preemption">
-<h4>Preemption<a class="headerlink" href="#preemption" title="Permalink to this headline">#</a></h4>
+</div>
+<div class="section" id="preemption">
+<h4>Preemption<a class="headerlink" href="#preemption" title="Permalink to this headline">¶</a></h4>
 <p>Now, any interrupt handler can preempt the task’s execution, but the newly enqueued task still needs to wait for
 the currently running task’s completion.
 It’d be better if the newly enqueued task with a higher priority can preempt the currently running task.</p>
@@ -1212,56 +943,42 @@ If there are higher priority tasks, execute the highest priority task.</p>
 <p class="admonition-title">Todo</p>
 <p>Implement the task queue’s preemption mechanism.</p>
 </div>
-</section>
-</section>
-</section>
-</section>
+</div>
+</div>
+</div>
+</div>
 
 
               </div>
               
-            </main>
-            <footer class="footer-article noprint">
-                
-    <!-- Previous / next buttons -->
-<div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="lab2.html" title="previous page">
-        <i class="fas fa-angle-left"></i>
-        <div class="prev-next-info">
-            <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Lab 2: Booting</p>
+        
+        <div class='prev-next-bottom'>
+            
+    <a class='left-prev' id="prev-link" href="lab2.html" title="previous page">Lab 2: Booting</a>
+    <a class='right-next' id="next-link" href="lab4.html" title="next page">Lab 4: Allocator</a>
+
         </div>
-    </a>
-    <a class='right-next' id="next-link" href="lab4.html" title="next page">
-    <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Lab 4: Allocator</p>
-    </div>
-    <i class="fas fa-angle-right"></i>
-    </a>
-</div>
-            </footer>
+        
         </div>
     </div>
-    <div class="footer-content row">
-        <footer class="col footer"><p>
-  
-    By Jim, Muller<br/>
-  
-      &copy; Copyright 2021, Jim, Muller.<br/>
-</p>
-        </footer>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Jim, Muller<br/>
+        
+            &copy; Copyright 2021, Jim, Muller.<br/>
+      </p>
     </div>
-    
-</div>
+  </footer>
+</main>
 
 
       </div>
     </div>
   
-  <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+  <script src="../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
 
-
+  
   </body>
 </html>

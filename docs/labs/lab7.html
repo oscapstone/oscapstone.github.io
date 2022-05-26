@@ -530,7 +530,7 @@ to re-design or modify the code.</p>
 <li><p>There’s no constraint on the design of VFS api, as long as there are no hard coded method for any file system (VFS is an generalize interface).</p></li>
 <li><p>The following steps are just recommendations, you don’t have to follow them.</p></li>
 <li><p>For tmpfs, you can assume that component name won’t excced 15 characters, and at most 16 entries for a directory. and at most 4096 bytes for a file.</p></li>
-<li><p>For VFS the max pathanme length is 256.</p></li>
+<li><p>For VFS the max pathanme length is 255.</p></li>
 <li><p>No need to support remove, rmdir, unlink …</p></li>
 <li><p>For file descriptor, max open fd is 16, so fd &lt; 16 if your fd number is reusable.</p></li>
 </ol>
@@ -979,7 +979,12 @@ info), which are also VFS api using underlying method.</p>
 </div>
 <div class="section" id="test">
 <h3>Test<a class="headerlink" href="#test" title="Permalink to this headline">¶</a></h3>
-<p><a class="reference download internal" download="" href="../_downloads/3cb3bdb8f851d1cf29ac6f4f5d585981/vfs1.img"><code class="xref download docutils literal notranslate"><span class="pre">user</span> <span class="pre">program</span></code></a></p>
+<p>put this <a class="reference download internal" download="" href="../_downloads/3cb3bdb8f851d1cf29ac6f4f5d585981/vfs1.img"><code class="xref download docutils literal notranslate"><span class="pre">user</span> <span class="pre">program</span></code></a> in initramfs.cpio</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="c1">// note that your exec should be using VFS api</span>
+<span class="n">exec</span><span class="p">(</span><span class="s">&quot;/initramfs/vfs1.img&quot;</span><span class="p">)</span><span class="w"></span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">fork</span></code> will validate framebuffer, and <code class="docutils literal notranslate"><span class="pre">vfs</span></code> will validate the rest</p>
 </div>
 </div>
 </div>

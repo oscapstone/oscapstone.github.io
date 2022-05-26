@@ -90,7 +90,7 @@ to re-design or modify the code.
   1. There's no constraint on the design of VFS api, as long as there are no hard coded method for any file system (VFS is an generalize interface).
   2. The following steps are just recommendations, you don't have to follow them.
   3. For tmpfs, you can assume that component name won't excced 15 characters, and at most 16 entries for a directory. and at most 4096 bytes for a file.
-  4. For VFS the max pathanme length is 256.
+  4. For VFS the max pathanme length is 255.
   5. No need to support remove, rmdir, unlink ...
   6. For file descriptor, max open fd is 16, so fd < 16 if your fd number is reusable. 
 
@@ -590,5 +590,13 @@ The following code is for mailbox initialize used in previous lab.
 Test
 ====
 
-:download:`user program <vfs1.img>`
+put this :download:`user program <vfs1.img>` in initramfs.cpio 
+
+.. code:: c
+  
+  // note that your exec should be using VFS api
+  exec("/initramfs/vfs1.img")
+
+``fork`` will validate framebuffer, and ``vfs`` will validate the rest 
+
 

@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Staff &#8212; IOC5213: Operating System Capstone</title>
+    <title>Lab 8: Non-volatile Storage &#8212; IOC5213: Operating System Capstone</title>
     
   <link href="../_static/css/theme.css" rel="stylesheet" />
   <link href="../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
@@ -34,8 +34,8 @@
     <script src="../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Overview" href="../labs/overview.html" />
-    <link rel="prev" title="Schedule" href="schedule.html" />
+    <link rel="next" title="Hardware" href="hardware/index.html" />
+    <link rel="prev" title="Lab 7: Virtual File System" href="lab7.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
     
@@ -68,14 +68,14 @@
   Class:
  </span>
 </p>
-<ul class="current nav bd-sidenav">
+<ul class="nav bd-sidenav">
  <li class="toctree-l1">
-  <a class="reference internal" href="schedule.html">
+  <a class="reference internal" href="../class/schedule.html">
    Schedule
   </a>
  </li>
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../class/staff.html">
    Staff
   </a>
  </li>
@@ -85,59 +85,59 @@
   Labs:
  </span>
 </p>
-<ul class="nav bd-sidenav">
+<ul class="current nav bd-sidenav">
  <li class="toctree-l1">
-  <a class="reference internal" href="../labs/overview.html">
+  <a class="reference internal" href="overview.html">
    Overview
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../labs/lab0.html">
+  <a class="reference internal" href="lab0.html">
    Lab 0: Environment Setup
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../labs/lab1.html">
+  <a class="reference internal" href="lab1.html">
    Lab 1: Hello World
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../labs/lab2.html">
+  <a class="reference internal" href="lab2.html">
    Lab 2: Booting
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../labs/lab3.html">
+  <a class="reference internal" href="lab3.html">
    Lab 3: Exception and Interrupt
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../labs/lab4.html">
+  <a class="reference internal" href="lab4.html">
    Lab 4: Allocator
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../labs/lab5.html">
+  <a class="reference internal" href="lab5.html">
    Lab 5: Thread and User Process
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../labs/lab6.html">
+  <a class="reference internal" href="lab6.html">
    Lab 6: Virtual Memory
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../labs/lab7.html">
+  <a class="reference internal" href="lab7.html">
    Lab 7: Virtual File System
   </a>
  </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../labs/lab8.html">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
    Lab 8: Non-volatile Storage
   </a>
  </li>
  <li class="toctree-l1 has-children">
-  <a class="reference internal" href="../labs/hardware/index.html">
+  <a class="reference internal" href="hardware/index.html">
    Hardware
   </a>
   <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
@@ -147,17 +147,17 @@
   </label>
   <ul>
    <li class="toctree-l2">
-    <a class="reference internal" href="../labs/hardware/asm.html">
+    <a class="reference internal" href="hardware/asm.html">
      The Assembly You Need
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../labs/hardware/mailbox.html">
+    <a class="reference internal" href="hardware/mailbox.html">
      Mailbox
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../labs/hardware/uart.html">
+    <a class="reference internal" href="hardware/uart.html">
      UART
     </a>
    </li>
@@ -221,7 +221,7 @@
         <!-- ipynb file if we had a myst markdown file -->
         
         <!-- Download raw file -->
-        <a class="dropdown-buttons" href="../_sources/class/staff.rst.txt"><button type="button"
+        <a class="dropdown-buttons" href="../_sources/labs/lab8.rst.txt"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
                 data-placement="left">.rst</button></a>
         <!-- Download PDF via print -->
@@ -246,24 +246,6 @@
         <!-- Table of contents -->
         <div class="d-none d-md-block col-md-2 bd-toc show">
             
-            <div class="tocsection onthispage pt-5 pb-3">
-                <i class="fas fa-list"></i> Contents
-            </div>
-            <nav id="bd-toc-nav">
-                <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#instructor">
-   Instructor
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#teaching-assistants">
-   Teaching assistants
-  </a>
- </li>
-</ul>
-
-            </nav>
         </div>
     </div>
 </div>
@@ -272,39 +254,8 @@
         
               <div>
                 
-  <div class="section" id="staff">
-<h1>Staff<a class="headerlink" href="#staff" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="instructor">
-<h2>Instructor<a class="headerlink" href="#instructor" title="Permalink to this headline">¶</a></h2>
-<p><strong>Tsung Tai Yeh</strong></p>
-<ul class="simple">
-<li><p>Email: ttyeh [at] cs.nctu</p></li>
-<li><p>Location: EC707</p></li>
-</ul>
-</div>
-<div class="section" id="teaching-assistants">
-<h2>Teaching assistants<a class="headerlink" href="#teaching-assistants" title="Permalink to this headline">¶</a></h2>
-<p><strong>Mu-Le Lee</strong></p>
-<ul class="simple">
-<li><p>Email: mllee [at] cs.nctu</p></li>
-<li><p>Location: EC120</p></li>
-</ul>
-<p><strong>Chih-Ning Hsi</strong></p>
-<ul class="simple">
-<li><p>Email: leonhsi111 [at] gmail</p></li>
-<li><p>Location: EC120</p></li>
-</ul>
-<p><strong>Kai-Chun Chang</strong></p>
-<ul class="simple">
-<li><p>Email: aa940249tw [at] gmail</p></li>
-<li><p>Location: EC120</p></li>
-</ul>
-<p><strong>Chung Chun Lin</strong></p>
-<ul class="simple">
-<li><p>Email: benjamin.cclin [at] gmail</p></li>
-<li><p>Location: X</p></li>
-</ul>
-</div>
+  <div class="section" id="lab-8-non-volatile-storage">
+<h1>Lab 8: Non-volatile Storage<a class="headerlink" href="#lab-8-non-volatile-storage" title="Permalink to this headline">¶</a></h1>
 </div>
 
 
@@ -313,8 +264,8 @@
         
         <div class='prev-next-bottom'>
             
-    <a class='left-prev' id="prev-link" href="schedule.html" title="previous page">Schedule</a>
-    <a class='right-next' id="next-link" href="../labs/overview.html" title="next page">Overview</a>
+    <a class='left-prev' id="prev-link" href="lab7.html" title="previous page">Lab 7: Virtual File System</a>
+    <a class='right-next' id="next-link" href="hardware/index.html" title="next page">Hardware</a>
 
         </div>
         

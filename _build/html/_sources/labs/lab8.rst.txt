@@ -133,9 +133,9 @@ Mount FAT32
 FAT32 stores its metadata in the first sector of the partition.
 You need to do the following things during mounting.
 
-  1. Parse the metadata on the SD card.
-  2. Create a kernel object to store the metadata in memory.
-  3. Get the root directory cluster number and create it's root directory object.
+1. Parse the metadata on the SD card.
+2. Create a kernel object to store the metadata in memory.
+3. Get the root directory cluster number and create it's root directory object.
 
 Basic Exercise 1 - Open and Read - 40%
 ========================================
@@ -147,9 +147,9 @@ Lookup and Open
 
 To look up files in FAT32 directory.
 
-  1. Get the cluster number of the directory and calculate its block index.
-  2. Read the first block of the cluster.
-  3. Traverse the directory entries to find the file.
+1. Get the cluster number of the directory and calculate its block index.
+2. Read the first block of the cluster.
+3. Traverse the directory entries to find the file.
 
 You can get the first cluster number of the file in the directory entry.
 
@@ -168,9 +168,9 @@ Create
 
 To create a new file in FAT32
 
-  1. Find an empty entry in the FAT table.
-  2. Find an empty directory entry in the target directory.
-  3. Set them to proper values.
+1. Find an empty entry in the FAT table.
+2. Find an empty directory entry in the target directory.
+3. Set them to proper values.
 
 Write
 ------
@@ -207,10 +207,10 @@ Directory Entry
 VFS can reduce the time spend on reading directory block and parsing directory entry by a component name cache mechanism. 
 A component name cache mechanism can be implemented as:
 
-  1. Look up the component name cache of the directory first.
-  2. If successfully finds the vnode, return to the vnode. Otherwise, call the lookup method of the underlying file system.
-  3. The underlying file system looks up from external storage.
-  4. If it successfully finds the file, it creates a vnode for the file and put it into the component name cache.
+1. Look up the component name cache of the directory first.
+2. If successfully finds the vnode, return to the vnode. Otherwise, call the lookup method of the underlying file system.
+3. The underlying file system looks up from external storage.
+4. If it successfully finds the file, it creates a vnode for the file and put it into the component name cache.
 
 
 File Content
@@ -218,9 +218,9 @@ File Content
 
 A VFS can cache file content in memory by page frames. A page cache mechanism can be implemented as:
 
-  1. Check the existence of the file's page frames when read or write a file.
-  2. If the page frames don't exist, allocate page frames for the file.
-  3. The underlying file system populates the page frames with the file's content in external storage if necessary.
+1. Check the existence of the file's page frames when read or write a file.
+2. If the page frames don't exist, allocate page frames for the file.
+3. The underlying file system populates the page frames with the file's content in external storage if necessary.
 
 Read or write the page frames of the file.
 

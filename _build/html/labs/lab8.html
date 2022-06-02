@@ -526,13 +526,11 @@ You can parse it to get each partition’s type, size, and block index.</p>
 <h3>Mount FAT32<a class="headerlink" href="#mount-fat32" title="Permalink to this headline">¶</a></h3>
 <p>FAT32 stores its metadata in the first sector of the partition.
 You need to do the following things during mounting.</p>
-<blockquote>
-<div><ol class="arabic simple">
+<ol class="arabic simple">
 <li><p>Parse the metadata on the SD card.</p></li>
 <li><p>Create a kernel object to store the metadata in memory.</p></li>
 <li><p>Get the root directory cluster number and create it’s root directory object.</p></li>
 </ol>
-</div></blockquote>
 </div>
 <div class="section" id="basic-exercise-1-open-and-read-40">
 <h3>Basic Exercise 1 - Open and Read - 40%<a class="headerlink" href="#basic-exercise-1-open-and-read-40" title="Permalink to this headline">¶</a></h3>
@@ -540,13 +538,11 @@ You need to do the following things during mounting.</p>
 <div class="section" id="lookup-and-open">
 <h4>Lookup and Open<a class="headerlink" href="#lookup-and-open" title="Permalink to this headline">¶</a></h4>
 <p>To look up files in FAT32 directory.</p>
-<blockquote>
-<div><ol class="arabic simple">
+<ol class="arabic simple">
 <li><p>Get the cluster number of the directory and calculate its block index.</p></li>
 <li><p>Read the first block of the cluster.</p></li>
 <li><p>Traverse the directory entries to find the file.</p></li>
 </ol>
-</div></blockquote>
 <p>You can get the first cluster number of the file in the directory entry.</p>
 </div>
 <div class="section" id="read">
@@ -560,13 +556,11 @@ You need to do the following things during mounting.</p>
 <div class="section" id="create">
 <h4>Create<a class="headerlink" href="#create" title="Permalink to this headline">¶</a></h4>
 <p>To create a new file in FAT32</p>
-<blockquote>
-<div><ol class="arabic simple">
+<ol class="arabic simple">
 <li><p>Find an empty entry in the FAT table.</p></li>
 <li><p>Find an empty directory entry in the target directory.</p></li>
 <li><p>Set them to proper values.</p></li>
 </ol>
-</div></blockquote>
 </div>
 <div class="section" id="write">
 <h4>Write<a class="headerlink" href="#write" title="Permalink to this headline">¶</a></h4>
@@ -593,25 +587,21 @@ The additional information is the file’s metadata. There is also metadata for 
 <h4>Directory Entry<a class="headerlink" href="#directory-entry" title="Permalink to this headline">¶</a></h4>
 <p>VFS can reduce the time spend on reading directory block and parsing directory entry by a component name cache mechanism.
 A component name cache mechanism can be implemented as:</p>
-<blockquote>
-<div><ol class="arabic simple">
+<ol class="arabic simple">
 <li><p>Look up the component name cache of the directory first.</p></li>
 <li><p>If successfully finds the vnode, return to the vnode. Otherwise, call the lookup method of the underlying file system.</p></li>
 <li><p>The underlying file system looks up from external storage.</p></li>
 <li><p>If it successfully finds the file, it creates a vnode for the file and put it into the component name cache.</p></li>
 </ol>
-</div></blockquote>
 </div>
 <div class="section" id="file-content">
 <h4>File Content<a class="headerlink" href="#file-content" title="Permalink to this headline">¶</a></h4>
 <p>A VFS can cache file content in memory by page frames. A page cache mechanism can be implemented as:</p>
-<blockquote>
-<div><ol class="arabic simple">
+<ol class="arabic simple">
 <li><p>Check the existence of the file’s page frames when read or write a file.</p></li>
 <li><p>If the page frames don’t exist, allocate page frames for the file.</p></li>
 <li><p>The underlying file system populates the page frames with the file’s content in external storage if necessary.</p></li>
 </ol>
-</div></blockquote>
 <p>Read or write the page frames of the file.</p>
 </div>
 <div class="section" id="sync">

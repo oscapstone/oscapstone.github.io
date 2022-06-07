@@ -372,8 +372,8 @@
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#advanced-exercises-memory-cached-sd-card-40">
-     Advanced Exercises - Memory Cached SD Card - 40%
+    <a class="reference internal nav-link" href="#advanced-exercise-1-memory-cached-sd-card-40">
+     Advanced Exercise 1 - Memory Cached SD Card - 40%
     </a>
     <ul class="nav section-nav flex-column">
      <li class="toc-h4 nav-item toc-entry">
@@ -571,8 +571,8 @@ You need to do the following things during mounting.</p>
 <div class="section" id="advanced-exercises">
 <h2>Advanced Exercises<a class="headerlink" href="#advanced-exercises" title="Permalink to this headline">¶</a></h2>
 <p>In this part, you create an cache layer for your SD card.</p>
-<div class="section" id="advanced-exercises-memory-cached-sd-card-40">
-<h3>Advanced Exercises - Memory Cached SD Card - 40%<a class="headerlink" href="#advanced-exercises-memory-cached-sd-card-40" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="advanced-exercise-1-memory-cached-sd-card-40">
+<h3>Advanced Exercise 1 - Memory Cached SD Card - 40%<a class="headerlink" href="#advanced-exercise-1-memory-cached-sd-card-40" title="Permalink to this headline">¶</a></h3>
 <p>Accessing an SD card is much slower than accessing memory.
 Before a CPU shutdown or an SD card ejected, it is not necessary to synchronize the data between memory and SD card.
 Hence, it’s more efficient to preserve the data in memory and use memory as a cache for external storage.</p>
@@ -622,11 +622,34 @@ the synchronize method for writing data back to the external storage.</p>
 Ex. open() -&gt; write() -&gt; close() -&gt; poweroff
 shouldn’t create a file on SD card.</p>
 </div>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>Although normally, filesystem are cached differently for different components (so it’s possible to partial sync).
+But we only test against full synchronization, so it is possible to cache at block level.
+which means, all block read and write goes through cache layer, and dirty blocks are written back to SD card when synced.</p>
+</div>
 </div>
 </div>
 <div class="section" id="test">
 <h3>Test<a class="headerlink" href="#test" title="Permalink to this headline">¶</a></h3>
-<p>TBD</p>
+<p>Put <a class="reference download internal" download="" href="../_downloads/4ee703906d67d0333ef4c215dc060ab3/vfs2.img"><code class="xref download docutils literal notranslate"><span class="pre">vfs2.img</span></code></a> in initramfs.cpio</p>
+<p>Put <a class="reference download internal" download="" href="../_downloads/bea670ac3f7fead6c64c87ad89c0813a/fat_r.txt"><code class="xref download docutils literal notranslate"><span class="pre">fat_r.txt</span></code></a> in your sd card</p>
+<ul class="simple">
+<li><p>Run <code class="docutils literal notranslate"><span class="pre">vfs_r</span></code> for Basic Exercise 1</p></li>
+<li><p>Run <code class="docutils literal notranslate"><span class="pre">vfs_w</span></code> for Basic Exercise 2</p></li>
+<li><p>Run <code class="docutils literal notranslate"><span class="pre">vfs_ws</span></code> for Advanced Exercise 1</p></li>
+</ul>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>you should check your sd card with your computer.
+For <code class="docutils literal notranslate"><span class="pre">vfs_w</span></code> there should be <code class="docutils literal notranslate"><span class="pre">vfs_w.txt</span></code>.
+For <code class="docutils literal notranslate"><span class="pre">vfs_ws</span></code> there should be <code class="docutils literal notranslate"><span class="pre">vfs_ws.txt</span></code>.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If you’ve implement advance exercise 1, run <code class="docutils literal notranslate"><span class="pre">vfs_ws</span></code> before <code class="docutils literal notranslate"><span class="pre">vfs_w</span></code> and then power off.
+There should be <code class="docutils literal notranslate"><span class="pre">vfs_ws.txt</span></code> but not <code class="docutils literal notranslate"><span class="pre">vfs_w.txt</span></code></p>
+</div>
 </div>
 </div>
 </div>

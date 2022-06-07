@@ -183,8 +183,8 @@ Advanced Exercises
 
 In this part, you create an cache layer for your SD card.
 
-Advanced Exercises - Memory Cached SD Card - 40%
-================================================
+Advanced Exercise 1 - Memory Cached SD Card - 40%
+==================================================
 
 Accessing an SD card is much slower than accessing memory. 
 Before a CPU shutdown or an SD card ejected, it is not necessary to synchronize the data between memory and SD card. 
@@ -246,9 +246,34 @@ the synchronize method for writing data back to the external storage.
   Ex. open() -> write() -> close() -> poweroff   
   shouldn't create a file on SD card.
 
+.. hint::
+
+  Although normally, filesystem are cached differently for different components (so it's possible to partial sync).
+  But we only test against full synchronization, so it is possible to cache at block level.
+  which means, all block read and write goes through cache layer, and dirty blocks are written back to SD card when synced.
+
 Test
 ====
 
-TBD
+Put :download:`vfs2.img <vfs2.img>` in initramfs.cpio 
+
+Put :download:`fat_r.txt <rsrc/fat_r.txt>` in your sd card
+
+* Run ``vfs_r`` for Basic Exercise 1
+* Run ``vfs_w`` for Basic Exercise 2
+* Run ``vfs_ws`` for Advanced Exercise 1
+
+.. important::
+
+  you should check your sd card with your computer. 
+  For ``vfs_w`` there should be ``vfs_w.txt``.
+  For ``vfs_ws`` there should be ``vfs_ws.txt``.
+
+.. note::
+
+  If you've implement advance exercise 1, run ``vfs_ws`` before ``vfs_w`` and then power off.
+  There should be ``vfs_ws.txt`` but not ``vfs_w.txt``
+
+
 
 

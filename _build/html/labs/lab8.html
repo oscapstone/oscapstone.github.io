@@ -633,22 +633,27 @@ which means, all block read and write goes through cache layer, and dirty blocks
 <div class="section" id="test">
 <h3>Test<a class="headerlink" href="#test" title="Permalink to this headline">¶</a></h3>
 <p>Put <a class="reference download internal" download="" href="../_downloads/4ee703906d67d0333ef4c215dc060ab3/vfs2.img"><code class="xref download docutils literal notranslate"><span class="pre">vfs2.img</span></code></a> in initramfs.cpio</p>
-<p>Put <a class="reference download internal" download="" href="../_downloads/bea670ac3f7fead6c64c87ad89c0813a/fat_r.txt"><code class="xref download docutils literal notranslate"><span class="pre">fat_r.txt</span></code></a> in your sd card</p>
+<p>Put <a class="reference download internal" download="" href="../_downloads/10fbdc3e04b471849e714edcdcf4ce26/FAT_R.TXT"><code class="xref download docutils literal notranslate"><span class="pre">FAT_R.TXT</span></code></a> in your sd card</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>normally for case insensitive file system, the file system driver does case insensitive lookup.
+But for your convenience, all filenames we use in FAT32 are upper case.</p>
+</div>
 <ul class="simple">
-<li><p>Run <code class="docutils literal notranslate"><span class="pre">vfs_r</span></code> for Basic Exercise 1</p></li>
-<li><p>Run <code class="docutils literal notranslate"><span class="pre">vfs_w</span></code> for Basic Exercise 2</p></li>
-<li><p>Run <code class="docutils literal notranslate"><span class="pre">vfs_ws</span></code> for Advanced Exercise 1</p></li>
+<li><p>Run <code class="docutils literal notranslate"><span class="pre">fat_r</span></code> for Basic Exercise 1</p></li>
+<li><p>Run <code class="docutils literal notranslate"><span class="pre">fat_w</span></code> for Basic Exercise 2</p></li>
+<li><p>Run <code class="docutils literal notranslate"><span class="pre">fat_ws</span></code> for Advanced Exercise 1</p></li>
 </ul>
 <div class="admonition important">
 <p class="admonition-title">Important</p>
 <p>you should check your sd card with your computer.
-For <code class="docutils literal notranslate"><span class="pre">vfs_w</span></code> there should be <code class="docutils literal notranslate"><span class="pre">vfs_w.txt</span></code>.
-For <code class="docutils literal notranslate"><span class="pre">vfs_ws</span></code> there should be <code class="docutils literal notranslate"><span class="pre">vfs_ws.txt</span></code>.</p>
+For <code class="docutils literal notranslate"><span class="pre">fat_w</span></code> there should be <code class="docutils literal notranslate"><span class="pre">FAT_W.TXT</span></code>.
+For <code class="docutils literal notranslate"><span class="pre">fat_ws</span></code> there should be <code class="docutils literal notranslate"><span class="pre">FAT_WS.TXT</span></code>.</p>
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>If you’ve implement advance exercise 1, run <code class="docutils literal notranslate"><span class="pre">vfs_ws</span></code> before <code class="docutils literal notranslate"><span class="pre">vfs_w</span></code> and then power off.
-There should be <code class="docutils literal notranslate"><span class="pre">vfs_ws.txt</span></code> but not <code class="docutils literal notranslate"><span class="pre">vfs_w.txt</span></code></p>
+<p>If you’ve implement advance exercise 1, run <code class="docutils literal notranslate"><span class="pre">fat_ws</span></code> before <code class="docutils literal notranslate"><span class="pre">fat_w</span></code> and then power off.
+There should be <code class="docutils literal notranslate"><span class="pre">FAT_WS.TXT</span></code> but not <code class="docutils literal notranslate"><span class="pre">FAT_W.TXT</span></code></p>
 </div>
 </div>
 </div>

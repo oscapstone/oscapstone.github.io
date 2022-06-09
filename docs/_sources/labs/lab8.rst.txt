@@ -257,22 +257,27 @@ Test
 
 Put :download:`vfs2.img <vfs2.img>` in initramfs.cpio 
 
-Put :download:`fat_r.txt <rsrc/fat_r.txt>` in your sd card
+Put :download:`FAT_R.TXT <rsrc/FAT_R.TXT>` in your sd card
 
-* Run ``vfs_r`` for Basic Exercise 1
-* Run ``vfs_w`` for Basic Exercise 2
-* Run ``vfs_ws`` for Advanced Exercise 1
+.. note::
+
+  normally for case insensitive file system, the file system driver does case insensitive lookup.
+  But for your convenience, all filenames we use in FAT32 are upper case.
+
+* Run ``fat_r`` for Basic Exercise 1
+* Run ``fat_w`` for Basic Exercise 2
+* Run ``fat_ws`` for Advanced Exercise 1
 
 .. important::
 
   you should check your sd card with your computer. 
-  For ``vfs_w`` there should be ``vfs_w.txt``.
-  For ``vfs_ws`` there should be ``vfs_ws.txt``.
+  For ``fat_w`` there should be ``FAT_W.TXT``.
+  For ``fat_ws`` there should be ``FAT_WS.TXT``.
 
 .. note::
 
-  If you've implement advance exercise 1, run ``vfs_ws`` before ``vfs_w`` and then power off.
-  There should be ``vfs_ws.txt`` but not ``vfs_w.txt``
+  If you've implement advance exercise 1, run ``fat_ws`` before ``fat_w`` and then power off.
+  There should be ``FAT_WS.TXT`` but not ``FAT_W.TXT``
 
 
 

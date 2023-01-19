@@ -1,112 +1,99 @@
 Schedule
 ========
 
-======= ========= ============================= =========== ============== ================ 
- Week    Date      Lecture Topics                Readings    Lab/Project    Lecture Video   
-======= ========= ============================= =========== ============== ================ 
- 1       15-Feb    Course Overview                                                  
+.. table::
+   :widths: auto
+   
+   +------+--------+----------------------------+-------------+-------------+------------------+
+   | Week | Date   | Lecture Topics             | Readings    | Lab/Project | Materials        |
+   +======+========+============================+=============+=============+==================+
+   |      | 14-Feb | OS Introduction            | \           | \           | `Unix System`_   |
+   +  1   +--------+----------------------------+-------------+-------------+------------------+
+   |      | 16-Feb | TA Lab Hours: Lab 0        | \           | \           |                  |
+   +------+--------+----------------------------+-------------+-------------+------------------+
+   |      | 21-Feb | Assembler, Linker, Loader  | \           | \           | `GOT/PLT`_       |
+   +  2   +--------+----------------------------+-------------+-------------+------------------+
+   |      | 23-Feb | TA Lab Hours: Lab 1        | \           | \           |                  |
+   +------+--------+----------------------------+-------------+-------------+------------------+
+   |      | 28-Feb | Holiday                    | \           | \           |                  |
+   +  3   +--------+----------------------------+-------------+-------------+------------------+
+   |      | 2-Mar  | Lab Demo: Lab 0/1          | \           | Lab 0/1 due |                  |
+   +------+--------+----------------------------+-------------+-------------+------------------+
+   |      | 7-Mar  | Boot Loader                | `Paper1`_   | \           | `First Process`_ |
+   +  4   +--------+----------------------------+-------------+-------------+------------------+
+   |      | 9-Mar  | TA Lab Hours: Lab 2        | \           | \           |                  |
+   +------+--------+----------------------------+-------------+-------------+------------------+
+   |      | 14-Mar | Process                    | `Paper2`_   | \           |                  |
+   +  5   +--------+----------------------------+-------------+-------------+------------------+
+   |      | 16-Mar | Lab Demo: Lab 2            | \           | Lab 2 due   |                  |
+   +------+--------+----------------------------+-------------+-------------+------------------+
+   |      | 21-Mar |  Interrupt and Exceptions  | `Paper3`_   | \           |                  |
+   +  6   +--------+----------------------------+-------------+-------------+------------------+
+   |      | 24-Mar | TA Lab Hours: Lab 3        | \           | \           |                  |
+   +------+--------+----------------------------+-------------+-------------+------------------+
+   |      | 28-Mar | Virtual Memory             | `Paper4`_   | \           |                  |
+   +  7   +--------+----------------------------+-------------+-------------+------------------+
+   |      | 30-Mar | Lab Demo: Lab 3            | \           | Lab 3 due   |                  |
+   +------+--------+----------------------------+-------------+-------------+------------------+
+   |      | 4-Apr  | Spring Break               | \           | \           |                  |
+   +  8   +--------+----------------------------+-------------+-------------+------------------+
+   |      | 6-Apr  | TA Lab Hours: Lab 4        | \           | \           |                  |
+   +------+--------+----------------------------+-------------+-------------+------------------+
+   |      | 11-Apr | Paging                     | `Paper5`_   | \           |                  |
+   +  9   +--------+----------------------------+-------------+-------------+------------------+
+   |      | 13-Apr | Lab Demo: Lab 4            | \           | Lab 4 due   |                  |
+   +------+--------+----------------------------+-------------+-------------+------------------+
+   |      | 18-Apr | Memory Allocation          | `Paper6`_   | \           | `mimalloc`_      |
+   +  10  +--------+----------------------------+-------------+-------------+------------------+
+   |      | 20-Apr | TA Lab Hours: Lab 5        | \           | \           |                  |
+   +------+--------+----------------------------+-------------+-------------+------------------+
+   |      | 25-Apr | Locking                    | `Paper7`_   | \           |                  |
+   +  11  +--------+----------------------------+-------------+-------------+------------------+
+   |      | 27-Apr | Lab Demo: Lab 5            | \           | Lab 5 due   |                  |
+   +------+--------+----------------------------+-------------+-------------+------------------+
+   |      | 2-May  | Multi-core Locks           | `Paper8`_   | \           | `RCU`_           |
+   +  12  +--------+----------------------------+-------------+-------------+------------------+
+   |      | 4-May  | TA Lab Hours: Lab 6        | \           | \           |                  |
+   +------+--------+----------------------------+-------------+-------------+------------------+
+   |      | 9-May  | File System                | `Paper9`_   | \           |                  |
+   +  13  +--------+----------------------------+-------------+-------------+------------------+
+   |      | 11-May | Lab Demo: Lab 6            | \           | Lab 6 due   |                  |
+   +------+--------+----------------------------+-------------+-------------+------------------+
+   |      | 16-May | Flash Translation Layer    | `Paper10`_  | \           |                  |
+   +  14  +--------+----------------------------+-------------+-------------+------------------+
+   |      | 18-May | TA Lab Hours: Lab 7        | \           | \           |                  |
+   +------+--------+----------------------------+-------------+-------------+------------------+
+   |      | 23-May | Device Driver              | `Paper11`_  | \           |                  |
+   +  15  +--------+----------------------------+-------------+-------------+------------------+
+   |      | 25-May | Lab Demo: Lab 7            | \           | Lab 7 due   |                  |
+   +------+--------+----------------------------+-------------+-------------+------------------+
+   |      | 30-May | Virtual Machine            | `Paper12`_  | \           | `VM1`_ `VM2`_    |
+   +  16  +--------+----------------------------+-------------+-------------+------------------+
+   |      | 1-Jun  | TA Lab Hours: Lab 8        | \           | \           |                  |
+   +------+--------+----------------------------+-------------+-------------+------------------+
+   |      | 6-Jun  | Final Project              | \           | \           |                  |
+   +  17  +--------+----------------------------+-------------+-------------+------------------+
+   |      | 8-Jun  | Lab Demo: Lab 8            | \           | Lab 8 due   |                  |
+   +------+--------+----------------------------+-------------+-------------+------------------+
+   |  18  | 13-Jun | Lab Demo                   | \           | \           |                  |
+   +------+--------+----------------------------+-------------+-------------+------------------+
 
-         17-Feb    TA Lab Hours: Lab 0                                                      
-
-         18-Feb    OS Introduction                                                          
-
- 2       22-Feb    Kernel Debugging Tool                                                    
-
-         24-Feb    TA Lab Hours: Lab 1                                                      
-
-         25-Feb    Kernel Compilation                                                       
-
- 3       1-Mar     Hardware Basics                                                          
-
-         3-Mar     Lab Demo: Lab 0/1                         Lab 0/1 due                    
-
-         4-Mar     Microprocessor and x86 ISA                                               
-
- 4       8-Mar     Booting Processing                                                       
-
-         10-Mar    TA Lab Hours: Lab 2                                                      
-
-         11-Mar    Bootloader                                                               
-
- 5       15-Mar    System calls                                                             
-
-         17-Mar    Lab Demo: Lab 2                           Lab 2 due                      
-
-         18-Mar    Interrupts and exceptions                                                
-
- 6       22-Mar    Process management                                                       
-
-         24-Mar    TA Lab Hours: Lab 3                                                      
-
-         25-Mar    Process management                                                       
-
- 7       29-Mar    Memory Management                                                        
-
-         30-Mar    Lab Demo: Lab 3                           Lab 3 due                      
-
-         1-Apr     Memory Management                                                        
-
- 8       5-Apr     Spring Break                                                             
-
-         7-Apr     TA Lab Hours: Lab 4                                                      
-
-         8-Apr     Virtual memory                                                           
-
- 9       12-Apr    Virtual memory                                                           
-
-         14-Apr    Lab Demo: Lab 4                           Lab 4 due                      
-
-         15-Apr    Virtual memory                                                           
-
- 10      19-Apr    Multiprocessor and locking                                               
-
-         21-Apr    TA Lab Hours: Lab 5                                                      
-
-         22-Apr    Concurrency issues                                                       
-
- 11      26-Apr    Presistent storage                                                       
-
-         28-Apr    Lab Demo: Lab 5                           Lab 5 due                      
-
-         29-Apr    Presistent storage Lab                                                   
-
- 12      3-May     Block Device Driver                                                      
-
-         5-May     TA Lab Hours: Lab 6                                                      
-
-         6-May     Block Device Driver Lab                                                  
-
- 13      10-May    File systems                                                             
-
-         12-May    Lab Demo: Lab 6                           Lab 6 due                      
-
-         13-May    File systems                                                             
-
- 14      17-May    Security                                                                 
-
-         19-May    TA Lab Hours: Lab 7                                                      
-
-         20-May    Security                                                                 
-
- 15      24-May    Networking                                                               
-
-         26-May    Lab Demo: Lab 7                           Lab 7 due                      
-
-         27-May    Networking                                                               
-
- 16      31-May    Virtual machine                                                          
-
-         2-Jun     TA Lab Hours: Lab 8                                                      
-
-         3-Jun     Holiday                                                                  
-
- 17      7-Jun     Final Project                                                            
-
-         9-Jun     Lab Demo: Lab 8                           Lab 8 due                      
-
-         10-Jun    Final Project                                                            
-
- 18      14-Jun    Final Project                                                            
-
-         17-Jun    Final Project Submission                                                 
-======= ========= ============================= =========== ============== ================ 
+.. _Paper1: https://www.usenix.org/system/files/conference/usenixsecurity17/sec17-redini.pdf
+.. _Paper2: https://www.usenix.org/system/files/conference/osdi16/osdi16-litton.pdf
+.. _Paper3: https://n.ethz.ch/~sshivaji/publications/smashex_ccs21.pdf
+.. _Paper4: https://homes.cs.washington.edu/~luisceze/publications/vmstudy-uwtr2013.pdf
+.. _Paper5: https://research.cs.wisc.edu/multifacet/papers/isca13_direct_segment.pdf
+.. _Paper6: https://www.microsoft.com/en-us/research/uploads/prod/2019/06/mimalloc-tr-v1.pdf
+.. _Paper7: https://gts3.org/assets/papers/2019/kashyap:shfllock.pdf
+.. _Paper8: https://www.usenix.org/system/files/conference/atc16/atc16_paper-guiroux.pdf
+.. _Paper9: http://supertech.csail.mit.edu/papers/JannenYuZh15a.pdf
+.. _Paper10: https://www.usenix.org/system/files/fast20-zhang_jie.pdf
+.. _Paper11: https://research.cs.wisc.edu/wind/Publications/split-sosp15.pdf
+.. _Paper12: https://cgi.luddy.indiana.edu/~prateeks/papers/a1-sharma.pdf
+.. _Unix System: https://www.youtube.com/watch?v=tc4ROCJYbm0
+.. _GOT/PLT: https://hackmd.io/@rhythm/ry5pxN6NI
+.. _First Process: https://xiayingp.gitbook.io/build_a_os/hardware-device-assembly/start-xv6-and-the-first-process
+.. _mimalloc: https://github.com/microsoft/mimalloc
+.. _RCU: https://github.com/CppCon/CppCon2017/blob/master/Presentations/Read%2C%20Copy%2C%20Update...%20Then%20What/Read%2C%20Copy%2C%20Update...%20Then%20What%20-%20Fedor%20Pikus%20-%20CppCon%202017.pdf
+.. _VM1: https://my.eng.utah.edu/~cs5460/slides/virt-lecture1.pdf
+.. _VM2: https://my.eng.utah.edu/~cs5460/slides/virt-lecture2.pdf

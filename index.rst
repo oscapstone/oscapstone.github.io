@@ -1,4 +1,4 @@
-Welcome to Operating System Capstone, Spring 2022!
+Welcome to Operating System Capstone, Spring 2023!
 ==================================================
 
 This course aims to introduce the design and implementation of operating system kernels.
@@ -11,17 +11,21 @@ Students can get their hands dirty on a **Real Machine** instead of an emulator.
 Lecture and Office Hours
 ========================
 
-==================== ================================================================ ========== === === === === === === === 
- Title                 Time                                                             Location
-==================== ================================================================ ========== === === === === === === === 
- Lectures             3:30 pm - 4:20 pm (Tue.)(On-Line), 10:10 am - 12:00 pm (Fri.)    EC-115                                
-
- Office Hours         5:00 - 6:00 pm (Mon.)                                            EC-707                                
-                                                                                                                             
- TA Lab Hours         6:00 - 9:00 pm (Thur.)                                           EC-120                                
-                                                                                                                             
- Lab Demo Hours       6:00 - 9:00 pm (Thur.)                                           EC-220                                
-==================== ================================================================ ========== === === === === === === === 
+.. table::
+   :widths: auto
+   
+   +----------------+-----------------------------------------+----------+
+   |     Title      |                  Time                   | Location |
+   +================+=========================================+==========+
+   | Lectures       | 3:30 - 5:20 pm (Tue.)                   | EC-222   |
+   +----------------+-----------------------------------------+----------+
+   | Office Hours   | 5:00 - 6:00 pm (Mon.)                   | EC-707   |
+   +----------------+-----------------------------------------+----------+
+   | Lab Demo Hours | 6:00 - 9:00 pm (Thur.)                  | EC-222   |
+   +----------------+-----------------------------------------+----------+
+   | Class Google   | https://meet.google.com/eyf-cdbb-jhv    |          |
+   | Meet Link      |                                         |          |
+   +----------------+-----------------------------------------+----------+
 
 .. important::
   This documentation is not self-contained, you can get more information from external references.

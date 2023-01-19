@@ -17,7 +17,7 @@
 # -- Project information -----------------------------------------------------
 
 project = 'Operating System Capstone'
-html_title = 'IOC5213: Operating System Capstone'
+html_title = 'IOC5226: Operating System Capstone'
 copyright = '2021, Jim, Muller'
 author = 'Jim, Muller'
 
@@ -34,7 +34,7 @@ templates_path = ['_templates']
 # List of patterns, relative to source directory, that match files and
 # directories to ignore when looking for source files.
 # This pattern also affects html_static_path and html_extra_path.
-exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
+exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store', 'docs']
 
 # -- Options for HTML output -------------------------------------------------
 

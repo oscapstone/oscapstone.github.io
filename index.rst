@@ -8,24 +8,29 @@ This course uses `Raspberry Pi 3 Model B+ <https://www.raspberrypi.org/products/
 as the hardware platform.
 Students can get their hands dirty on a **Real Machine** instead of an emulator.
 
+
 Lecture and Office Hours
 ========================
 
 .. table::
    :widths: auto
    
-   +----------------+-----------------------------------------+----------+
-   |     Title      |                  Time                   | Location |
-   +================+=========================================+==========+
-   | Lectures       | 3:30 - 5:20 pm (Tue.)                   | EC-222   |
-   +----------------+-----------------------------------------+----------+
-   | Office Hours   | 5:00 - 6:00 pm (Mon.)                   | EC-707   |
-   +----------------+-----------------------------------------+----------+
-   | Lab Demo Hours | 6:00 - 9:00 pm (Thur.)                  | EC-222   |
-   +----------------+-----------------------------------------+----------+
-   | Class Google   | https://meet.google.com/eyf-cdbb-jhv    |          |
-   | Meet Link      |                                         |          |
-   +----------------+-----------------------------------------+----------+
+   +--------------------+--------------------------------------+-----------------------------------------+
+   | Title              | Time                                 | Location                                |
+   +====================+======================================+=========================================+
+   | Lectures           | 3:30 - 5:20 pm (Tue.)                | EC-222                                  |
+   +--------------------+--------------------------------------+-----------------------------------------+
+   | Office Hours       | 5:00 - 6:00 pm (Mon.)                | EC-707                                  |
+   +--------------------+--------------------------------------+-----------------------------------------+
+   | Lab Demo Hours     | 6:00 - 9:00 pm (Thur.)               | EC-222                                  |
+   +--------------------+--------------------------------------+-----------------------------------------+
+   | Lecture Website    | https://people.cs.nctu.edu.tw/~ttyeh/course/2023_Spring/IOC5226/outline.html   |
+   +--------------------+--------------------------------------------------------------------------------+
+
+.. important::
+  Check the `lecture website`_ for the schedule and the lecture slides!
+.. _lecture website: https://people.cs.nctu.edu.tw/~ttyeh/course/2023_Spring/IOC5226/outline.html
+
 
 .. important::
   This documentation is not self-contained, you can get more information from external references.

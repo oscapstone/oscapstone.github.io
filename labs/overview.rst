@@ -21,8 +21,8 @@ There is no limitation on which programming language you should use for the labs
 However, there are a lot of things that are language-dependent and even compiler-dependent.
 You need to manage them yourself.
 
-You can check last year's `course website <https://grasslab.github.io/NYCU_Operating_System_Capstone/>`_ 
-and `submission repository <https://github.com/GrassLab/osc2021>`_ to see what you might need
+You can check last year's `course website <https://oscapstone.github.io/osc2022>`_ 
+and `submission repository <https://github.com/oscapstone/osc2022>`_ to see what you might need
 to do during this semester.
 Yet, the requirements and descriptions may differ this semester.
 
@@ -33,12 +33,17 @@ It's allowed and recommended to check others code, but you still need to write i
 instead of copy/paste.
 
 TAs validate plagiarism by asking for the detail of your implementation.
-If you can't elaborate your code clearly, you only get 70% of the score.
+If you can't elaborate your code clearly, you only get 50% of the score.
 
 Your code may work on an emulator even it's wrong.
 Hence, you get 90% of the score if your code works on QEMU but not on real rpi3.
 
 For late hand-in, the penalty is 1% per week.
+
+.. important::
+   Remember to create a Pull Request to `oscapstone/osc2023 <https://github/oscapstone/osc2023>`_
+   before you demo and make sure the TA merge the PR after finishing demo.
+   It is an evidance to show that you have finished your homework in time.
 
 Disclaimer
 ##########

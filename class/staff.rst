@@ -14,3 +14,13 @@ Teaching assistants
 
 * Email: liuth [at] cs.nycu.edu.tw
 * Location: X
+
+**Kai-Chun Chang**
+
+* aa940249tw [at] gmail.com
+* Location: EC120
+
+**Zhi-Duan Jiang**
+
+* m897420 [at] gmail.com
+* Location: EC120

@@ -133,7 +133,7 @@ After building, you can use QEMU to see the dumped assembly.
 
 .. code-block:: none
 
-  qemu-system-aarch64 -M raspi3 -kernel kernel8.img -display none -d in_asm
+  qemu-system-aarch64 -M raspi3b -kernel kernel8.img -display none -d in_asm
 
 .. admonition:: Todo
 
@@ -222,7 +222,7 @@ You can use the following command waiting for gdb connection.
 
 .. code-block:: none
 
-  qemu-system-aarch64 -M raspi3 -kernel kernel8.img -display none -S -s
+  qemu-system-aarch64 -M raspi3b -kernel kernel8.img -display none -S -s
 
 Then you can use the following command in gdb to load debugging information and connect to QEMU.
 

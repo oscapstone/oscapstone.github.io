@@ -650,7 +650,7 @@ llvm-objcopy --output-target=aarch64-rpi3-elf -O binary kernel8.elf kernle8.img
 <section id="check-on-qemu">
 <h3>Check on QEMU<a class="headerlink" href="#check-on-qemu" title="Permalink to this headline">#</a></h3>
 <p>After building, you can use QEMU to see the dumped assembly.</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>qemu-system-aarch64 -M raspi3 -kernel kernel8.img -display none -d in_asm
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>qemu-system-aarch64 -M raspi3b -kernel kernel8.img -display none -d in_asm
 </pre></div>
 </div>
 <div class="admonition-todo admonition">
@@ -728,7 +728,7 @@ You can use it to test if your Lab kits function well.</p>
 <p>Debugging on QEMU is a relatively easier way to validate your code.
 QEMU could dump memory, registers, and expose them to a debugger.
 You can use the following command waiting for gdb connection.</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>qemu-system-aarch64 -M raspi3 -kernel kernel8.img -display none -S -s
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>qemu-system-aarch64 -M raspi3b -kernel kernel8.img -display none -S -s
 </pre></div>
 </div>
 <p>Then you can use the following command in gdb to load debugging information and connect to QEMU.</p>

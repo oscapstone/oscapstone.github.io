@@ -41,7 +41,7 @@ Hence, you get 90% of the score if your code works on QEMU but not on real rpi3.
 For late hand-in, the penalty is 1% per week.
 
 .. important::
-   Remember to create a Pull Request to `oscapstone/osc2023 <https://github/oscapstone/osc2023>`_
+   Remember to create a Pull Request to `oscapstone/osc2023 <https://github.com/oscapstone/osc2023>`_
    before you demo and make sure the TA merge the PR after finishing demo.
    It is an evidance to show that you have finished your homework in time.
 
